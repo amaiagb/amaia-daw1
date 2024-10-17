@@ -9,7 +9,7 @@
 
 * **Sintaxis**: Variables, Operadores, Estructuras de control
 * **Arrays**
-  * [Ejercicios](1_arrays/3.3ejerciciosArrays)
+  * [Ejercicios](1_arrays)
 * **Colecciones**
   * [Ejercicios](2_colecciones)
   
