@@ -1,0 +1,15 @@
+TIENDA
+___________
+
+
+Vendedores, Clientes y Clientes Oro
+el vendedor tiene acumuladoVentas y el cliente tiene saldo
+
+El cliente puede comprar productos.
+Si es cliente oro se le aplica un 15% de descuento.
+La comprar siempre va asociada a un vendedor.
+
+c1.comprar      v2     
+c1.comprar("pan",1,4)
+ClienteOro cO = new clienteOro();
+cO.comprar("pan",1,4);
