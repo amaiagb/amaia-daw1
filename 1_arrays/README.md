@@ -12,7 +12,7 @@ int[] numeros = {1,2,3,4,5};
 ### 1. Encuentra el número máximo en un array
 
 Crea un programa que lea 5 números enteros y los almacene en un array. Luego, encuentra y muestra el número más alto en el array.
-[Solución](1_arrays/3.3ejerciciosArrays/arrays1/src/mayornumeroarray/Main.java)
+[Solución](3.3ejerciciosArrays/arrays1/src/mayornumeroarray/Main.java)
 
 ### 2. Calcula la media de los números en un array
 
