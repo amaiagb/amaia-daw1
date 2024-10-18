@@ -11,7 +11,9 @@ public class App {
 		
 		ArrayList<Cancion> listaCanciones = new ArrayList<>();
 		
-		//Crear instancias de cancion
+		//1. CREAR 10 CANCIONES Y GUARDARLAS EN UNA LISTA
+		
+		//Opción 1: Crear instancias de cancion + Añadirlas al arrayList
 		
 		Cancion c1 = new Cancion("Letra de canción 1", 180, "Título 1");
 		Cancion c2 = new Cancion("Letra de canción 2", 201, "Título 2");
@@ -19,15 +21,13 @@ public class App {
 		Cancion c4 = new Cancion("Letra de canción 4", 248, "Título 4");
 		Cancion c5 = new Cancion("Letra de canción 5", 352, "Título 5");
 		
-		//Añadirlas al arrayList
-		
 		listaCanciones.add(c1);
 		listaCanciones.add(c2);
 		listaCanciones.add(c3);
 		listaCanciones.add(c4);
 		listaCanciones.add(c5);
 		
-		//Añadir las canciones al arrayList al crearlas directamente
+		//Opción 2: Añadir las canciones al arrayList directamente al crearlas
 		
 		listaCanciones.add(new Cancion("Letra de canción 6", 412, "Título 6"));
 		listaCanciones.add(new Cancion("Letra de canción 7", 238, "Título 7"));
@@ -35,7 +35,7 @@ public class App {
 		listaCanciones.add(new Cancion("Letra de canción 9", 275, "Título 9"));
 		listaCanciones.add(new Cancion("Letra de canción 10", 246, "Título 10"));
 		
-		//Recorrer el arrayList y mostrar los datos de cada canción en orden:
+		//2.1 MOSTRAR LAS CANCIONES EN ORDEN:
 		System.out.println("Canciones en orden:");
 		for(int i=0; i<listaCanciones.size()-1; i++) {
 			
@@ -47,9 +47,9 @@ public class App {
 		}
 		
 		
-		//Recorrer el arrayList y mostrar los datos de cada canción aleatoriamente sin repetirlas:
+		//2.2 MOSTRAR LAS CANCIONES ALEATORIAMENTE (sin repeticiones):
 		System.out.println("\nCanciones aleatorias:");
-		ArrayList indices = new ArrayList<>();
+		ArrayList<Integer> indices = new ArrayList<>();
 		
 		while(indices.size() != listaCanciones.size()) {
 
@@ -65,6 +65,23 @@ public class App {
 				String letra = listaCanciones.get(aleatorio).getLetra();
 				
 				System.out.println("*** "+nombre+" ("+duracion+"s) - "+letra+" ***");
+			}
+			
+		}
+		
+		//2.3 MEJORAR EL CÓDIGO SOBREESRIBIENDO EL MÉTODO toString
+		System.out.println("\nCanciones aleatorias:");
+		ArrayList<Integer> indices2 = new ArrayList<>();
+		
+		while(indices2.size() != listaCanciones.size()) {
+
+			Random rand = new Random();
+			int aleatorio2 = rand.nextInt(10);
+			
+			if(indices2.contains(aleatorio2) == false) {
+				
+				indices2.add(aleatorio2);
+				System.out.println(listaCanciones.get(aleatorio2));
 			}
 			
 		}

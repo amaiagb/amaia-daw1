@@ -50,6 +50,10 @@ public class Cancion {
 		this.duracion = duracion;
 	}
 	
+	public String toString() //Sobreescribir el metodo toString
+    { 
+        return "*** " +this.nombre+ " (" +this.duracion+ "s) - "+this.letra+" ***"; 
+    } 
 	
 	
 }
