@@ -1,6 +1,7 @@
 package view;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 import model.Cancion;
@@ -37,7 +38,8 @@ public class App {
 		
 		//2.1 MOSTRAR LAS CANCIONES EN ORDEN:
 		System.out.println("Canciones en orden:");
-		for(int i=0; i<listaCanciones.size()-1; i++) {
+
+		for(int i=0; i<listaCanciones.size(); i++) {
 			
 			String nombre = listaCanciones.get(i).getNombre();
 			int duracion = listaCanciones.get(i).getDuracion();
@@ -54,9 +56,9 @@ public class App {
 		while(indices.size() != listaCanciones.size()) {
 
 			Random rand = new Random();
-			int aleatorio = rand.nextInt(10);
+			int aleatorio = rand.nextInt(listaCanciones.size());
 			
-			if(indices.contains(aleatorio) == false) {
+			if(!indices.contains(aleatorio)) {
 				
 				indices.add(aleatorio);
 				
@@ -66,13 +68,12 @@ public class App {
 				
 				System.out.println("*** "+nombre+" ("+duracion+"s) - "+letra+" ***");
 			}
-			
 		}
 		
 		//2.3 MEJORAR EL CÓDIGO SOBREESRIBIENDO EL MÉTODO toString
 		System.out.println("\nCanciones aleatorias:");
 		ArrayList<Integer> indices2 = new ArrayList<>();
-		
+				
 		while(indices2.size() != listaCanciones.size()) {
 
 			Random rand = new Random();
@@ -85,6 +86,9 @@ public class App {
 			}
 			
 		}
+		
+		//EL MÉTODO SHUFFLE() REORDENA AUTOMATICAMENTE LOS ELEMENTOS DE LA LISTA
+		//Collections.shuffle(listaCanciones);
 		
 	}
 
