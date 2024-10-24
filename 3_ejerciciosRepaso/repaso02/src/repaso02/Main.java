@@ -23,23 +23,21 @@ public class Main {
 		int modoInicializacion = entrada.nextInt();
 		
 		switch(modoInicializacion) {
-		//Valores aleatorios
-		case 2: 
+		case 2: //Valores aleatorios
 			for(int i=0; i<dimensionArray;i++) {
 				Random rand = new Random();
-				int aleatorio = rand.nextInt(100);
-				nuevoArray[i] = aleatorio;
+				nuevoArray[i] = rand.nextInt(100)+1;
 			}
 			break;
-		//Valores manuales
-		case 3:
-			
+		
+		case 3: //Valores manuales
 			for(int i=0; i<dimensionArray; i++) {
-				System.out.println("Introduce el número para la posición "+i+":");
+				System.out.println("Introduce el número para la posición "+(i+1)+":");
 				nuevoArray[i] = entrada.nextInt();
 			}			
 			break;
 		default:
+			System.out.println("Elegir un numero entre 1 - 3");
 			break;
 		}
 		mostrarArray(nuevoArray);

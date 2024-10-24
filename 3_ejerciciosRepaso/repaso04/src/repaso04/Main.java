@@ -1,5 +1,6 @@
 package repaso04;
 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -75,8 +76,10 @@ public class Main {
 			gestionarMenu(entrada, dimensionArray, nuevoArray, seleccionMenu);
 			
 		}while(seleccionMenu!=0); //ejecutar bucle mientras el usuario no indique "salir"
+		
+		
 	}
-
+	// *********** MÉTODOS ****************
 	private static void gestionarMenu(Scanner entrada, int dimensionArray, int[] nuevoArray, int seleccionMenu) {
 		switch(seleccionMenu) {
 		case 1:
@@ -118,11 +121,12 @@ public class Main {
 			System.out.println("La multiplicación es: "+mult);
 			break;
 		case 7:
-			int media = 0;
+			double  media = 0;
+			int total = 0;
 			for(int num : nuevoArray) {
-				media +=num;
+				total += num;
 			}
-			media = media/(nuevoArray.length);
+			media = (double)total/(nuevoArray.length);
 			System.out.println("La media es: "+media);
 			break;
 		case 8:
@@ -131,7 +135,9 @@ public class Main {
 			}
 			break;
 		case 9:
-			ordenarMenorMayor(nuevoArray);
+			//ordenarMenorMayor(nuevoArray);
+			Arrays.sort(nuevoArray);
+			mostrarArray(nuevoArray);
 			break;
 		case 10:
 			ordenarMayorMenor(nuevoArray);
@@ -164,7 +170,7 @@ public class Main {
 		}
 		mostrarArray(array);
 	}
-
+	
 	private static void factorial(int num) {
 		int factorial = 1;
 		for(int i=1; i<=num; i++) {

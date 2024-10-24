@@ -34,7 +34,6 @@ public class Main {
 		int modoInicializacion = entrada.nextInt();
 		
 		switch(modoInicializacion) {
-		//Valores aleatorios
 		case 2: 
 			for(int i=0; i<dimensionArray;i++) {
 				Random rand = new Random();
@@ -42,13 +41,11 @@ public class Main {
 				nuevoArray[i] = aleatorio;
 			}
 			break;
-		//Valores manuales
 		case 3:
-			
-			rellenarArrayManualmente(entrada, dimensionArray, nuevoArray);
-						
+			rellenarArrayManualmente(entrada, dimensionArray, nuevoArray);						
 			break;
 		default:
+			System.out.println("Elegir un numero entre 1 - 3");
 			break;
 		}
 		mostrarArray(nuevoArray);
@@ -67,11 +64,17 @@ public class Main {
 			seleccionMenu = entrada.nextInt();
 			
 			gestionarMenu(entrada, dimensionArray, nuevoArray, seleccionMenu);
-			mostrarArray(nuevoArray);
+			
+			if(seleccionMenu != 0) {
+				mostrarArray(nuevoArray);
+			}
 			
 		}while(seleccionMenu!=0); //ejecutar bucle mientras el usuario no indique "salir"
+		
 	}
-
+	
+	// **************** MÉTODOS ***************
+	
 	private static void gestionarMenu(Scanner entrada, int dimensionArray, int[] nuevoArray, int seleccionMenu) {
 		switch(seleccionMenu) {
 		case 1:
@@ -80,8 +83,13 @@ public class Main {
 		case 2:
 			System.out.println("Introduce la posición que quieres cambiar:");
 			int posicion = entrada.nextInt();
-			System.out.println("Introduce el valor para la posicion "+posicion+":");
-			nuevoArray[posicion] = entrada.nextInt();
+			
+			if(posicion <= dimensionArray && posicion > 0 ) {
+				System.out.println("Introduce el valor para la posicion "+(posicion)+":");
+				nuevoArray[posicion-1] = entrada.nextInt();
+			}   else {
+				System.out.println("Introducir valor de 1 a "+(dimensionArray));
+			}
 			break;
 		case 3:
 			entrada.nextLine();
@@ -93,6 +101,9 @@ public class Main {
 			}
 			break;
 		default: 
+			if(seleccionMenu != 0 && seleccionMenu != 4) {
+				System.out.println("Elegir un numero entre 0 - 4");
+			}
 			break;
 			
 		}
