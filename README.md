@@ -16,6 +16,7 @@
   * [Juego de la Vida](juegoConway/src/juegoConway/App.java)
   * Prueba Individual 1.1: [Suma de Matrices](4_pruebaIndividual/01SumaMatrices/src/Main.java)
   * Prueba Individual 1.2: [Árbol de Navidad](4_pruebaIndividual/02ArbolNavidad/src/Main.java)
+  * Prueba Individual 1.3: [Menú Operaciones](4_pruebaIndividual/ExamenExtra/src)
   
 ---
 
