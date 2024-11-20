@@ -12,6 +12,11 @@
   * [Ejercicios](1_arrays)
 * **Colecciones**
   * [Ejercicios](2_colecciones)
+* **Proyectos**
+  * [Juego de la Vida](juegoConway/src/juegoConway/App.java)
+  * Prueba Individual 1.1: [Suma de Matrices](4_pruebaIndividual/01SumaMatrices/src/Main.java)
+  * Prueba Individual 1.2: [Árbol de Navidad](4_pruebaIndividual/02ArbolNavidad/src/Main.java)
+  * Prueba Individual 1.3: [Menú Operaciones](4_pruebaIndividual/ExamenExtra/src)
   
 ---
 
@@ -20,10 +25,12 @@
 - Ejercicio [Autos Locos](oop/02AutosLocos)
 - Ejemplo [Herencias](oop/03Herencia)
 - Ejercicio [Tienda](oop/04Tienda)
+- Ejercicio [Interfaces](oop/05Interfaces)
 
 ---
 
 ## Lenguaje de Marcas
 - HTML
 - CSS
+- Proyecto Reto 1: [ASEJ, Web Corporativa](https://github.com/amaiagb/web-reto1)
 

@@ -10,6 +10,8 @@ public class Main {
 		historial.put("San Luis", "http://www.centrosanluis.com");
 
 		System.out.println(historial.get("San Luis"));
+
+		int numero = (int) (Math.random()*10);
 		
 	}
 
