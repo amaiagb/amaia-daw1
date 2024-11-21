@@ -3,66 +3,61 @@ package excepcionesFecha;
 import java.util.HashMap;
 
 public class Fecha {
-	private int ano = 0;
+	private int anio = 0;
 	private int mes = 1;
 	private int dia = 1;
-	public static final int MESES_AÑO = 12;
+	public static final int MESES_ANIO = 12;
 	
-	public static boolean esBisiesto(int año) {
-		
-		return true;
+	//Método de clase esBisiesto()
+	public static boolean esBisiesto(int anio) {
+		if(anio%4==0 && anio%100!=0 || anio%400==0) {
+			return true;
+		}
+		return false;
 	}
+	//Constructores
 	public Fecha() {
 		
 	}
-	public Fecha(int año, int mes, int dia) {
-		
+	public Fecha(int anio, int mes, int dia) {
+		setAnio(anio);
+		setMes(mes);
+		setDia(dia);
 	}
 	public Fecha(Fecha f) {
-		
+		setAnio(f.getAnio());
+		setMes(f.getMes());
+		setDia(f.getDia());
 	}
+	//Método de instancia esBisiesto()
 	public boolean esBisiesto() {
-		return true;
+		int anio = this.anio;
+		if(anio%4==0 && anio%100!=0 || anio%400==0) {
+			return true;
+		}
+		return false;
 	}
-	public void setAño(int año) {
-		
+	//Getters & Setters
+	public void setAnio(int anio) {
+		this.anio = anio;
 	}
-	public int getAno() {
-		return ano;
+	public int getAnio() {
+		return this.anio;
 	}
-	public void setMes(int mes) {
-		
+	public void setMes(int mes) throws FechaException{
+		if(mes>0 && mes<=MESES_ANIO) {
+			this.mes = mes;
+		} else {
+			throw new FechaException("Mes incorrecto: "+mes);
+		}
 	}
 	public int getMes() {
-		return mes;
+		return this.mes;
 	}
-	public void setDia(int dia) {
-		
-	}
-	public int getDia() {
-		return dia;
-	}
-	public void set(int ano, int mes, int dia) {
-		
-	}
-	public void set(Fecha f) {
-		
-	}
-	/*
-	public String toString() {
-		
-	}
-	public boolean equals(Object o) {
-		
-	}
-	*/
-	
-	public void validarFecha(int dia, int mes, int ano) throws FechaException{
-		
+	public void setDia(int dia) throws FechaException{
 		HashMap<Integer, Integer> diasMes = new HashMap<Integer, Integer>();
-		
 		diasMes.put(1, 31);
-		if(esBisiesto(ano)) {
+		if(this.esBisiesto()) {
 			diasMes.put(2, 29);
 		} else {
 			diasMes.put(2, 28);
@@ -78,15 +73,40 @@ public class Fecha {
 		diasMes.put(11, 30);
 		diasMes.put(12, 31);
 		
-	
-		if(mes <1 || mes >12) {
-			throw new FechaException("Mes incorrecto (1-12)");
+		if(dia >0 && dia<=diasMes.get(this.mes)) {
+			this.dia = dia;
+		} else {
+			throw new FechaException("Día incorrecto: "+dia+"/"+mes);
 		}
 		
-		
-		
-		if(dia> diasMes.get(mes) || dia < 1) {
-			throw new FechaException("Día incorrecto");
-		}
 	}
+	public int getDia() {
+		return this.dia;
+	}
+	public void set(int anio, int mes, int dia) {
+		setAnio(anio);
+		setMes(mes);
+		setDia(dia);
+	}
+	public void set(Fecha f) {
+		setAnio(f.getAnio());
+		setMes(f.getMes());
+		setDia(f.getDia());
+	}
+	
+	@Override
+	public String toString() {
+		return this.dia+"/"+this.mes+"/"+this.anio;
+	}
+	
+	public boolean equals(Object o) {
+		if(o instanceof Fecha) {
+			Fecha f = (Fecha) o;
+			if(this.getAnio()==f.getAnio() && this.getMes()==f.getMes() && this.getDia()==f.getDia()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }
