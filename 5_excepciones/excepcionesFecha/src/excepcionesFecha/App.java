@@ -1,9 +1,11 @@
 package excepcionesFecha;
 
+import java.util.Scanner;
+
 public class App {
 	
 	public static final int MAX_FECHAS = 100;
-
+	
 	public static void main(String[] args) {
 		
 		for (int i = 0; i < MAX_FECHAS; i++) {

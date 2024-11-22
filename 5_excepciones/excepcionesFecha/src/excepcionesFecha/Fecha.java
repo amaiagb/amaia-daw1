@@ -7,14 +7,7 @@ public class Fecha {
 	private int mes = 1;
 	private int dia = 1;
 	public static final int MESES_ANIO = 12;
-	
-	//Método de clase esBisiesto()
-	public static boolean esBisiesto(int anio) {
-		if(anio%4==0 && anio%100!=0 || anio%400==0) {
-			return true;
-		}
-		return false;
-	}
+
 	//Constructores
 	public Fecha() {
 		
@@ -29,9 +22,17 @@ public class Fecha {
 		setMes(f.getMes());
 		setDia(f.getDia());
 	}
+
+	//Método de clase esBisiesto()
+	public static boolean esBisiesto(int anio) {
+		if(anio%4==0 && anio%100!=0 || anio%400==0) {
+			return true;
+		}
+		return false;
+	}
+	
 	//Método de instancia esBisiesto()
 	public boolean esBisiesto() {
-		int anio = this.anio;
 		if(anio%4==0 && anio%100!=0 || anio%400==0) {
 			return true;
 		}
@@ -54,10 +55,11 @@ public class Fecha {
 	public int getMes() {
 		return this.mes;
 	}
+	
 	public void setDia(int dia) throws FechaException{
 		HashMap<Integer, Integer> diasMes = new HashMap<Integer, Integer>();
 		diasMes.put(1, 31);
-		if(this.esBisiesto()) {
+		if(esBisiesto()) {
 			diasMes.put(2, 29);
 		} else {
 			diasMes.put(2, 28);
@@ -78,8 +80,8 @@ public class Fecha {
 		} else {
 			throw new FechaException("Día incorrecto: "+dia+"/"+mes);
 		}
-		
 	}
+	
 	public int getDia() {
 		return this.dia;
 	}
@@ -109,4 +111,28 @@ public class Fecha {
 		return false;
 	}
 	
+	/*
+	//Opcion 2: con switch y metodo de comprobarDia()
+	public void setDia(int dia) {
+		switch (this.mes) {
+			case 1,3,5,7,8,10,12 -> comprobarDia(dia,31);
+			case 4,6,9,11 -> comprobarDia(dia,30);
+			case 2 -> {
+				if(this.esBisiesto()) {
+					comprobarDia(dia,29);
+				}else {
+					comprobarDia(dia,28);
+				}
+			}
+		}
+	}
+	public void comprobarDia(int dia, int diasMax) {
+		if(dia >0 && dia<=diasMax) {
+			this.dia = dia;
+		} else {
+			throw new FechaException("Día incorrecto: "+dia+"/"+mes);
+		}
+	}
+	*/
+
 }
