@@ -17,7 +17,9 @@
   * Prueba Individual 1.1: [Suma de Matrices](4_pruebaIndividual/01SumaMatrices/src/Main.java)
   * Prueba Individual 1.2: [Árbol de Navidad](4_pruebaIndividual/02ArbolNavidad/src/Main.java)
   * Prueba Individual 1.3: [Menú Operaciones](4_pruebaIndividual/ExamenExtra/src)
-  
+* [**Excepciones**](5_excepciones)
+
+   
 ---
 
 ## OOP, Programación Orientada a Objetos
@@ -32,5 +34,5 @@
 ## Lenguaje de Marcas
 - HTML
 - CSS
-- Proyecto Reto 1: [ASEJ, Web Corporativa](https://github.com/amaiagb/web-reto1)
+- Proyecto Reto 1: [Web Corporativa](https://github.com/amaiagb/web-reto1)
 
