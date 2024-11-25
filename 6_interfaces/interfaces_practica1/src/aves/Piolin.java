@@ -14,11 +14,11 @@ public class Piolin extends Canario implements Hablador{
 	@Override
 	public void hablar() {
 		System.out.println("Hola, soy "+this.getClass().getSimpleName()+" y sé hablar");
-		System.out.print("Sexo: "+sexo);
-		System.out.print(". Edad: "+edad);
-		System.out.print(". Canta: "+canta);
-		System.out.print(". Películas: "+numPeliculas);
-		System.out.println();
+		System.out.println(this.toString());
 	}
 	
+	@Override
+	public String toString() {
+		return "Sexo: " + sexo + ", Edad: " + edad + ", Canta: " + canta + ", Películas: " + numPeliculas + "";
+	}
 }

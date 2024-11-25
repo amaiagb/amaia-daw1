@@ -16,11 +16,11 @@ public class Radio extends Aparato implements Hablador{
 	@Override
 	public void hablar() {
 		System.out.println("Hola, soy una "+this.getClass().getSimpleName()+" y sé hablar");
-		System.out.print("Consumo: "+consumo);
-		System.out.print(". Precio: "+precio);
-		System.out.print(". Casette: "+casette);
-		System.out.print(". Potencia: "+potencia);
-		System.out.println();
+		System.out.println(this.toString());
 	}
 
+	@Override
+	public String toString() {
+		return "Consumo: " + consumo + ", Precio: " + precio + ", Casette: " + casette + ", Potencia: " + potencia + "";
+	}
 }

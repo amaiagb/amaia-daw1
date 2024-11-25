@@ -16,16 +16,12 @@ public class TV extends Aparato implements Hablador{
 	@Override
 	public void hablar() {
 		System.out.println("Hola, soy una "+this.getClass().getSimpleName()+" y sé hablar");
-		System.out.print("Consumo: "+consumo);
-		System.out.print(". Precio: "+precio);
-		System.out.print(". Teletexto: "+teletexto);
-		System.out.print(". Pulgadas: "+pulgadas);
-		System.out.println();
+		System.out.println(this.toString());
 	}
 	
-	
-	
-
-	
-	
+	@Override
+	public String toString() {
+		return "Consumo: " + consumo + ", Precio: " + precio + ", Teletexto: " + teletexto + ", Pulgadas: " + pulgadas + "";
+	}
 }
+	

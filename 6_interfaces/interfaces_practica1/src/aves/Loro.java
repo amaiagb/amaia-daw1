@@ -16,12 +16,11 @@ public class Loro extends Ave implements Hablador{
 	@Override
 	public void hablar() {
 		System.out.println("Hola, soy un "+this.getClass().getSimpleName()+" y sé hablar");
-		System.out.print("Sexo: "+sexo);
-		System.out.print(". Edad: "+edad);
-		System.out.print(". Región: "+region);
-		System.out.print(". Color: "+color);
-		System.out.println();
+		System.out.println(this.toString());
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Sexo: " + sexo + ", Edad: " + edad + ", region: " + region + ", Color: " + color + "";
+	}
 }
