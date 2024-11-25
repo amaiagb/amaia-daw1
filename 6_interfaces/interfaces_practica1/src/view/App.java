@@ -2,6 +2,9 @@ package view;
 
 import model.Hablador;
 import aves.*;
+
+import javax.swing.JOptionPane;
+
 import aparatos.*;
 import personas.*;
 
@@ -23,14 +26,12 @@ public class App {
 		objetos[9]=new Bedel("Dani", 40, "Tarde", 10); 
 		objetos[10]=new TV(100, 300000, true, 28);
 		objetos[11]=new Radio(50, 150000, false, 25);
-		
-		for (int i = 0; i < objetos.length; i++) {
-			if(objetos[i] instanceof Hablador) {
-				((Hablador) objetos[i]).hablar();
+
+		for (Object o: objetos) {
+			if(o instanceof Hablador) {
+				((Hablador) o).hablar();
 				System.out.println();
 			}
 		}
 	}
-
-	
 }
