@@ -1,4 +1,4 @@
-package numeros;
+package juegos.numeros;
 
 import juegos.interfaces.Jugable;
 
@@ -19,13 +19,17 @@ public class JuegoAdivinaPar extends JuegoAdivinaNumero implements Jugable{
 	}
 	@Override
 	public void muestraNombre() {
-		System.out.println("Adivina un número par");
+		System.out.println("*** Adivina un número par ***");
 	}
 	
 	@Override
 	public void muestraInfo() {
-		System.out.println("Intenta adivinar el número PAR oculto entre 0 y 10 (incluidos).\nTe quedan "+this.getVidas()+" vidas");
-		
+		System.out.println("Intenta adivinar el número PAR oculto entre 0 y 10 (incluidos)");
+		System.out.println("[Te quedan "+this.getVidas()+" vidas]");
 	}
-	//TODO OVERRIDE REINICIAR PARTIDA
+	@Override
+	public void reiniciaPartida() {
+		super.reiniciaPartida();
+		if(this.numeroAAdivinar%2!=0) this.numeroAAdivinar++;
+	}
 }

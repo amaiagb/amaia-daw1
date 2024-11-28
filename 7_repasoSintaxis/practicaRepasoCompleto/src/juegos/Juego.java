@@ -1,5 +1,8 @@
 package juegos;
 
+import java.util.Date;
+import java.util.Random;
+
 public abstract class Juego {
 	
 	//atributos
@@ -46,7 +49,7 @@ public abstract class Juego {
 	
 	public boolean quitaVida() {
 		vidas--;
-		if(vidas>0) {
+		if(vidas>=0) {
 			return true;
 		}else {
 			System.out.println("Juego terminado");
