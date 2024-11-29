@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+import juegos.excepciones.JuegoException;
 import juegos.interfaces.Jugable;
 import juegos.letras.JuegoAhorcado;
 import juegos.numeros.JuegoAdivinaImpar;
@@ -14,23 +15,30 @@ public class App {
 	
 	public static void main(String[] args) {
 		
-		String volverAJugar;
+		String volverAJugar = "n";
 		
 		do {
-			Jugable j = eligeJuego();
-			System.out.println();
-			j.muestraNombre();
-			j.muestraInfo();
-			j.juega();
-			System.out.println("¿Quieres jugar otra vez? (s/n)");
-			Scanner entrada = new Scanner(System.in);
-			volverAJugar = entrada.nextLine();
+			try {
+				Jugable j = eligeJuego();
+				System.out.println();
+				j.muestraNombre();
+				j.muestraInfo();
+				j.juega();
+				System.out.println("¿Quieres jugar otra vez? (s/n)");
+				Scanner entrada = new Scanner(System.in);
+				volverAJugar = entrada.nextLine();
+			}catch(JuegoException e) {
+				System.out.println(e.getMessage());
+			}finally {
+				System.out.println("Fin del programa");
+			}
+			
 		} while("s".equalsIgnoreCase(volverAJugar));
 		
-
 	}
 	
-	public static Jugable eligeJuego() {
+	public static Jugable eligeJuego() throws JuegoException{
+		
 		Object juegoNumero = new JuegoAdivinaNumero(3);
 		Object juegoPar = new JuegoAdivinaPar(3);
 		Object juegoImpar = new JuegoAdivinaImpar(3);
@@ -41,7 +49,7 @@ public class App {
 		juegos.add((Jugable) juegoPar);
 		juegos.add((Jugable) juegoImpar);
 		juegos.add((Jugable) juegoAhorcado);
-		
+
 		int seleccionJuego = 0;
 		do {
 			Scanner entrada = new Scanner(System.in);

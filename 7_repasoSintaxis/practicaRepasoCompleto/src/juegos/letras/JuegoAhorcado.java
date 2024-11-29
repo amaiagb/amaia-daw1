@@ -5,15 +5,23 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import juegos.Juego;
+import juegos.excepciones.JuegoException;
 import juegos.interfaces.Jugable;
 
 public class JuegoAhorcado extends Juego implements Jugable{
 	
 	public String cadenaAAdivinar;
 	
-	public JuegoAhorcado(int vidas, String cadenaAAdivinar) {
+	public JuegoAhorcado(int vidas, String cadenaAAdivinar) throws JuegoException {
 		super(vidas);
 		this.cadenaAAdivinar = cadenaAAdivinar;
+		for (int i = 0; i < cadenaAAdivinar.length(); i++) {
+			Character caracter = cadenaAAdivinar.charAt(i);			
+			if(caracter.getType(caracter) == 9) {
+				throw new JuegoException("Error: Se ha introducido un número");
+			}
+			
+		}
 		//TO DO 
 		/*comprobar que ninguno de los caracteres de la palabra a adivinar sea un
 número, para ello puede valerse de los métodos de la clase Character. Si hay un
