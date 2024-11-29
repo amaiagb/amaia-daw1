@@ -20,13 +20,7 @@ public class JuegoAhorcado extends Juego implements Jugable{
 			if(caracter.getType(caracter) == 9) {
 				throw new JuegoException("Error: Se ha introducido un número");
 			}
-			
 		}
-		//TO DO 
-		/*comprobar que ninguno de los caracteres de la palabra a adivinar sea un
-número, para ello puede valerse de los métodos de la clase Character. Si hay un
-número, lanzará una excepción JuegoException notificándolo
-*/
 	}
 
 	@Override
