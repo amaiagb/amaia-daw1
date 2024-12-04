@@ -48,10 +48,19 @@ public class Main {
 		btnSumar.addActionListener(new ActionListener() {
 			
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				int num1 = Integer.parseInt(txtNum1.getText());
-				int num2 = Integer.parseInt(txtNum2.getText());
-				lblResultado.setText(Integer.toString(num1+num2));
+			public void actionPerformed(ActionEvent event) {
+				
+				try {
+					int num1 = Integer.parseInt(txtNum1.getText());
+					int num2 = Integer.parseInt(txtNum2.getText());
+					
+					lblResultado.setText(Integer.toString(num1+num2));
+					
+				} catch (NumberFormatException e) {
+					lblResultado.setText("Debes introducir valores numéricos");
+				} catch (Exception e) {
+					lblResultado.setText("Error inesperado");
+				}
 			}
 		});
 		

@@ -1,4 +1,4 @@
-package ventana_ej2;
+package ventanas_ej2;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 
 public class Main {
 
-	public static void main(String[] args) {
+public static void main(String[] args) {
 		
 		JFrame ventana = new JFrame("Cambiar color de fondo");
 		ventana.setBounds(50,50,400,350);
@@ -58,5 +58,6 @@ public class Main {
 		ventana.setVisible(true);
 
 	}
+
 
 }

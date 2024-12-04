@@ -1,4 +1,4 @@
-package ventana_ej3;
+package ventanas_ej3;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,8 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class Main {
-
 	public static void main(String[] args) {
+		
 		JFrame ventana = new JFrame("Validar número");
 		ventana.setBounds(50,50,400,350);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,7 +42,8 @@ public class Main {
 			public void actionPerformed(ActionEvent event) {
 
 				try {
-				int num = Integer.parseInt(txtNum.getText());	
+					String valor = txtNum.getText().replaceAll(",",".");
+					Double.parseDouble(valor);	
 					lblResultado.setText("Es un número");
 				
 				} catch(NumberFormatException e) {
@@ -56,5 +57,4 @@ public class Main {
 		ventana.setVisible(true);
 
 	}
-
 }
