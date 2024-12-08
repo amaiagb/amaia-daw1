@@ -1,0 +1,43 @@
+
+
+al clicar en cada número:
+	- ir concatenando los valores en una variable 
+	- mostrarlo en pantalla 
+	
+	hay que diferenciar si justo antes estaba clicando más numeros para seguir concatenando
+	o si lo de la pantalla es un resultado porque en ese caso no se concatena sino que se empieza de nuevo
+	
+al clicar en una operación:
+	- leer el valor en pantalla
+	- convertir a número y almacenarlo en una variable (primerValor)
+	- guardar el tipo de ooperación en una variable (operacion)
+	
+	si queremos que haga calculos a tiempo real, sin tener que pulsar el igual habría que comprobar primero si ya hay un primerValor almacenado
+	
+al clicar en calcular:
+	- leer el valor en pantalla
+	- convertir a número y almacenarlo en una variable (segundoValor)
+	- leer el tipo de operación en un switch y realizar el calculo correspondiente
+	- devolver el valor del resultado (valorResultado)
+	
+
+Manejo de excepciones cuando hay strings en pantalla: cómo gestionarlo para empezar a concatenar numeros
+	
+- Manejo de excepciones al dividir x 0
+al ser numeros double no da arithmetic exception: da NaN (0/0) e Inifnity (X/0)
+
+- Numberformat cuando intenta guardar un valor y la pantalla está vacía (no se ha pulsado ningun numero)
+- Nullpointer cuando se da a calcular antes de seleccionar ninguna operación
+
+Eliminar los decimales si son sólo ceros:
+Opc.1 
+¿para eso habría que utilizar big decimal y usar el stripTrailingZeros()?
+al usar big decimal  no funcionan los calculos aritmeticos baásicos, hay que usar sus propios métodos
+Opc. 2
+Comparar el numero double con el mismo pasado a entero/long, si no son iguales tiene decimales
+Opc.3
+Usar el módulo entre 1. 12%1 = 12, 12.34%1 = 0.34. Si el double%1 != 0 tiene decimales.
+
+
+	
+	
