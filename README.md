@@ -22,8 +22,9 @@
 * **Interfaces**
   * [Ejercicios](6_interfaces)
 * **Ventanas**
-  * [Ejercicios básicos (sin editor gráfico)](8_ventanas)
-  * [Proyecto Calculadora v1.0](8_ventanas/calculadora/src/view/App.java)
+  * [Ejercicios básicos](8_ventanas) (sin editor gráfico)
+  * Ejercicio [Calculadora](8_ventanas/calculadora/src/view/App.java) v1.0
+  * Ejercicio [Formulario](8_ventanas/formulario/src) v1.0
 
    
 ---
