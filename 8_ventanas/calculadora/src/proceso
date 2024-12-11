@@ -6,6 +6,7 @@ al clicar en cada número:
 	
 	hay que diferenciar si justo antes estaba clicando más numeros para seguir concatenando
 	o si lo de la pantalla es un resultado porque en ese caso no se concatena sino que se empieza de nuevo
+	tener en cuenta los numeros decimales para que el programa no de problemas cuando empieza por 0,
 	
 al clicar en una operación:
 	- leer el valor en pantalla
