@@ -1,5 +1,6 @@
 package colegio;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import colegio.model.Estudiante;
@@ -25,6 +26,7 @@ public class App {
 		estudiante1.setTerminosAceptados(true);
 		estudiante1.setCurso("DAW");
 		estudiante1.setGenero(0);
+		estudiante1.setFechaNacimiento(LocalDate.of(1997, 02, 21));
 		
 		Estudiante estudiante2 = new Estudiante();
 		estudiante2.setNombre("Miren");
@@ -35,6 +37,7 @@ public class App {
 		estudiante2.setTerminosAceptados(true);
 		estudiante2.setCurso("DAW");
 		estudiante2.setGenero(1);
+		estudiante2.setFechaNacimiento(LocalDate.of(2003, 05, 26));
 		
 		Estudiante estudiante3 = new Estudiante();
 		estudiante3.setNombre("Alex");
@@ -45,19 +48,20 @@ public class App {
 		estudiante3.setTerminosAceptados(true);
 		estudiante3.setCurso("DAW");
 		estudiante3.setGenero(2);
+		estudiante3.setFechaNacimiento(LocalDate.of(2001, 10, 9));
+		
+		Estudiante estudiante4 = new Estudiante("44523671S", "Maialen", "Olabarria", "molabarria@gmail.com", 0, LocalDate.of(1999,10,11), "ASIR", "", true);
 		
 		estudiantes.add(estudiante1);
 		estudiantes.add(estudiante2);
 		estudiantes.add(estudiante3);
+		estudiantes.add(estudiante4);
 		
-		//AltaEstudiante frame = new AltaEstudiante(estudiantes);
+		//AltaEstudiante ventana = new AltaEstudiante(estudiantes);
 		
-		/**TODO
-		 *  
-		 */
 		
-		ListadoEstudiante frame = new ListadoEstudiante(estudiantes);
-		frame.setVisible(true);
+		ListadoEstudiante ventana = new ListadoEstudiante(estudiantes);
+		ventana.setVisible(true);
 
 	}
 

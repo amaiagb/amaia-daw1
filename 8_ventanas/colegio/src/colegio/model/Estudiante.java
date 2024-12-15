@@ -18,6 +18,23 @@ public class Estudiante {
 	private boolean terminosAceptados;
 	private List<Asignatura> asignaturas;	
 	
+	public Estudiante() {
+		
+	}
+	
+	public Estudiante(String dni, String nombre, String apellidos, String email, int genero, LocalDate fechaNacimiento,
+			String curso, String necesidadesEspeciales, boolean terminosAceptados) {
+		super();
+		this.dni = dni;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.email = email;
+		this.genero = genero;
+		this.fechaNacimiento = fechaNacimiento;
+		this.curso = curso;
+		this.necesidadesEspeciales = necesidadesEspeciales;
+		this.terminosAceptados = terminosAceptados;
+	}
 	public String getDni() {
 		return dni;
 	}
