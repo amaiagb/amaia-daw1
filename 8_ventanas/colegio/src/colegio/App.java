@@ -50,7 +50,7 @@ public class App {
 		estudiante3.setGenero(2);
 		estudiante3.setFechaNacimiento(LocalDate.of(2001, 10, 9));
 		
-		Estudiante estudiante4 = new Estudiante("44523671S", "Maialen", "Olabarria", "molabarria@gmail.com", 0, LocalDate.of(1999,10,11), "ASIR", "", true);
+		Estudiante estudiante4 = new Estudiante("44523671S", "Maialen", "Olabarria", "molabarria@gmail.com", 1, LocalDate.of(1999,10,11), "ASIR", "", true);
 		
 		estudiantes.add(estudiante1);
 		estudiantes.add(estudiante2);
