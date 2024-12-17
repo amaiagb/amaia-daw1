@@ -41,5 +41,6 @@
 ## Lenguaje de Marcas
 - HTML
 - CSS
+- Responsive: [Ejercicios](lenguaje_marcas/ejercicios-responsive)
 - Proyecto Reto 1: [Web Corporativa](https://github.com/amaiagb/web-reto1)
 
