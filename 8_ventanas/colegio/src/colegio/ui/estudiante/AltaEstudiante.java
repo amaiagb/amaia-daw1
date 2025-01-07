@@ -25,6 +25,7 @@ import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import colegio.App;
 import colegio.model.Estudiante;
 import java.awt.Color;
 
@@ -37,6 +38,7 @@ public class AltaEstudiante extends JFrame {
 	private JTextField txtEmail;
 	private JLabel lblFechaNacimiento;
 	private JTextField txtFechaNacimiento;
+	private JLabel lblError;
 	private final ButtonGroup btnGroupGenero = new ButtonGroup();
 
 	public AltaEstudiante(ArrayList<Estudiante> estudiantes) {
@@ -112,7 +114,7 @@ public class AltaEstudiante extends JFrame {
 		contentPane.add(lblCurso);
 		
 		JComboBox<String> cmbCurso = new JComboBox<String>();
-		cmbCurso.setModel(new DefaultComboBoxModel<String>(new String[] {"Selecciona", "DAW", "Integraci\u00F3n Social"}));
+		cmbCurso.setModel(new DefaultComboBoxModel<String>(new String[] {"Selecciona", "DAW", "ASIR", "Integración Social"}));
 		cmbCurso.setBounds(337, 86, 110, 22);
 		contentPane.add(cmbCurso);
 		
@@ -142,7 +144,7 @@ public class AltaEstudiante extends JFrame {
 		lblAltaDeEstudiante.setBounds(21, 11, 426, 27);
 		contentPane.add(lblAltaDeEstudiante);
 		
-		JLabel lblError = new JLabel("Errores en los datos introducidos");
+		lblError = new JLabel("Errores en los datos introducidos");
 		lblError.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblError.setForeground(new Color(139, 0, 0));
 		lblError.setHorizontalAlignment(SwingConstants.CENTER);
@@ -203,6 +205,7 @@ public class AltaEstudiante extends JFrame {
 						}
 					}
 					estudiantes.add(estudiante);
+
 				} else {
 					lblError.setVisible(true);
 				}
@@ -213,30 +216,38 @@ public class AltaEstudiante extends JFrame {
 	private boolean validarCampos(String dni, String nombre, String apellidos, String email, String curso, String fechaNacimiento, Boolean terminos, String genero) {
 		
 		if(dni.equals("") || dni.length() != 9) { //Se podría validar también que el dni no esté repetido o que tenga el formato correcto
+			lblError.setText("Error en DNI");
 			return false;
 		}
 		if(nombre.equals("")) { 
+			lblError.setText("Error en nombre");
 			return false;
 		}
 		if(apellidos.equals("")) { 
+			
 			return false;
 		}
 		if(curso.equals("Selecciona")) { 
+			lblError.setText("Error en curso");
 			return false;
 		}
 		if(email.equals("")) { //Comprobar que el email tenga formato correcto
+			lblError.setText("Error en email");
 			return false;
 		}
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		try {
 			format.parse(fechaNacimiento);
 		} catch (ParseException e) {
+			lblError.setText("Error en fecha");
 			return false;
 		}
 		if(!terminos) {
+			lblError.setText("Error en terminos");
 			return false;
 		}
 		if(genero.equals("")) { 
+			lblError.setText("Error en genero");
 			return false;
 		}
 		return true;

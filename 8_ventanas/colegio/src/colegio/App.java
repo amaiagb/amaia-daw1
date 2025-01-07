@@ -3,6 +3,8 @@ package colegio;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
+
 import colegio.model.Estudiante;
 import colegio.ui.estudiante.AltaEstudiante;
 import colegio.ui.estudiante.ListadoEstudiante;
@@ -57,12 +59,13 @@ public class App {
 		estudiantes.add(estudiante3);
 		estudiantes.add(estudiante4);
 		
-		//AltaEstudiante ventana = new AltaEstudiante(estudiantes);
-		
-		
-		ListadoEstudiante ventana = new ListadoEstudiante(estudiantes);
-		ventana.setVisible(true);
+		AltaEstudiante ventana = new AltaEstudiante(estudiantes);
 
+		ListadoEstudiante ventana2 = new ListadoEstudiante(estudiantes);
+		
+		ventana.setVisible(true);
+		ventana2.setVisible(true);
+		
 	}
 
 }
