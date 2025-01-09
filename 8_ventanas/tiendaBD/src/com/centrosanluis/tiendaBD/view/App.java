@@ -13,7 +13,7 @@ public class App {
 		try {
 			AccesoBDTienda bd = new AccesoBDTienda();
 			ProductoDTO p = bd.getProducto(2);
-			//System.out.println(p.getId()+". "+p.getNombre()+": "+p.getDescripcion()+" ("+p.getColor()+")");
+			System.out.println(p.getId()+". "+p.getNombre()+": "+p.getDescripcion()+" ("+p.getColor()+")");
 			Ventana ventana = new Ventana(bd);
 			ventana.setVisible(true);
 			
