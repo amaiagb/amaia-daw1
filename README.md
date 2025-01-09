@@ -22,9 +22,11 @@
 * **Interfaces**
   * [Ejercicios](6_interfaces)
 * **Ventanas**
-  * [Ejercicios básicos](8_ventanas) (sin editor gráfico)
+  * Ejercicios básicos (sin editor gráfico): [Ej. 1](8_ventanas/ventanas_ej1/src/ventanas_ej1/Main.java) | [Ej. 2](8_ventanas/ventanas_ej2/src/ventanas_ej2/Main.java) | [Ej. 3](8_ventanas/ventanas_ej3/src/ventanas_ej3/Main.java)
   * Ejercicio [Calculadora](8_ventanas/calculadora/src) v1.1
   * Ejercicio [Formulario](8_ventanas/formulario/src) v1.0
+  * Ejercicio [Colegio](8_ventanas/colegio)
+  * Ejercicio [Tienda](8_ventanas/tiendaBD) (con conexión a BD)
 
    
 ---
@@ -35,6 +37,7 @@
 - Ejemplo [Herencias](oop/03Herencia)
 - Ejercicio [Tienda](oop/04Tienda)
 - Ejemplo [Interfaces](oop/05Interfaces) | Ejercicio [Interfaces: Vehículos](oop/06Interfaces_vehiculos)
+- Ejercicio [Conexión con BD](oop/08BasesDeDatos)
 
 ---
 
