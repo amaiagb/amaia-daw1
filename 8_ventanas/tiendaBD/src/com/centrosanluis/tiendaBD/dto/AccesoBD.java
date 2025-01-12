@@ -17,6 +17,7 @@ public class AccesoBD {
 	String bd, user, pass;
 	String tipoBD;
 
+	
 	public AccesoBD(String tipoBD, String bd, String user, String pass) throws ClassNotFoundException, SQLException {
 		super();
 		this.bd = bd;
