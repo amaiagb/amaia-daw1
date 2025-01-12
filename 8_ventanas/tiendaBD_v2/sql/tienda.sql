@@ -31,16 +31,19 @@ CREATE TABLE IF NOT EXISTS `productos` (
   `color` varchar(50) DEFAULT NULL,
   `estado` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla tienda.productos: ~6 rows (aproximadamente)
+-- Volcando datos para la tabla tienda.productos: ~9 rows (aproximadamente)
 INSERT INTO `productos` (`id`, `nombre`, `precio`, `descuento`, `valor_dto`, `categoria`, `descripcion`, `color`, `estado`) VALUES
 	(1, 'Monitor', 200, 0, 0, 'Informática', '4K Full HD', 'Negro', 'Nuevo'),
 	(2, 'Teclado', 60, 0, 0, 'Informática', 'Inalámbrico', 'Negro', 'Nuevo'),
 	(3, 'Ratón', 45, 1, 10, 'Informática', 'Conexión bluetooth', 'Blanco', 'Reacondiconado'),
 	(5, 'Auriculares', 39.99, 0, 0, 'Audio', 'Bluetooth', 'Blanco', 'Nuevo'),
 	(6, 'Altavoz', 210, 1, 15, 'Audio', 'Inalámbrico', 'Azul', 'Reacondicionado'),
-	(7, 'ipad', 480, 0, 0, 'electrónica', 'wifi 3G 128GB', 'negro', 'nuevo');
+	(7, 'ipad', 480, 0, 0, 'electrónica', 'wifi 3G 128GB', 'negro', 'nuevo'),
+	(13, 'Monitor HD', 135, 1, 25, 'Informática', 'Full HD ', 'Negro', 'Reacondicionado'),
+	(14, 'iphone', 999, 0, 0, 'Electrónica', '256GB', 'Blanco', 'Nuevo'),
+	(15, 'Portátil', 760, 0, 0, 'Informática', '15,6"', 'Gris', 'Nuevo');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
