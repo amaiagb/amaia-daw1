@@ -1,0 +1,37 @@
+
+Clase Carta :
+	- id
+	- color
+	- imgFile
+	- mostrada
+	- resuelta
+	
+ArrayList<Carta> cartas
+
+JFrame tablero:
+	- JLabel lblCarta1, lblCarta2...
+	
+Proceso:
+	Click en cada carta:
+		- ¿es la primera carta?
+			- voltear
+			- guardar id en carta1
+			- 
+		-¿es la segunda carta?
+			-voltear
+			-guardar id en carta2
+			-comprobar pareja
+				-comparar color de ambas cartas del arraylist
+				-resetear valores de carta1 carta 2 y cartasLevantadas
+				- Fallo:
+					- Voltear cartas
+				- Acierto:
+					- Deshabiliar clic en esas cartas
+					- Mantener descubiertas siempre
+					- Sumar pareja al contador
+		- Consideraciones:
+			- No clicar dos veces en la misma carta -> no tener en cuenta
+			- No clicar en cartas resueltas
+			
+
+
