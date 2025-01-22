@@ -67,6 +67,7 @@ public class Ventana2 extends JFrame {
 				Ventana1 ventana = new Ventana1(segundos);
 				ventana.setVisible(true);
 				dispose();
+				timer.stop();
 			}
 		});
 		btnDer.setForeground(Color.WHITE);
