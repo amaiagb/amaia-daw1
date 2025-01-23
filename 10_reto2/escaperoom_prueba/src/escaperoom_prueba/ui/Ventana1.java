@@ -33,6 +33,7 @@ public class Ventana1 extends JFrame {
     private JPanel escena1;
     private JPanel escena2;
     private JPanel escena3;
+    private Escena4 e4;
     AccesoDBEscaperoom bd;
     private String idioma = "EN";
     
@@ -75,7 +76,7 @@ public class Ventana1 extends JFrame {
 		textArea.setText("texto de prueba texto de prueba texto de prueba texto de prueba texto de prueba texto de prueba texto de prueba texto de prueba texto de prueba texto de prueba texto de prueba");
 		Mensaje m;
 		try {
-			m = bd.getMensaje(2, idioma);
+			m = bd.getMensaje(1, idioma);
 			textArea.setText(m.getLocutor()+": "+m.getTexto());
 		} catch (ClassNotFoundException | SQLException e1) {
 			e1.printStackTrace();
@@ -287,7 +288,7 @@ public class Ventana1 extends JFrame {
 		
 		btnEsc4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Escena4 e4 = new Escena4(contentPane);
+				e4 = new Escena4(contentPane);
 				e4.setVisible(true);
 				escena1.setVisible(false);
 				escena2.setVisible(false);

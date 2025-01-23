@@ -4,14 +4,16 @@ public class Mensaje {
 	private String idioma;
 	private String texto;
 	private String locutor;
+	private int id;
 	
 	public Mensaje() {}
 	
-	public Mensaje(String idioma, String texto, String locutor) {
+	public Mensaje(String idioma, String texto, String locutor, int id) {
 		super();
 		this.idioma = idioma;
 		this.texto = texto;
 		this.locutor = locutor;
+		this.id = id;
 	}
 
 	public String getIdioma() {
@@ -36,6 +38,14 @@ public class Mensaje {
 
 	public void setLocutor(String locutor) {
 		this.locutor = locutor;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	

@@ -19,8 +19,10 @@ public class AccesoDBEscaperoom extends AccesoDB{
 			mensaje.setIdioma(idioma);
 			mensaje.setLocutor(rs.getString("locutor"));
 			mensaje.setTexto(rs.getString("texto_"+idioma));
+			mensaje.setId(Integer.parseInt(rs.getString("id")));
 			return mensaje;
 		}
+		desconectar();
 		return null;
 	}
 
