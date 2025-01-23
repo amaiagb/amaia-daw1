@@ -10,11 +10,18 @@ import java.awt.event.ActionListener;
 //import java.util.Timer;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import db.AccesoDBEscaperoom;
+import db.Mensaje;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.awt.FlowLayout;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Ventana1 extends JFrame {
 
@@ -26,12 +33,21 @@ public class Ventana1 extends JFrame {
     private JPanel escena1;
     private JPanel escena2;
     private JPanel escena3;
+    AccesoDBEscaperoom bd;
+    private String idioma = "EN";
     
 	public Ventana1(int segundosRestantes) {
+		
+		try {
+			bd = new AccesoDBEscaperoom();
+
+		} catch (ClassNotFoundException | SQLException e1) {
+			e1.printStackTrace();
+		}
+		
 		setResizable(false);
 		
 		segundos = segundosRestantes;		
-
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
@@ -40,7 +56,11 @@ public class Ventana1 extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		/*****/
+		JButton btnEsc4 = new JButton("Escena4");
+		
+		btnEsc4.setBounds(102, 339, 89, 23);
+		contentPane.add(btnEsc4);
+		
 		JTextArea textArea = new JTextArea(5, 30);
 		textArea.setBackground(Color.ORANGE);
 		textArea.setFont(new Font("Monospaced", Font.PLAIN, 13));
@@ -52,8 +72,15 @@ public class Ventana1 extends JFrame {
 		scroll.setBounds(150, 450, 576, 100);
 		getContentPane().add(scroll);
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		//setPreferredSize(new Dimension(250, 110));
 		textArea.setText("texto de prueba texto de prueba texto de prueba texto de prueba texto de prueba texto de prueba texto de prueba texto de prueba texto de prueba texto de prueba texto de prueba");
+		Mensaje m;
+		try {
+			m = bd.getMensaje(2, idioma);
+			textArea.setText(m.getLocutor()+": "+m.getTexto());
+		} catch (ClassNotFoundException | SQLException e1) {
+			e1.printStackTrace();
+		}
+		
 		
 		
 		JPanel menu = new JPanel();
@@ -70,12 +97,7 @@ public class Ventana1 extends JFrame {
 		});
 		btnIzq.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*
-				Ventana2 ventana = new Ventana2(segundos);
-				ventana.setVisible(true);
-				dispose();
-				timer.stop();
-				*/
+
 				if(escena1.isVisible()) {
 					escena2.setVisible(true);
 					escena1.setVisible(false);
@@ -115,7 +137,7 @@ public class Ventana1 extends JFrame {
 		inventario.add(lblInventario);
 		
 		JLabel lblMochila = new JLabel("");
-		lblMochila.setIcon(new ImageIcon(IMG_DIR+"mochilaIcon.png"));
+		lblMochila.setIcon(new ImageIcon("D:\\amaia\\programacion\\programacion\\02\\escaperoom_prueba\\resources\\mochilaIcon.png"));
 		lblMochila.setBounds(10, 450, 96, 96);
 		contentPane.add(lblMochila);
 		lblMochila.addMouseListener(new MouseAdapter() {
@@ -175,9 +197,15 @@ public class Ventana1 extends JFrame {
 		timer = new Timer(1000, new ActionListener() { // Se ejecuta cada segundo
             @Override
             public void actionPerformed(ActionEvent e) {
-            	segundos--;
-                String time = String.format("%02d:%02d", segundos / 60, segundos % 60);
-                txtTimer.setText(time);
+            	if(segundos > 0) {
+            		segundos--;
+                    String time = String.format("%02d:%02d", segundos / 60, segundos % 60);
+                    txtTimer.setText(time);
+            	} else {
+            		timer.stop();
+            		JOptionPane.showMessageDialog(txtTimer,"FIN","Mensaje",JOptionPane.INFORMATION_MESSAGE);
+            	}
+            	
                 
             }
         });
@@ -197,9 +225,21 @@ public class Ventana1 extends JFrame {
 		
 		JLabel zoomMapa = new JLabel();
 		zoomMapa.setBounds(170, 40, 448, 336);
-		zoomMapa.setIcon(new ImageIcon(IMG_DIR+"mapa_xs.png"));
+		zoomMapa.setIcon(new ImageIcon("D:\\amaia\\programacion\\programacion\\02\\escaperoom_prueba\\resources\\mapa_xs.png"));
 		zoomMapa.setVisible(false);
 		escena1.add(zoomMapa);
+		
+		JButton btnCerrarMapa = new JButton("X");
+		btnCerrarMapa.setBackground(Color.RED);
+		btnCerrarMapa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				zoomMapa.setVisible(false);
+			}
+		});
+		btnCerrarMapa.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnCerrarMapa.setBounds(500, 80, 45, 40);
+		btnCerrarMapa.setVisible(false);
+		escena1.add(btnCerrarMapa);
 		
 		JLabel lblMapa = new JLabel("");
 		lblMapa.setBounds(10, 21, 90, 89);
@@ -212,24 +252,18 @@ public class Ventana1 extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				zoomMapa.setVisible(true);
+				btnCerrarMapa.setVisible(true);
 			}
 		});
-		JButton btnCerrarMapa = new JButton("X");
-		btnCerrarMapa.setBackground(Color.RED);
-		btnCerrarMapa.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				zoomMapa.setVisible(false);
-			}
-		});
-		btnCerrarMapa.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnCerrarMapa.setBounds(500, 80, 45, 40);
-		escena1.add(btnCerrarMapa);
+		
 		
 	
 		JLabel lblfondo = new JLabel("");
-		lblfondo.setIcon(new ImageIcon(IMG_DIR+"bus0.jpg"));
+		lblfondo.setIcon(new ImageIcon("D:\\amaia\\programacion\\programacion\\02\\escaperoom_prueba\\resources\\bus0.jpg"));
 		lblfondo.setBounds(0, 0, 784, 505);
 		escena1.add(lblfondo);
+		
+		
 		
 		escena2 = new JPanel();
 		escena2.setBounds(0, 53, 784, 508);
@@ -237,7 +271,7 @@ public class Ventana1 extends JFrame {
 		escena2.setLayout(null);
 		
 		JLabel lblfondo2 = new JLabel("");
-		lblfondo2.setIcon(new ImageIcon(IMG_DIR+"bus1.jpg"));
+		lblfondo2.setIcon(new ImageIcon("D:\\amaia\\programacion\\programacion\\02\\escaperoom_prueba\\resources\\bus1.jpg"));
 		lblfondo2.setBounds(0, 0, 784, 505);
 		escena2.add(lblfondo2);
 		
@@ -247,8 +281,18 @@ public class Ventana1 extends JFrame {
 		escena3.setLayout(null);
 		
 		JLabel lblfondo3 = new JLabel("");
-		lblfondo3.setIcon(new ImageIcon(IMG_DIR+"bus2.jpg"));
+		lblfondo3.setIcon(new ImageIcon("D:\\amaia\\programacion\\programacion\\02\\escaperoom_prueba\\resources\\bus2.jpg"));
 		lblfondo3.setBounds(0, 0, 784, 505);
 		escena3.add(lblfondo3);
+		
+		btnEsc4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Escena4 e4 = new Escena4(contentPane);
+				e4.setVisible(true);
+				escena1.setVisible(false);
+				escena2.setVisible(false);
+				escena3.setVisible(false);
+			}
+		});
 	}
 }

@@ -6,8 +6,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import db.AccesoDBEscaperoom;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 public class VentanaInicio extends JFrame {
@@ -16,6 +20,8 @@ public class VentanaInicio extends JFrame {
 	private int tiempo;
 
 	public VentanaInicio() {
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		setTitle("Inicio");
@@ -27,9 +33,16 @@ public class VentanaInicio extends JFrame {
 		JButton btnJugar = new JButton("Jugar");
 		btnJugar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ventana1 ventana = new Ventana1(3600);
-				ventana.setVisible(true);
-				dispose();
+				Ventana1 ventana;
+				try {
+					ventana = new Ventana1(3600);
+					ventana.setVisible(true);
+					dispose();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 		btnJugar.setBounds(299, 205, 200, 100);
