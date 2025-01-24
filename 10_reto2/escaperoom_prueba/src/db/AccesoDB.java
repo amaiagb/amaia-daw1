@@ -27,7 +27,7 @@ public class AccesoDB {
 	public void conectar() throws ClassNotFoundException, SQLException {
 		Class.forName(tipoBD);
 		con = DriverManager.getConnection("jdbc:mysql://localhost/"+bd, user, pass);
-		System.out.println("Conexión establecida");
+		//System.out.println("Conexión establecida");
 		st = con.createStatement();
 	}
 

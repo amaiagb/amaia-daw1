@@ -19,16 +19,20 @@ import escaperoom_prueba.ui.Ventana1;
 import javax.swing.JTextPane;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 public class TestTxt extends JFrame {
 	
 	private String idioma = "ES";
-	private JTextPane textPane;
+	private JTextPane txtMensaje;
 	private JTextPane txtPersonaje;
+	private Mensaje m = null;
+	private AccesoDBEscaperoom bd= null;
+	private JPanel panelMensajes;
 	
 	public TestTxt(AccesoDBEscaperoom bd) throws ClassNotFoundException, SQLException {
-			
-		Mensaje m = bd.getMensaje(1, idioma);
+		this.bd = bd;	
+		m = bd.getMensaje(1, idioma);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
@@ -37,10 +41,38 @@ public class TestTxt extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		textPane = new JTextPane();
-		textPane.setBounds(124, 222, 465, 127);
-		contentPane.add(textPane);		
-		textPane.setText(m.getTexto());
+		panelMensajes = new JPanel();
+		panelMensajes.setBounds(0, 0, 800, 600);
+		panelMensajes.setLayout(null);
+		contentPane.add(panelMensajes);
+		
+		JButton btnES = new JButton("");
+		btnES.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				idioma = "ES";
+				cambiarIdioma(m);
+			}
+		});
+		btnES.setIcon(new ImageIcon("D:\\amaia\\programacion\\amaia-daw1\\10_reto2\\escaperoom_prueba\\resources\\spain.png"));
+		btnES.setBounds(114, 122, 59, 40);
+		panelMensajes.add(btnES);
+		
+		JButton btnEN = new JButton("");
+		btnEN.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				idioma = "EN";
+				cambiarIdioma(m);
+			}
+
+		});
+		btnEN.setIcon(new ImageIcon("D:\\amaia\\programacion\\amaia-daw1\\10_reto2\\escaperoom_prueba\\resources\\united-kingdom.png"));
+		btnEN.setBounds(181, 122, 59, 40);
+		panelMensajes.add(btnEN);
+		
+		txtMensaje = new JTextPane();
+		txtMensaje.setBounds(124, 222, 465, 127);
+		panelMensajes.add(txtMensaje);		
+		txtMensaje.setText(m.getTexto());
 		
 		txtPersonaje = new JTextPane();
 		txtPersonaje.setEditable(false);
@@ -48,25 +80,31 @@ public class TestTxt extends JFrame {
 		txtPersonaje.setBackground(Color.WHITE);
 		txtPersonaje.setText((String) null);
 		txtPersonaje.setBounds(114, 173, 243, 40);
-		contentPane.add(txtPersonaje);
+		panelMensajes.add(txtPersonaje);
 		txtPersonaje.setText(m.getLocutor());
 	    txtPersonaje.setBorder(new CompoundBorder(BorderFactory.createLineBorder(Color.BLUE, 2, true),  new EmptyBorder(10,10,10,10)));
 		
 		JButton btnMas = new JButton(">");
+		btnMas.setBounds(555, 348, 41, 35);
+		panelMensajes.add(btnMas);
+		
 		btnMas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int idMsg = m.getId();
 				idMsg++;
 				try {
-					Mensaje m2 = bd.getMensaje(idMsg, idioma);
-					mostrarMensaje(m2);
+					m = bd.getMensaje(idMsg, idioma);
+					if(m!=null) {
+						mostrarMensaje(m);
+					} else {
+						cerrarMensajes();
+					}
+					
 				} catch (ClassNotFoundException | SQLException e1) {
 					e1.printStackTrace();
 				}
 			}
 		});
-		btnMas.setBounds(555, 348, 41, 35);
-		contentPane.add(btnMas);
 		
 		JLabel lblMsgFondo = new JLabel("");
 		lblMsgFondo.setBackground(Color.WHITE);
@@ -76,14 +114,29 @@ public class TestTxt extends JFrame {
 		//title = BorderFactory.createTitledBorder(loweredBevel, m.getLocutor());
 		//lblMsgFondo.setBorder(BorderFactory.createTitledBorder(m.getLocutor()));
 		lblMsgFondo.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2, true));
-		contentPane.add(lblMsgFondo);
+		panelMensajes.add(lblMsgFondo);
 		
 			
 			
 	}
 
-	protected void mostrarMensaje(Mensaje m) {
-		textPane.setText(m.getTexto());
+	protected void cerrarMensajes() {
+		panelMensajes.setVisible(false);
+		
+	}
+
+	public void cambiarIdioma(Mensaje m) {
+		int idMsg = m.getId();
+		try {
+			m = bd.getMensaje(idMsg, idioma);
+			mostrarMensaje(m);
+		} catch (ClassNotFoundException | SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	public void mostrarMensaje(Mensaje m) {
+		txtMensaje.setText(m.getTexto());
 		txtPersonaje.setText(m.getLocutor());
 	}
 }
