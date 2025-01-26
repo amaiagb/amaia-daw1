@@ -1,31 +1,26 @@
 package tests;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
-
-import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.Point;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextPane;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.Point;
-import javax.swing.JButton;
+import javax.swing.border.EmptyBorder;
 
-public class VentanaInventario extends JFrame{
-	
+public class PanelInventario extends JPanel {
+
 	private JPanel contentPane;
 	private JLabel lblInventarioObjeto1;
 	private JLabel lblInventarioObjeto2;
@@ -39,21 +34,21 @@ public class VentanaInventario extends JFrame{
 	private final String IMG_FOLDER = System.getProperty("user.dir")+"\\resources\\";
 	private int objetoSeleccionado = -1;
 	
-	public VentanaInventario(ArrayList<Objeto> objetos) {
-		setResizable(false);
-		this.objetos = objetos;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 443, 324);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+	public PanelInventario(ArrayList<Objeto> objetos) {
 		
-		JPanel panelInventario = new JPanel();
-		panelInventario.setBackground(new Color(153, 204, 204));
-		panelInventario.setBounds(49, 11, 319, 248);
-		getContentPane().add(panelInventario);
-		panelInventario.setLayout(null);
+		this.objetos = objetos;
+		//setBounds(100, 100, 443, 324);
+		//contentPane = new JPanel();
+		//setBorder(new EmptyBorder(5, 5, 5, 5));
+		//setContentPane(contentPane);
+		//setLayout(null);
+		
+		//JPanel panelInventario = new JPanel();
+		setBackground(new Color(153, 204, 204));
+		setBounds(10, 10, 319, 248);
+		setOpaque(true);
+		//getContentPane().add(panelInventario);
+		setLayout(null);
 		
 		lblInventarioObjeto1 = new JLabel("");
 		lblInventarioObjeto1.setBackground(new Color(240, 240, 240));
@@ -61,7 +56,7 @@ public class VentanaInventario extends JFrame{
 		lblInventarioObjeto1.setBorder(BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 		lblInventarioObjeto1.setHorizontalAlignment(JLabel.CENTER); 
 		lblInventarioObjeto1.setVerticalAlignment(JLabel.CENTER);
-		panelInventario.add(lblInventarioObjeto1);
+		add(lblInventarioObjeto1);
 		labels.add(lblInventarioObjeto1);
 		
 		lblInventarioObjeto2 = new JLabel("");
@@ -70,7 +65,7 @@ public class VentanaInventario extends JFrame{
 		lblInventarioObjeto2.setBorder(BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 		lblInventarioObjeto2.setHorizontalAlignment(JLabel.CENTER); 
 		lblInventarioObjeto2.setVerticalAlignment(JLabel.CENTER);
-		panelInventario.add(lblInventarioObjeto2);
+		add(lblInventarioObjeto2);
 		labels.add(lblInventarioObjeto2);
 		
 		lblInventarioObjeto3 = new JLabel("");
@@ -79,7 +74,7 @@ public class VentanaInventario extends JFrame{
 		lblInventarioObjeto3.setBounds(148, 33, 50, 50);
 		lblInventarioObjeto3.setHorizontalAlignment(JLabel.CENTER); 
 		lblInventarioObjeto3.setVerticalAlignment(JLabel.CENTER);
-		panelInventario.add(lblInventarioObjeto3);
+		add(lblInventarioObjeto3);
 		labels.add(lblInventarioObjeto3);
 		
 		lblInventarioObjeto4 = new JLabel("");
@@ -88,7 +83,7 @@ public class VentanaInventario extends JFrame{
 		lblInventarioObjeto4.setBorder(BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 		lblInventarioObjeto4.setHorizontalAlignment(JLabel.CENTER); 
 		lblInventarioObjeto4.setVerticalAlignment(JLabel.CENTER);
-		panelInventario.add(lblInventarioObjeto4);
+		add(lblInventarioObjeto4);
 		labels.add(lblInventarioObjeto4);
 		
 		lblInventarioObjeto5 = new JLabel("");
@@ -97,7 +92,7 @@ public class VentanaInventario extends JFrame{
 		lblInventarioObjeto5.setBorder(BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 		lblInventarioObjeto5.setHorizontalAlignment(JLabel.CENTER); 
 		lblInventarioObjeto5.setVerticalAlignment(JLabel.CENTER);
-		panelInventario.add(lblInventarioObjeto5);
+		add(lblInventarioObjeto5);
 		labels.add(lblInventarioObjeto5);
 		
 		lblInventarioObjeto6 = new JLabel("");
@@ -106,7 +101,7 @@ public class VentanaInventario extends JFrame{
 		lblInventarioObjeto6.setBounds(148, 90, 50, 50);
 		lblInventarioObjeto6.setHorizontalAlignment(JLabel.CENTER); 
 		lblInventarioObjeto6.setVerticalAlignment(JLabel.CENTER);
-		panelInventario.add(lblInventarioObjeto6);
+		add(lblInventarioObjeto6);
 		labels.add(lblInventarioObjeto6);
 		
 		txtObjDescripcion = new JTextPane();
@@ -114,7 +109,7 @@ public class VentanaInventario extends JFrame{
 		txtObjDescripcion.setEditable(false);
 		txtObjDescripcion.setBackground(new Color(255, 255, 255));
 		txtObjDescripcion.setBounds(32, 151, 166, 66);
-		panelInventario.add(txtObjDescripcion);
+		add(txtObjDescripcion);
 		txtObjDescripcion.setText("Selecciona un objeto del inventario para ver su descripción");
 
 		mostrarObjetosInventario(objetos);

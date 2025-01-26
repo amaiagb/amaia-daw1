@@ -38,12 +38,14 @@ public class App {
 			e.printStackTrace();
 		}
 		*/
+		
 		//PROBAR GESTIÓN INVENTARIO
 		ArrayList<Objeto> objetosInventario = new ArrayList<>();
 		
 		objetosInventario.add(new Objeto("llave","llave.png", "Una llave metálica, demasiado pequeña para una puerta, quizá sea de algún candado"));
 		objetosInventario.add(new Objeto("nota","note.png", "Una nota con un código escrito"));
 		objetosInventario.add(new Objeto("destornillador","destornillador.png", "Un destornillador, siempre es útil tener herramientas"));
+		objetosInventario.add(new Objeto("sandwich","sandwich.png", "El sandwich para comer en el recreo"));
 		
 		VentanaInventario frame = new VentanaInventario(objetosInventario);
 		frame.setVisible(true);
