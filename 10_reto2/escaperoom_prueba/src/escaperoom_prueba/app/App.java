@@ -40,6 +40,7 @@ public class App {
 		*/
 		
 		//PROBAR GESTIÓN INVENTARIO
+		/*
 		ArrayList<Objeto> objetosInventario = new ArrayList<>();
 		
 		objetosInventario.add(new Objeto("llave","llave.png", "Una llave metálica, demasiado pequeña para una puerta, quizá sea de algún candado"));
@@ -49,7 +50,7 @@ public class App {
 		
 		VentanaInventario frame = new VentanaInventario(objetosInventario);
 		frame.setVisible(true);
-		
+		*/
 		
 		
 
