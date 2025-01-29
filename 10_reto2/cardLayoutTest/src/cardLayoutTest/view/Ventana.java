@@ -16,18 +16,8 @@ public class Ventana extends JFrame {
 	private JPanel contentPane;
 	private CardLayout cardLayout;
 	private JPanel panelEscenas;
+	private JPanel panelInventario;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		Ventana frame = new Ventana();
-		frame.setVisible(true);
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public Ventana() {
 		setResizable(false);
 		setTitle("Escape Room");

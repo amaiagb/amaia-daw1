@@ -28,8 +28,9 @@ public class App {
 		frame.setVisible(true);
 		*/
 		
-		/*
+		
 		//PROBAR ACCESO DB
+		/*
 		try {
 			AccesoDBEscaperoom bd = new AccesoDBEscaperoom();
 			TestTxt ventanaTexto = new TestTxt(bd);
