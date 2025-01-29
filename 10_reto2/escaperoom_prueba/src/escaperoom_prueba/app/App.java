@@ -23,10 +23,10 @@ public class App {
 
 	public static void main(String[] args) {
 		
-		/*
+		
 		VentanaInicio frame = new VentanaInicio();
 		frame.setVisible(true);
-		*/
+		
 		
 		
 		//PROBAR ACCESO DB

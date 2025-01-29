@@ -2,6 +2,7 @@ package com.asej.escaperoom.view;
 
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 
@@ -18,34 +19,46 @@ import java.awt.event.MouseEvent;
 
 public class Portada extends JPanel {
 
-	public Portada() {
+	private Ventana ventana;
+	private JButton btnOpciones;
+	private JButton btnInstrucciones;
+	private JButton btnJugar;
+	private Timer timer;
+	private boolean sonido = true;
+	private String idioma = "ES";
+	
+	public Portada(Ventana ventana) {
 		setBounds(0, 0, 1084, 711);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
 		
-		JLabel lblTitulo = new JLabel("DigiDoor");
+		this.ventana = ventana;
+		
+
+		JLabel lblTitulo = new JLabel();
+		lblTitulo.setIcon(new ImageIcon("C:\\Users\\Amaia\\eclipse-workspace\\amaia-daw1\\10_reto2\\escaperoom\\resources\\images\\Grupo 1.png"));
         lblTitulo.setForeground(Color.WHITE);
         lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 80));
         lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTitulo.setBounds(0, 0, 435, 220);
+        lblTitulo.setBounds(-10, 50, 450, 220);
         add(lblTitulo);
         
-        JButton btnJugar = new JButton("Jugar");
+        btnJugar = new JButton("Jugar");
         btnJugar.setFont(new Font("Segoe UI", Font.BOLD, 16));
         btnJugar.setBackground(Color.WHITE);
-        btnJugar.setBounds(100, 200, 200, 60);
+        btnJugar.setBounds(100, 300, 200, 60);
         add(btnJugar);
         
-        JButton btnGuia = new JButton("Instrucciones");
-        btnGuia.setFont(new Font("Segoe UI", Font.BOLD, 16));
-        btnGuia.setBackground(Color.WHITE);
-        btnGuia.setBounds(100, 300, 200, 60);
-        add(btnGuia);
+        btnInstrucciones = new JButton("Instrucciones");
+        btnInstrucciones.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        btnInstrucciones.setBackground(Color.WHITE);
+        btnInstrucciones.setBounds(100, 400, 200, 60);
+        add(btnInstrucciones);
         
-        JButton btnOpciones = new JButton("Opciones");
+        btnOpciones = new JButton("Opciones");
 		btnOpciones.setBackground(Color.WHITE);
 		btnOpciones.setFont(new Font("Segoe UI", Font.BOLD, 16));
-		btnOpciones.setBounds(100, 400, 200, 60);
+		btnOpciones.setBounds(100, 500, 200, 60);
 		add(btnOpciones);
         
         JLabel lblPortadaFondo = new JLabel("");
@@ -60,10 +73,10 @@ public class Portada extends JPanel {
         		btnJugar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         	}
         });
-		btnGuia.addMouseListener(new MouseAdapter() {
+		btnInstrucciones.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseEntered(MouseEvent e) {
-        		btnGuia.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        		btnInstrucciones.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         	}
         });
 		btnOpciones.addMouseListener(new MouseAdapter() {
@@ -76,17 +89,24 @@ public class Portada extends JPanel {
 		btnJugar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		setVisible(false);
+        		ventana.getTimer().start();
         	}
         });
-		btnGuia.addActionListener(new ActionListener() {
+		btnInstrucciones.addActionListener(new ActionListener() {	// Abrir panel instrucciones de juego
         	public void actionPerformed(ActionEvent e) {
-        		//abrir panel instrucciones de juego
+        		ventana.getPanelInstrucciones().setVisible(true);
         	}
         });
-		btnOpciones.addActionListener(new ActionListener() {
+		btnOpciones.addActionListener(new ActionListener() {	// Abrir panel opciones
         	public void actionPerformed(ActionEvent e) {
-        		//Abrir panel opciones
+        		ventana.getPanelOpciones().setVisible(true);  
         	}
         });
 	}
+/*
+	public JButton getBtnOpciones() {
+		return btnOpciones;
+		
+	}
+	*/
 }
