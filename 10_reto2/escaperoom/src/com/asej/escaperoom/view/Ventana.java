@@ -5,7 +5,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -27,6 +32,13 @@ public class Ventana extends JFrame {
 	private JTextField txtTimer;
 	private Timer timer;
 	private int segundos = 3600;
+	private static Clip clipPrincipal;
+    private Clip clipBoton;
+    private static Clip clipClick;
+    private JPanel panelTextos;
+    private JPanel panelNav;
+    private JPanel panelPrincipal;
+    private CardLayout cardLayout;
 
 	public Ventana() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,20 +64,21 @@ public class Ventana extends JFrame {
 		layeredPane.add(panelInstrucciones, JLayeredPane.POPUP_LAYER);
 		panelInstrucciones.setVisible(false);
 
-		JPanel panelNav = new JPanel();
+		panelNav = new JPanel();
 		panelNav.setBounds(0, 0, 1084, 60);
 		panelNav.setBackground(Color.DARK_GRAY);
 		layeredPane.add(panelNav, JLayeredPane.PALETTE_LAYER);
 		
-		JPanel panelTextos = new JPanel();
-		panelTextos.setBounds(0, 570, 1084, 180);
+		panelTextos = new JPanel();
+		panelTextos.setBounds(0, 630, 1084, 120);
 		panelTextos.setBackground(Color.DARK_GRAY);
 		layeredPane.add(panelTextos, JLayeredPane.PALETTE_LAYER);
 		
-		JPanel panelPrincipal = new JPanel();
+		panelPrincipal = new JPanel();
 		panelPrincipal.setBounds(0, 0, 1084, 711);
 		layeredPane.add(panelPrincipal, JLayeredPane.DEFAULT_LAYER);
-		panelPrincipal.setLayout(new CardLayout(0, 0));
+		cardLayout = new CardLayout();
+		panelPrincipal.setLayout(cardLayout);
 		
 		txtTimer = new JTextField();
 		txtTimer.setEnabled(false);
@@ -115,14 +128,115 @@ public class Ventana extends JFrame {
             }
         });
 		
-
-		Escena1 escena1 = new Escena1();
-		panelPrincipal.add(escena1, "Escena1");
+		reproducirMusicaPrincipal();
+/*
+		Escena1 escena1 = new Escena1(panelTextos);
+		panelPrincipal.add(escena1, "Escena 1");
+		panelNav.setLayout(null);
+		*/
+		Escena5 escena5 = new Escena5(this);
+		panelPrincipal.add(escena5, "Escena 5");
+		
+		panelNav.setLayout(null);
+		Escena5_pc escena5_pc = new Escena5_pc(this);
+		panelPrincipal.add(escena5_pc, "Escena 5 Ordenador");
 		panelNav.setLayout(null);
 		
-		
+		cardLayout.show(panelPrincipal, "Escena 5");
 
 	}
+
+	public static void reproducirMusicaPrincipal() {
+		if (clipPrincipal != null && clipPrincipal.isRunning()) {
+            clipPrincipal.stop(); // Detén la música anterior si está sonando
+        }
+
+        new Thread(() -> {
+            try {
+                File musica = new File("resources//audio//op.wav");
+                if (!musica.exists()) {
+                    System.err.println("El archivo no existe: " + musica.getAbsolutePath());
+                    return;
+                }
+
+                try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musica)) {
+                    clipPrincipal = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, audioInputStream.getFormat()));
+                    clipPrincipal.open(audioInputStream);
+                    clipPrincipal.loop(Clip.LOOP_CONTINUOUSLY); // Reproduce en bucle
+                    clipPrincipal.start(); // Inicia la reproducción
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+		
+	}
+	public static void detenerMusicaPrincipal() {
+        if (clipPrincipal != null && clipPrincipal.isRunning()) {
+        	clipPrincipal.stop();
+        }
+    }
+	
+	public void reproducirMusicaBoton() {
+        if (clipBoton != null && clipBoton.isRunning()) {
+        	clipBoton.stop(); // Detén la música anterior si está sonando
+        }
+
+        new Thread(() -> {
+            try {
+                File musica = new File("resources//audio//boton.wav");
+                if (!musica.exists()) {
+                    System.err.println("El archivo no existe: " + musica.getAbsolutePath());
+                    return;
+                }
+
+                try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musica)) {
+                	clipBoton = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, audioInputStream.getFormat()));
+                	clipBoton.open(audioInputStream);
+                	clipBoton.start();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    public void detenerMusicaBoton() {
+        if (clipBoton != null && clipBoton.isRunning()) {
+        	clipBoton.stop();
+        }
+    }
+    
+    
+    public void reproducirMusicaClick() {
+        if (clipClick != null && clipClick.isRunning()) {
+        	clipClick.stop(); // Detén la música anterior si está sonando
+        }
+
+        new Thread(() -> {
+            try {
+                File musica = new File("resources//audio//click.wav");
+                if (!musica.exists()) {
+                    System.err.println("El archivo no existe: " + musica.getAbsolutePath());
+                    return;
+                }
+
+                try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musica)) {
+                	clipClick = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, audioInputStream.getFormat()));
+                	clipClick.open(audioInputStream);
+                	clipClick.start();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    public static void detenerMusicaClick() {
+        if (clipClick != null && clipClick.isRunning()) {
+        	clipClick.stop();
+        }
+    }
 
 	public PanelOpciones getPanelOpciones() {
 		return panelOpciones;
@@ -132,9 +246,22 @@ public class Ventana extends JFrame {
 		return panelInstrucciones;
 	}
 	
+	public JPanel getPanelPrincipal() {
+		return panelPrincipal;
+	}
+	
+	public JPanel getPanelTextos() {
+		return panelTextos;
+	}
+	
+	public CardLayout getCardLayout() {
+		return cardLayout;
+	}
 	public Timer getTimer() {
 		return timer;
 	}
+	
+	
 
 	
 }

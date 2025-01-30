@@ -42,7 +42,7 @@ public class tablero extends JFrame {
 				jugar(1,lblCarta1, cartas);
 			}			
 		});
-		lblCarta1.setIcon(new ImageIcon("C:\\Users\\Amaia\\eclipse-workspace\\amaia-daw1\\10_reto2\\parejas\\resources\\img0.jpg"));
+		lblCarta1.setIcon(new ImageIcon("resources\\img0.jpg"));
 		lblCarta1.setBounds(70, 70, 154, 137);
 		contentPane.add(lblCarta1);
 		
@@ -53,7 +53,7 @@ public class tablero extends JFrame {
 				jugar(2,lblCarta2, cartas);
 			}
 		});
-		lblCarta2.setIcon(new ImageIcon("C:\\Users\\Amaia\\eclipse-workspace\\amaia-daw1\\10_reto2\\parejas\\resources\\img0.jpg"));
+		lblCarta2.setIcon(new ImageIcon("resources\\img0.jpg"));
 		lblCarta2.setBounds(243, 70, 154, 137);
 		contentPane.add(lblCarta2);
 		
@@ -64,7 +64,7 @@ public class tablero extends JFrame {
 				jugar(3,lblCarta3, cartas);
 			}
 		});
-		lblCarta3.setIcon(new ImageIcon("C:\\Users\\Amaia\\eclipse-workspace\\amaia-daw1\\10_reto2\\parejas\\resources\\img0.jpg"));
+		lblCarta3.setIcon(new ImageIcon("resources\\img0.jpg"));
 		lblCarta3.setBounds(70, 218, 154, 137);
 		contentPane.add(lblCarta3);
 		
@@ -75,7 +75,7 @@ public class tablero extends JFrame {
 				jugar(4,lblCarta4, cartas);
 			}
 		});
-		lblCarta4.setIcon(new ImageIcon("C:\\Users\\Amaia\\eclipse-workspace\\amaia-daw1\\10_reto2\\parejas\\resources\\img0.jpg"));
+		lblCarta4.setIcon(new ImageIcon("resources\\img0.jpg"));
 		lblCarta4.setBounds(243, 218, 154, 137);
 		contentPane.add(lblCarta4);
 		

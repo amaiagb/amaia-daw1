@@ -49,6 +49,7 @@ public class App {
 		objetosInventario.add(new Objeto("destornillador","destornillador.png", "Un destornillador, siempre es útil tener herramientas"));
 		objetosInventario.add(new Objeto("sandwich","sandwich.png", "El sandwich para comer en el recreo"));
 		
+		
 		VentanaInventario frame = new VentanaInventario(objetosInventario);
 		frame.setVisible(true);
 		*/

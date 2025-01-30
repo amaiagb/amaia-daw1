@@ -113,6 +113,7 @@ public class PanelOpciones extends JPanel {
         			tglbtnSonido.setOpaque(true);
         			tglbtnSonido.setBackground(Color.BLACK);
         			tglbtnSilenciado.setBackground(Color.DARK_GRAY);
+        			Ventana.reproducirMusicaPrincipal();
         		}
         	}
         });
@@ -125,6 +126,7 @@ public class PanelOpciones extends JPanel {
         			tglbtnSilenciado.setOpaque(true);
         			tglbtnSilenciado.setBackground(Color.BLACK);
         			tglbtnSonido.setBackground(Color.DARK_GRAY);
+        			Ventana.detenerMusicaPrincipal();
         		}
         	}
         });

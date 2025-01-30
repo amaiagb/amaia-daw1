@@ -26,6 +26,7 @@ public class Portada extends JPanel {
 	private Timer timer;
 	private boolean sonido = true;
 	private String idioma = "ES";
+	private JPanel panelTextos;
 	
 	public Portada(Ventana ventana) {
 		setBounds(0, 0, 1084, 711);
@@ -33,10 +34,9 @@ public class Portada extends JPanel {
 		setLayout(null);
 		
 		this.ventana = ventana;
-		
 
 		JLabel lblTitulo = new JLabel();
-		lblTitulo.setIcon(new ImageIcon("C:\\Users\\Amaia\\eclipse-workspace\\amaia-daw1\\10_reto2\\escaperoom\\resources\\images\\Grupo 1.png"));
+		lblTitulo.setIcon(new ImageIcon("resources\\images\\titulo.png"));
         lblTitulo.setForeground(Color.WHITE);
         lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 80));
         lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -90,6 +90,7 @@ public class Portada extends JPanel {
         	public void actionPerformed(ActionEvent e) {
         		setVisible(false);
         		ventana.getTimer().start();
+        		ventana.getCardLayout().show(ventana.getPanelPrincipal(), "Escena 5");
         	}
         });
 		btnInstrucciones.addActionListener(new ActionListener() {	// Abrir panel instrucciones de juego
