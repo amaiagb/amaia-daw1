@@ -11,11 +11,15 @@ import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Font;
 
 public class Escena5 extends JPanel {
 
 	private Ventana ventana;
 	private JPanel panelTextos;
+	
+	private final String RUTA = "C:\\Users\\Amaia\\eclipse-workspace\\amaia-daw1\\10_reto2\\escaperoom\\";
+	//private final String RUTA = "D:\\amaia\\programacion\\amaia-daw1\\10_reto2\\escaperoom\\";
 	
 	public Escena5(Ventana ventana) {
 		
@@ -26,10 +30,13 @@ public class Escena5 extends JPanel {
 		this.ventana = ventana;
 		
 		JTextPane txtMensaje = new JTextPane();
-		txtMensaje.setBounds(0, 0, 1000, 100);
+		txtMensaje.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+		txtMensaje.setBounds(0, 611, 1084, 100);
 		txtMensaje.setBackground(Color.DARK_GRAY);
 		txtMensaje.setForeground(Color.WHITE);
-		ventana.getPanelTextos().add(txtMensaje);
+		txtMensaje.setBorder(new EmptyBorder(20, 20, 20, 20));
+		add(txtMensaje);
+		txtMensaje.setText("Igual en la sala de informática encuentro algo que me ayude");
 		
 		JButton btnIzq = new JButton("<");
 		btnIzq.setBounds(10, 250, 65, 61);
@@ -44,7 +51,7 @@ public class Escena5 extends JPanel {
 		add(lblPizarra);
 		
 		JLabel lblFondo = new JLabel("");
-		lblFondo.setIcon(new ImageIcon("D:\\amaia\\programacion\\amaia-daw1\\10_reto2\\escaperoom\\resources\\images\\esc5.jpg"));
+		lblFondo.setIcon(new ImageIcon(RUTA+"resources\\images\\esc5.jpg"));
 		lblFondo.setBounds(-150, 0, 1284, 711);
 		add(lblFondo);
 		
@@ -56,7 +63,7 @@ public class Escena5 extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				ventana.getCardLayout().show(ventana.getPanelPrincipal(), "Escena 5 Ordenador");
-				System.out.println(ventana.getCardLayout());
+				
 			}
 		});
 		

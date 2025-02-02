@@ -11,6 +11,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -68,12 +69,13 @@ public class Ventana extends JFrame {
 		panelNav.setBounds(0, 0, 1084, 60);
 		panelNav.setBackground(Color.DARK_GRAY);
 		layeredPane.add(panelNav, JLayeredPane.PALETTE_LAYER);
-		
+		panelNav.setLayout(null);
+		/*
 		panelTextos = new JPanel();
 		panelTextos.setBounds(0, 630, 1084, 120);
 		panelTextos.setBackground(Color.DARK_GRAY);
 		layeredPane.add(panelTextos, JLayeredPane.PALETTE_LAYER);
-		
+		*/
 		panelPrincipal = new JPanel();
 		panelPrincipal.setBounds(0, 0, 1084, 711);
 		layeredPane.add(panelPrincipal, JLayeredPane.DEFAULT_LAYER);
@@ -105,10 +107,10 @@ public class Ventana extends JFrame {
 		
 		JLabel btnOpciones = new JLabel();
 		btnOpciones.setHorizontalAlignment(SwingConstants.CENTER);
-		btnOpciones.setText("Opciones");
+		btnOpciones.setIcon(new ImageIcon("resources\\images\\ajuste.png"));
 		btnOpciones.setForeground(Color.WHITE);
 		btnOpciones.setBackground(Color.GRAY);
-		btnOpciones.setBounds(970, 10, 100, 40);
+		btnOpciones.setBounds(970, 10, 60, 40);
 		btnOpciones.setOpaque(true);
 		panelNav.add(btnOpciones);
 		
@@ -128,7 +130,7 @@ public class Ventana extends JFrame {
             }
         });
 		
-		reproducirMusicaPrincipal();
+		//reproducirMusicaPrincipal();
 /*
 		Escena1 escena1 = new Escena1(panelTextos);
 		panelPrincipal.add(escena1, "Escena 1");
@@ -137,10 +139,11 @@ public class Ventana extends JFrame {
 		Escena5 escena5 = new Escena5(this);
 		panelPrincipal.add(escena5, "Escena 5");
 		
-		panelNav.setLayout(null);
 		Escena5_pc escena5_pc = new Escena5_pc(this);
 		panelPrincipal.add(escena5_pc, "Escena 5 Ordenador");
-		panelNav.setLayout(null);
+		
+		Escena5_escritorio escena5_escritorio = new Escena5_escritorio(this);
+		panelPrincipal.add(escena5_escritorio, "Pantalla ordenador");
 		
 		cardLayout.show(panelPrincipal, "Escena 5");
 
