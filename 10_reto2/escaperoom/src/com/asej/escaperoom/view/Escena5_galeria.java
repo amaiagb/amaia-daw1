@@ -23,8 +23,8 @@ public class Escena5_galeria extends JPanel {
 	private JLabel lblFotoNombre;
 	private JLabel lblFoto;
 	
-	private final String RUTA = "C:\\Users\\Amaia\\eclipse-workspace\\amaia-daw1\\10_reto2\\escaperoom\\";
-	//private final String RUTA = "D:\\amaia\\programacion\\amaia-daw1\\10_reto2\\escaperoom\\";
+	//private final String RUTA = "C:\\Users\\Amaia\\eclipse-workspace\\amaia-daw1\\10_reto2\\escaperoom\\";
+	private final String RUTA = "D:\\amaia\\programacion\\amaia-daw1\\10_reto2\\escaperoom\\";
 	
 	public Escena5_galeria(Ventana ventana) {
 
@@ -139,7 +139,7 @@ public class Escena5_galeria extends JPanel {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				mostrarFoto(lblFoto2, "tarta.jpg", "07_03.jpg");
+				mostrarFoto(lblFoto2, "puerta.jpg", "07_03.jpg");
 			}
 		});
 		
@@ -150,7 +150,7 @@ public class Escena5_galeria extends JPanel {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				mostrarFoto(lblFoto1, "puerta.jpg", "15_05.jpg");
+				mostrarFoto(lblFoto1, "tarta.jpg", "15_05.jpg");
 			}
 		});
 		

@@ -27,8 +27,8 @@ public class Escena5_pc extends JPanel {
 	private JTextField txtPcPassword;
 	private final String PASSWORD = "sanluis";
 	
-	private final String RUTA = "C:\\Users\\Amaia\\eclipse-workspace\\amaia-daw1\\10_reto2\\escaperoom\\";
-	//private final String RUTA = "D:\\amaia\\programacion\\amaia-daw1\\10_reto2\\escaperoom\\";
+	//private final String RUTA = "C:\\Users\\Amaia\\eclipse-workspace\\amaia-daw1\\10_reto2\\escaperoom\\";
+	private final String RUTA = "D:\\amaia\\programacion\\amaia-daw1\\10_reto2\\escaperoom\\";
 	
 	public Escena5_pc(Ventana ventana) {
 		
@@ -113,6 +113,7 @@ public class Escena5_pc extends JPanel {
 					pcEncendido = false;
 				} else {
 					ventana.getCardLayout().show(ventana.getPanelPrincipal(), "Escena 5");
+					
 				}
 			}
 		});
