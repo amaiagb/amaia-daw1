@@ -90,7 +90,8 @@ public class Portada extends JPanel {
         	public void actionPerformed(ActionEvent e) {
         		setVisible(false);
         		ventana.getTimer().start();
-        		ventana.getCardLayout().show(ventana.getPanelPrincipal(), "Cocina");
+        		ventana.getCardLayout().show(ventana.getPanelPrincipal(), "Habitacion");
+        		ventana.getPanelTextos().setVisible(true);
         	}
         });
 		btnInstrucciones.addActionListener(new ActionListener() {	// Abrir panel instrucciones de juego

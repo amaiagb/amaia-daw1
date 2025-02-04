@@ -1,23 +1,26 @@
-package com.asej.escaperoom.view;
+package com.asej.escaperoom.view.lvl5;
 
 import java.awt.Cursor;
-import java.awt.Image;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.Font;
+
+import com.asej.escaperoom.view.Ventana;
 
 public class Escena5_escritorio extends JPanel {
 
 	//private final String RUTA = "C:\\Users\\Amaia\\eclipse-workspace\\amaia-daw1\\10_reto2\\escaperoom\\";
-	private final String RUTA = "D:\\amaia\\programacion\\amaia-daw1\\10_reto2\\escaperoom\\";
+	//private final String RUTA = "D:\\amaia\\programacion\\amaia-daw1\\10_reto2\\escaperoom\\";
+	private final String RUTA = "";
+	
 	private JLabel lblDocRestaurado;
 	private ImageIcon imageIcon;
 	private JLabel lblDocAbierto;
@@ -31,6 +34,8 @@ public class Escena5_escritorio extends JPanel {
 		setLayout(null);
 		setBounds(0, 0, 1084, 711);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
+		
+		ventana.getPanelTextos().setVisible(false);
 		
 		txtCorreo = new JTextField();
 		txtCorreo.setBounds(390, 280, 289, 47);
@@ -63,8 +68,15 @@ public class Escena5_escritorio extends JPanel {
 		add(lblLoginError);
 		lblLoginError.setVisible(false);
 
+		JLabel lblCerrarLogin = new JLabel();
+		lblCerrarLogin.setFont(new Font("OCR A Extended", Font.PLAIN, 18));
+		lblCerrarLogin.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCerrarLogin.setBounds(880,100, 40, 40);
+		add(lblCerrarLogin);
+		lblCerrarLogin.setVisible(false);
+		
 		JLabel lblCorreoLogin = new JLabel();
-		lblCorreoLogin.setIcon(new ImageIcon("D:\\amaia\\programacion\\amaia-daw1\\10_reto2\\escaperoom\\resources\\images\\email_login.png"));
+		lblCorreoLogin.setIcon(new ImageIcon(RUTA+"resources\\images\\email_login.png"));
 		lblCorreoLogin.setBounds(166,100,760,524);
 		add(lblCorreoLogin);
 		lblCorreoLogin.setVisible(false);
@@ -85,7 +97,7 @@ public class Escena5_escritorio extends JPanel {
 		lblCerrarCarpeta.setVisible(false);
 		
 		JLabel lblCarpeta = new JLabel();
-		lblCarpeta.setIcon(new ImageIcon("D:\\amaia\\programacion\\amaia-daw1\\10_reto2\\escaperoom\\resources\\images\\carpeta.png"));
+		lblCarpeta.setIcon(new ImageIcon(RUTA+"resources\\images\\carpeta.png"));
 		lblCarpeta.setBounds(160, 100, 760, 524);
 		add(lblCarpeta);
 		lblCarpeta.setVisible(false);
@@ -98,13 +110,13 @@ public class Escena5_escritorio extends JPanel {
 		lblDocAbierto = new JLabel();
 		lblDocAbierto.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblDocAbierto.setBounds(250, 100, 550, 526);
-		lblDocAbierto.setIcon(new ImageIcon("D:\\amaia\\programacion\\amaia-daw1\\10_reto2\\escaperoom\\resources\\images\\docRestaurado.png"));
+		lblDocAbierto.setIcon(new ImageIcon(RUTA+"resources\\images\\docRestaurado.png"));
 		add(lblDocAbierto);
 		lblDocAbierto.setVisible(false);
 
 		lblDocRestaurado = new JLabel("");
 		lblDocRestaurado.setVerticalAlignment(SwingConstants.TOP);
-		lblDocRestaurado.setIcon(new ImageIcon("D:\\amaia\\programacion\\amaia-daw1\\10_reto2\\escaperoom\\resources\\images\\docSecreto.png"));
+		lblDocRestaurado.setIcon(new ImageIcon(RUTA+"resources\\images\\docSecreto.png"));
 		lblDocRestaurado.setBounds(929, 306, 145, 131);
 		add(lblDocRestaurado);
 		lblDocRestaurado.setVisible(false);
@@ -259,8 +271,27 @@ public class Escena5_escritorio extends JPanel {
 				txtCorreo.setVisible(true);
 				txtPass.setVisible(true);
 				btnLogin.setVisible(true);
+				lblCerrarLogin.setVisible(true);
 			}
 		});
+		
+		lblCerrarLogin.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblCerrarLogin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lblCorreoLogin.setVisible(false);
+				txtCorreo.setVisible(false);
+				txtPass.setVisible(false);
+				btnLogin.setVisible(false);
+				lblCerrarLogin.setVisible(false);
+				lblLoginError.setVisible(false);
+			}
+		});
+		
 		
 		btnLogin.addMouseListener(new MouseAdapter() {
 			@Override

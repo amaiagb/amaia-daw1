@@ -28,6 +28,9 @@ import com.asej.escaperoom.view.lvl1.Habitacion;
 import com.asej.escaperoom.view.lvl1.Pasillo;
 import com.asej.escaperoom.view.lvl1.Salon;
 import com.asej.escaperoom.view.lvl1.Terraza;
+import com.asej.escaperoom.view.lvl5.Escena5;
+import com.asej.escaperoom.view.lvl5.Escena5_escritorio;
+import com.asej.escaperoom.view.lvl5.Escena5_pc;
 
 public class Ventana extends JFrame {
 
@@ -76,7 +79,7 @@ public class Ventana extends JFrame {
 		panelNav.setLayout(null);
 		
 		panelTextos = new JPanel();
-		panelTextos.setBounds(0, 590, 1084, 120);
+		panelTextos.setBounds(0, 610, 1084, 100);
 		panelTextos.setBackground(Color.DARK_GRAY);
 		layeredPane.add(panelTextos, JLayeredPane.PALETTE_LAYER);
 		panelTextos.setLayout(null);

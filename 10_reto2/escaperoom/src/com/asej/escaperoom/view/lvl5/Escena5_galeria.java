@@ -1,9 +1,12 @@
-package com.asej.escaperoom.view;
+package com.asej.escaperoom.view.lvl5;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.asej.escaperoom.view.Ventana;
+
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -24,7 +27,8 @@ public class Escena5_galeria extends JPanel {
 	private JLabel lblFoto;
 	
 	//private final String RUTA = "C:\\Users\\Amaia\\eclipse-workspace\\amaia-daw1\\10_reto2\\escaperoom\\";
-	private final String RUTA = "D:\\amaia\\programacion\\amaia-daw1\\10_reto2\\escaperoom\\";
+	//private final String RUTA = "D:\\amaia\\programacion\\amaia-daw1\\10_reto2\\escaperoom\\";
+	private final String RUTA = "";
 	
 	public Escena5_galeria(Ventana ventana) {
 

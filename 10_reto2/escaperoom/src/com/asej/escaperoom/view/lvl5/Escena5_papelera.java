@@ -1,4 +1,4 @@
-package com.asej.escaperoom.view;
+package com.asej.escaperoom.view.lvl5;
 
 import java.awt.Cursor;
 import java.awt.Image;
@@ -8,6 +8,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import com.asej.escaperoom.view.Ventana;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
@@ -16,7 +19,8 @@ public class Escena5_papelera extends JPanel {
 
 	private Ventana ventana;
 	//private final String RUTA = "C:\\Users\\Amaia\\eclipse-workspace\\amaia-daw1\\10_reto2\\escaperoom\\";
-	private final String RUTA = "D:\\amaia\\programacion\\amaia-daw1\\10_reto2\\escaperoom\\";
+	//private final String RUTA = "D:\\amaia\\programacion\\amaia-daw1\\10_reto2\\escaperoom\\";
+	private final String RUTA = "";
 	
 	private JLabel docRestaurado;
 	

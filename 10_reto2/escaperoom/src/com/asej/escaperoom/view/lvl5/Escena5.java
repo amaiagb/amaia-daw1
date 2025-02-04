@@ -1,4 +1,4 @@
-package com.asej.escaperoom.view;
+package com.asej.escaperoom.view.lvl5;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -9,6 +9,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
+
+import com.asej.escaperoom.view.Ventana;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
@@ -19,7 +22,8 @@ public class Escena5 extends JPanel {
 	private JPanel panelTextos;
 	
 	//private final String RUTA = "C:\\Users\\Amaia\\eclipse-workspace\\amaia-daw1\\10_reto2\\escaperoom\\";
-	private final String RUTA = "D:\\amaia\\programacion\\amaia-daw1\\10_reto2\\escaperoom\\";
+	//private final String RUTA = "D:\\amaia\\programacion\\amaia-daw1\\10_reto2\\escaperoom\\";
+	private final String RUTA = "";
 	
 	public Escena5(Ventana ventana) {
 		

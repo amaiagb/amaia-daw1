@@ -1,4 +1,4 @@
-package com.asej.escaperoom.view;
+package com.asej.escaperoom.view.lvl5;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -10,6 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
+
+import com.asej.escaperoom.view.Ventana;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
@@ -28,7 +31,8 @@ public class Escena5_pc extends JPanel {
 	private final String PASSWORD = "sanluis";
 	
 	//private final String RUTA = "C:\\Users\\Amaia\\eclipse-workspace\\amaia-daw1\\10_reto2\\escaperoom\\";
-	private final String RUTA = "D:\\amaia\\programacion\\amaia-daw1\\10_reto2\\escaperoom\\";
+	//private final String RUTA = "D:\\amaia\\programacion\\amaia-daw1\\10_reto2\\escaperoom\\";
+	private final String RUTA = "";
 	
 	public Escena5_pc(Ventana ventana) {
 		

@@ -59,7 +59,7 @@ public class Pasillo extends JPanel {
 				ventana.getCardLayout().show(ventana.getPanelPrincipal(), "Salon");
 			}
 		});
-		sala_button.setBounds(519, 65, 46, 35);
+		sala_button.setBounds(519, 540, 46, 35);
 		add(sala_button);
 		terraza_button.setBounds(10, 344, 46, 64);
 		add(terraza_button);

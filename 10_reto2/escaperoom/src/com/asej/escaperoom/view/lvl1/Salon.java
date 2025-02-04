@@ -40,7 +40,7 @@ public class Salon extends JPanel {
 				ventana.getCardLayout().show(ventana.getPanelPrincipal(), "Pasillo");
 			}
 		});
-		pasillo_button.setBounds(516, 38, 46, 35);
+		pasillo_button.setBounds(516, 540, 46, 35);
 		add(pasillo_button);
 		
 		dialogo_textPane = new JTextPane(); // Inicializar el JTextPane

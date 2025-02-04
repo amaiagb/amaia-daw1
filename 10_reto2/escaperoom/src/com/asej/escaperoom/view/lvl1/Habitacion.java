@@ -1,5 +1,6 @@
 package com.asej.escaperoom.view.lvl1;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -37,7 +38,6 @@ public class Habitacion extends JPanel {
 		pasillo_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				reproducirMusicaBoton();
-				//setVisible(false);
 				ventana.getCardLayout().show(ventana.getPanelPrincipal(), "Pasillo");
 			}
 		});
@@ -101,8 +101,10 @@ public class Habitacion extends JPanel {
 		
 		dialogo_textPane = new JTextPane(); // Inicializar el JTextPane
 	    dialogo_textPane.setEditable(false);
-	    dialogo_textPane.setBounds(310, 580, 605, 120);
-	    add(dialogo_textPane);
+	    dialogo_textPane.setOpaque(false);
+	    dialogo_textPane.setForeground(Color.white);
+	    dialogo_textPane.setBounds(0, 0, 800, 80);
+	    ventana.getPanelTextos().add(dialogo_textPane);
 		
 		JLabel fondo_Label = new JLabel("");
 		fondo_Label.setIcon(new ImageIcon("resources\\images\\habitacion.jpg"));
