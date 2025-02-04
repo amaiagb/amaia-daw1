@@ -12,7 +12,6 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -23,7 +22,12 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 
-import com.asej.escaperoom.controlador.Controlador;
+import com.asej.escaperoom.view.lvl1.Cocina;
+import com.asej.escaperoom.view.lvl1.Garaje;
+import com.asej.escaperoom.view.lvl1.Habitacion;
+import com.asej.escaperoom.view.lvl1.Pasillo;
+import com.asej.escaperoom.view.lvl1.Salon;
+import com.asej.escaperoom.view.lvl1.Terraza;
 
 public class Ventana extends JFrame {
 
@@ -70,12 +74,13 @@ public class Ventana extends JFrame {
 		panelNav.setBackground(Color.DARK_GRAY);
 		layeredPane.add(panelNav, JLayeredPane.PALETTE_LAYER);
 		panelNav.setLayout(null);
-		/*
+		
 		panelTextos = new JPanel();
-		panelTextos.setBounds(0, 630, 1084, 120);
+		panelTextos.setBounds(0, 590, 1084, 120);
 		panelTextos.setBackground(Color.DARK_GRAY);
 		layeredPane.add(panelTextos, JLayeredPane.PALETTE_LAYER);
-		*/
+		panelTextos.setLayout(null);
+		
 		panelPrincipal = new JPanel();
 		panelPrincipal.setBounds(0, 0, 1084, 711);
 		layeredPane.add(panelPrincipal, JLayeredPane.DEFAULT_LAYER);
@@ -145,7 +150,25 @@ public class Ventana extends JFrame {
 		Escena5_escritorio escena5_escritorio = new Escena5_escritorio(this);
 		panelPrincipal.add(escena5_escritorio, "Pantalla ordenador");
 		
-		cardLayout.show(panelPrincipal, "Escena 5");
+		Habitacion habitacion = new Habitacion(this);
+		panelPrincipal.add(habitacion, "Habitacion");
+		
+		Pasillo pasillo = new Pasillo(this);
+		panelPrincipal.add(pasillo, "Pasillo");
+		
+		Terraza terraza = new Terraza(this);
+		panelPrincipal.add(terraza, "Terraza");
+		
+		Salon salon = new Salon(this);
+		panelPrincipal.add(salon, "Salon");
+		
+		Cocina cocina = new Cocina(this);
+		panelPrincipal.add(cocina, "Cocina");
+		
+		Garaje garaje = new Garaje(this);
+		panelPrincipal.add(garaje, "Garaje");
+		
+		cardLayout.show(panelPrincipal, "Habitacion");
 
 	}
 
