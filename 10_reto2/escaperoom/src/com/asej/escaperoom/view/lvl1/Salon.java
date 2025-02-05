@@ -33,118 +33,99 @@ public class Salon extends JPanel {
 		setBounds(0, 0, 1100, 750);
 		setLayout(null);
 
-		JButton pasillo_button = new JButton("v");
-		pasillo_button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				reproducirMusicaBoton();
-				ventana.getCardLayout().show(ventana.getPanelPrincipal(), "Pasillo");
-			}
-		});
-		pasillo_button.setBounds(516, 540, 46, 35);
-		add(pasillo_button);
+		JButton btnIrPasillo = new JButton("v");
+		btnIrPasillo.setBounds(516, 540, 46, 35);
+		add(btnIrPasillo);
 		
-		dialogo_textPane = new JTextPane(); // Inicializar el JTextPane
-		dialogo_textPane.setEditable(false);
-		dialogo_textPane.setBounds(310, 580, 605, 120);
-		add(dialogo_textPane);
+		JButton btnIrCocina = new JButton(">");
+		btnIrCocina.setBounds(1028, 344, 46, 64);
+		add(btnIrCocina);
 		
-		JButton garaje_button = new JButton(">");
-		garaje_button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				reproducirMusicaBoton();
-				ventana.getCardLayout().show(ventana.getPanelPrincipal(), "Cocina");
-			}
-		});
-		garaje_button.setBounds(1028, 344, 46, 64);
-		add(garaje_button);
+		JButton btnIrGaraje = new JButton("<");
+		btnIrGaraje.setBounds(10, 344, 46, 64);
+		add(btnIrGaraje);
 		
-		JButton cocina_button = new JButton("<");
-		cocina_button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				reproducirMusicaBoton();
-				ventana.getCardLayout().show(ventana.getPanelPrincipal(), "Garaje");
-			}
-		});
-		cocina_button.setBounds(10, 344, 46, 64);
-		add(cocina_button);
+		JButton btnSopaLetras = new JButton("");
+		btnSopaLetras.setBounds(412, 563, 63, 15);
+		btnSopaLetras.setOpaque(true); 
+		btnSopaLetras.setContentAreaFilled(false); 
+		btnSopaLetras.setBorderPainted(false); 
+		add(btnSopaLetras);
 		
-		JButton sopaLetras_Button = new JButton("");
-		sopaLetras_Button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//ventana.getCardLayout().show(ventana.getPanelPrincipal(), "Sopa de letras");
-			}
-		});
-		sopaLetras_Button.setBounds(412, 563, 63, 15);
-		sopaLetras_Button.setOpaque(true); 
-		sopaLetras_Button.setContentAreaFilled(false); 
-		sopaLetras_Button.setBorderPainted(false); 
-		add(sopaLetras_Button);
+		JButton btnTerraza = new JButton("");
+		btnTerraza.setBounds(458, 211, 151, 329);
+		btnTerraza.setOpaque(true); 
+		btnTerraza.setContentAreaFilled(false); 
+		btnTerraza.setBorderPainted(false); 
+		add(btnTerraza);
 		
-		JButton terraza2_Button = new JButton("");
-		terraza2_Button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				  actualizarDialogo("La otra terraza de la casa, tiene mejores vistas");
-			}
-		});
-		terraza2_Button.setBounds(458, 211, 151, 329);
-		terraza2_Button.setOpaque(true); 
-		terraza2_Button.setContentAreaFilled(false); 
-		terraza2_Button.setBorderPainted(false); 
-		add(terraza2_Button);
+		JButton btnCuadro = new JButton("");
+		btnCuadro.setBounds(107, 188, 39, 212);
+		btnCuadro.setOpaque(true); 
+		btnCuadro.setContentAreaFilled(false); 
+		btnCuadro.setBorderPainted(false); 
+		add(btnCuadro);
 		
-		JButton cuadro_Button = new JButton("");
-		cuadro_Button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				  actualizarDialogo("El cuadro favorito de mama, un dia casi lo rompo de un balonazo. Sentia la muerte sobre mis hombros");
-			}
-		});
-		cuadro_Button.setBounds(107, 188, 39, 212);
-		cuadro_Button.setOpaque(true); 
-		cuadro_Button.setContentAreaFilled(false); 
-		cuadro_Button.setBorderPainted(false); 
-		add(cuadro_Button);
-		
-		JButton sillon_Button = new JButton("");
-		sillon_Button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				  actualizarDialogo("Tiene la marca del culo de mi padre, ya le vale");
-			}
-		});
-		sillon_Button.setBounds(607, 440, 116, 142);
-		sillon_Button.setOpaque(true); 
-		sillon_Button.setContentAreaFilled(false); 
-		sillon_Button.setBorderPainted(false); 
-		add(sillon_Button);
-		/*
-		JButton sofa_Button = new JButton("");
-		sofa_Button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int opcion = JOptionPane.showConfirmDialog(
-                        view_sala.this,
-                        "¿Te apetece tumbarte?",
-                        "Confirmación",
-                        JOptionPane.YES_NO_OPTION
-                );
+		JButton btnSillon = new JButton("");
+		btnSillon.setBounds(607, 440, 116, 142);
+		btnSillon.setOpaque(true); 
+		btnSillon.setContentAreaFilled(false); 
+		btnSillon.setBorderPainted(false); 
+		add(btnSillon);
 
-                if (opcion == JOptionPane.YES_OPTION) {
-                    System.exit(0); // Cierra toda la aplicación
-                } else if (opcion == JOptionPane.NO_OPTION) {
-                    actualizarDialogo("No es momento para tumbarse, mejor cuando vuelva");
-                }
-            }
-        });
-        
-		sofa_Button.setBounds(0, 450, 309, 250);
-		sofa_Button.setOpaque(true); 
-		sofa_Button.setContentAreaFilled(false); 
-		sofa_Button.setBorderPainted(false); 
-		add(sofa_Button);
-		*/
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("resources\\images\\salon.jpg"));
-		lblNewLabel.setBounds(0, 0, 1084, 711);
-		add(lblNewLabel);
+		JLabel lblFondo = new JLabel("New label");
+		lblFondo.setIcon(new ImageIcon("resources\\images\\salon.jpg"));
+		lblFondo.setBounds(0, 0, 1084, 711);
+		add(lblFondo);
 		
+
+		btnIrPasillo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				reproducirMusicaBoton();
+				Ventana.mostrarTextoPantalla("");
+				ventana.showEscena("Pasillo");
+			}
+		});
+
+		btnIrCocina.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				reproducirMusicaBoton();
+				Ventana.mostrarTextoPantalla("");
+				ventana.showEscena("Cocina");
+			}
+		});
+
+		btnIrGaraje.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				reproducirMusicaBoton();
+				Ventana.mostrarTextoPantalla("");
+				ventana.showEscena("Garaje");
+			}
+		});
+
+		btnSopaLetras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ventana.showEscena("Sopa de letras");
+			}
+		});
+
+		btnTerraza.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Ventana.mostrarTextoPantalla("La otra terraza de la casa, tiene mejores vistas");
+			}
+		});
+
+		btnCuadro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Ventana.mostrarTextoPantalla("El cuadro favorito de mama, un dia casi lo rompo de un balonazo. Sentia la muerte sobre mis hombros");
+			}
+		});
+
+		btnSillon.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Ventana.mostrarTextoPantalla("Tiene la marca del culo de mi padre, ya le vale");
+			}
+		});
 		
 		setVisible(true);
 		

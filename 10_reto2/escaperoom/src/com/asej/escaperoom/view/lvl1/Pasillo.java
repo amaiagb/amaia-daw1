@@ -33,49 +33,45 @@ public class Pasillo extends JPanel {
 		setBounds(0, 0, 1100, 750);
 		setLayout(null);
 		
-		JButton habitacion_button = new JButton(">");
-		habitacion_button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				reproducirMusicaBoton();
-				//setVisible(false);
-				ventana.getCardLayout().show(ventana.getPanelPrincipal(), "Habitacion");
-			}
-		});
+		JButton btnIrHabitacion = new JButton(">");
+		btnIrHabitacion.setBounds(1038, 344, 46, 64);
+		add(btnIrHabitacion);
 		
-		JButton terraza_button = new JButton("<");
-		terraza_button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				reproducirMusicaBoton();
-				//setVisible(false);
-				ventana.getCardLayout().show(ventana.getPanelPrincipal(), "Terraza");
-			}
-		});
+		JButton btnTerraza = new JButton("<");
+		btnTerraza.setBounds(10, 344, 46, 64);
+		add(btnTerraza);
 		
-		JButton sala_button = new JButton("^");
-		sala_button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				reproducirMusicaBoton();
-				setVisible(false);
-				ventana.getCardLayout().show(ventana.getPanelPrincipal(), "Salon");
-			}
-		});
-		sala_button.setBounds(519, 540, 46, 35);
-		add(sala_button);
-		terraza_button.setBounds(10, 344, 46, 64);
-		add(terraza_button);
-		habitacion_button.setBounds(1038, 344, 46, 64);
-		add(habitacion_button);
+		JButton btnSalon = new JButton("^");
+		btnSalon.setBounds(519, 540, 46, 35);
+		add(btnSalon);
 		
-		JTextPane dialogo_textPane = new JTextPane();
-		dialogo_textPane.setEditable(false);
-		dialogo_textPane.setBounds(237, 580, 605, 120);
-		add(dialogo_textPane);
-		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("resources\\images\\pasillo.jpg"));
-		lblNewLabel.setBounds(0, 0, 1084, 723);
-		add(lblNewLabel);
+		JLabel lblFondo = new JLabel("");
+		lblFondo.setIcon(new ImageIcon("resources\\images\\pasillo.jpg"));
+		lblFondo.setBounds(0, 0, 1084, 723);
+		add(lblFondo);
 	
+
+		btnIrHabitacion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				reproducirMusicaBoton();
+				ventana.showEscena("Habitacion");
+			}
+		});
+		
+		btnTerraza.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				reproducirMusicaBoton();
+				ventana.showEscena("Terraza");
+			}
+		});		
+
+		btnSalon.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				reproducirMusicaBoton();
+				ventana.showEscena("Salon");
+			}
+		});
+		
 		setVisible(true);
 	}
 	

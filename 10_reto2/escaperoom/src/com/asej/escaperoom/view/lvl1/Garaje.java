@@ -30,80 +30,80 @@ public class Garaje extends JPanel {
 		
 		setBounds(0, 0, 1100, 750);
 		setLayout(null);
-		
-		dialogo_textPane = new JTextPane(); // Inicializar el JTextPane
-        dialogo_textPane.setEditable(false);
-        dialogo_textPane.setBounds(310, 580, 605, 120);
-        add(dialogo_textPane);
 
-        JButton coche_Button = new JButton("");
-        coche_Button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	reproducirMusicaCar();
-                actualizarDialogo("El coche de papá está averiado. Será mejor que hoy coja el bus.");
-            }
-        });
-        coche_Button.setBounds(455, 344, 224, 206);
-        coche_Button.setOpaque(true);
-        coche_Button.setContentAreaFilled(false);
-        coche_Button.setBorderPainted(false);
-        add(coche_Button);
+        JButton btnCoche = new JButton("");
+        btnCoche.setBounds(455, 344, 224, 206);
+        btnCoche.setOpaque(true);
+        btnCoche.setContentAreaFilled(false);
+        btnCoche.setBorderPainted(false);
+        add(btnCoche);
 
-        JButton nevera_Button = new JButton("");
-        nevera_Button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	reproducirMusicaArmario();
-                actualizarDialogo("¿Por qué solo hay alcohol?");
-            }
-        });
-        nevera_Button.setBounds(695, 306, 89, 215);
-        nevera_Button.setOpaque(true);
-        nevera_Button.setContentAreaFilled(false);
-        nevera_Button.setBorderPainted(false);
-        add(nevera_Button);
+        JButton btnNevera = new JButton("");
+        btnNevera.setBounds(695, 306, 89, 215);
+        btnNevera.setOpaque(true);
+        btnNevera.setContentAreaFilled(false);
+        btnNevera.setBorderPainted(false);
+        add(btnNevera);
 
-        JButton limpieza_Button = new JButton("");
-        limpieza_Button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	reproducirMusicaArmario();
-                actualizarDialogo("Solo son productos de limpieza del coche, no me sirve.");
-            }
-        });
-        limpieza_Button.setBounds(895, 436, 46, 101);
-        limpieza_Button.setOpaque(true);
-        limpieza_Button.setContentAreaFilled(false);
-        limpieza_Button.setBorderPainted(false);
-        add(limpieza_Button);
+        JButton btnLimpieza = new JButton("");
+        btnLimpieza.setBounds(895, 436, 46, 101);
+        btnLimpieza.setOpaque(true);
+        btnLimpieza.setContentAreaFilled(false);
+        btnLimpieza.setBorderPainted(false);
+        add(btnLimpieza);
 
-        JButton herramientas_Button = new JButton("");
-        herramientas_Button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	reproducirMusicaCoin();
-                actualizarDialogo("¿Quién guarda una caja de herramientas en un cajón?");
-                herramientas_Button.setEnabled(false);
+        JButton btnHerramientas = new JButton("");
+        btnHerramientas.setBounds(327, 436, 36, 23);
+        btnHerramientas.setOpaque(true);
+        btnHerramientas.setContentAreaFilled(false);
+        btnHerramientas.setBorderPainted(false);
+        add(btnHerramientas);
 
-            }
-        });
-        herramientas_Button.setBounds(327, 436, 36, 23);
-        herramientas_Button.setOpaque(true);
-        herramientas_Button.setContentAreaFilled(false);
-        herramientas_Button.setBorderPainted(false);
-        add(herramientas_Button);
+        JButton btnIrSalon = new JButton(">");
+        btnIrSalon.setBounds(1028, 344, 46, 64);
+        add(btnIrSalon);
 
-        JButton salon_Button = new JButton(">");
-        salon_Button.addActionListener(new ActionListener() {
+        JLabel lblFondo = new JLabel("");
+        lblFondo.setIcon(new ImageIcon("resources\\images\\garaje.jpg"));
+        lblFondo.setBounds(0, 0, 1084, 711);
+        add(lblFondo);
+
+        btnIrSalon.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 				reproducirMusicaBoton();
-				ventana.getCardLayout().show(ventana.getPanelPrincipal(), "Salon");
+				Ventana.mostrarTextoPantalla("");
+				ventana.showEscena("Salon");
             }
         });
-        salon_Button.setBounds(1028, 344, 46, 64);
-        add(salon_Button);
 
-        JLabel lblNewLabel = new JLabel("");
-        lblNewLabel.setIcon(new ImageIcon("resources\\images\\garaje.jpg"));
-        lblNewLabel.setBounds(0, 0, 1084, 711);
-        add(lblNewLabel);
+        btnCoche.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	reproducirMusicaCar();
+            	Ventana.mostrarTextoPantalla("El coche de papá está averiado. Será mejor que hoy coja el bus.");
+            }
+        });
+
+        btnNevera.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	reproducirMusicaArmario();
+            	Ventana.mostrarTextoPantalla("¿Por qué solo hay alcohol?");
+            }
+        });
+
+        btnLimpieza.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	reproducirMusicaArmario();
+            	Ventana.mostrarTextoPantalla("Solo son productos de limpieza del coche, no me sirve.");
+            }
+        });
+        
+        btnHerramientas.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	reproducirMusicaCoin();
+            	Ventana.mostrarTextoPantalla("¿Quién guarda una caja de herramientas en un cajón?");
+                btnHerramientas.setEnabled(false);
+            }
+        });
 
         setVisible(true);
     }

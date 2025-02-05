@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -18,9 +20,13 @@ import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 import com.asej.escaperoom.view.lvl1.Cocina;
 import com.asej.escaperoom.view.lvl1.Garaje;
@@ -37,18 +43,26 @@ public class Ventana extends JFrame {
 	private JPanel contentPane;
 	private PanelOpciones panelOpciones;
 	private PanelInstrucciones panelInstrucciones;
-	private JTextField txtTimer;
-	private Timer timer;
-	private int segundos = 3600;
-	private static Clip clipPrincipal;
-    private Clip clipBoton;
-    private static Clip clipClick;
-    private JPanel panelTextos;
+	private PanelInventario panelInventario;
+	private PanelPistas panelPistas;
+	private JPanel panelTextos;
     private JPanel panelNav;
     private JPanel panelPrincipal;
     private CardLayout cardLayout;
+    private static JTextPane txtDialogo;
+    private JTextField txtTimer;
+	private Timer timer;
+	private int segundos = 3600;
+    private ResourceBundle mensajes;
+    
+    private static Clip clipPrincipal;
+    private Clip clipBoton;
+    private static Clip clipClick;
 
-	public Ventana() {
+	public Ventana(Locale locale) {
+		
+		mensajes = ResourceBundle.getBundle("com.asej.escaperoom.language.Mensajes", locale);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1100, 750);
 		contentPane = new JPanel();
@@ -60,6 +74,8 @@ public class Ventana extends JFrame {
 		layeredPane.setBounds(0, 0, 1084, 711);
 		contentPane.add(layeredPane);
 		setLocationRelativeTo(null);
+		//	LayeredPane layers: 
+		//	Default -> Palette -> Modal -> Popup -> Drag
 		
 		Portada portada = new Portada(this);
 		layeredPane.add(portada, JLayeredPane.MODAL_LAYER);
@@ -71,7 +87,15 @@ public class Ventana extends JFrame {
 		panelInstrucciones = new PanelInstrucciones();
 		layeredPane.add(panelInstrucciones, JLayeredPane.POPUP_LAYER);
 		panelInstrucciones.setVisible(false);
+		
+		panelInventario = new PanelInventario();
+		layeredPane.add(panelInventario, JLayeredPane.MODAL_LAYER);
+		panelInventario.setVisible(false);
 
+		panelPistas = new PanelPistas();
+		layeredPane.add(panelPistas, JLayeredPane.MODAL_LAYER);
+		panelPistas.setVisible(false);
+		
 		panelNav = new JPanel();
 		panelNav.setBounds(0, 0, 1084, 60);
 		panelNav.setBackground(Color.DARK_GRAY);
@@ -79,11 +103,23 @@ public class Ventana extends JFrame {
 		panelNav.setLayout(null);
 		
 		panelTextos = new JPanel();
-		panelTextos.setBounds(0, 610, 1084, 100);
+		panelTextos.setBounds(0, 640, 1084, 70);
 		panelTextos.setBackground(Color.DARK_GRAY);
 		layeredPane.add(panelTextos, JLayeredPane.PALETTE_LAYER);
 		panelTextos.setLayout(null);
 		
+		txtDialogo = new JTextPane(); 
+		txtDialogo.setFont(new Font("Tahoma", Font.PLAIN, 16));
+	    txtDialogo.setEditable(false);
+	    txtDialogo.setOpaque(false);
+	    txtDialogo.setForeground(Color.white);
+	    txtDialogo.setBounds(0, 10, 1084, 70);
+	    StyledDocument doc = txtDialogo.getStyledDocument();
+	    SimpleAttributeSet center = new SimpleAttributeSet();
+	    StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+	    doc.setParagraphAttributes(0, doc.getLength(), center, false);
+		panelTextos.add(txtDialogo);
+	    
 		panelPrincipal = new JPanel();
 		panelPrincipal.setBounds(0, 0, 1084, 711);
 		layeredPane.add(panelPrincipal, JLayeredPane.DEFAULT_LAYER);
@@ -103,13 +139,23 @@ public class Ventana extends JFrame {
 		panelNav.add(txtTimer);
 		txtTimer.setColumns(10);
 		
+		JLabel btnInventario = new JLabel();
+		btnInventario.setHorizontalAlignment(SwingConstants.CENTER);
+		btnInventario.setForeground(Color.WHITE);
+		btnInventario.setBackground(Color.GRAY);
+		btnInventario.setLocation(800, 10);
+		btnInventario.setSize(100, 40);
+		btnInventario.setText(mensajes.getString("btnInventario"));
+		btnInventario.setOpaque(true);
+		panelNav.add(btnInventario);
+		
 		JLabel btnPista = new JLabel();
 		btnPista.setHorizontalAlignment(SwingConstants.CENTER);
 		btnPista.setForeground(Color.WHITE);
 		btnPista.setBackground(Color.GRAY);
-		btnPista.setLocation(860, 10);
+		btnPista.setLocation(910, 10);
 		btnPista.setSize(100, 40);
-		btnPista.setText("Pista");
+		btnPista.setText(mensajes.getString("btnPista"));
 		btnPista.setOpaque(true);
 		panelNav.add(btnPista);
 		
@@ -118,7 +164,7 @@ public class Ventana extends JFrame {
 		btnOpciones.setIcon(new ImageIcon("resources\\images\\ajuste.png"));
 		btnOpciones.setForeground(Color.WHITE);
 		btnOpciones.setBackground(Color.GRAY);
-		btnOpciones.setBounds(970, 10, 60, 40);
+		btnOpciones.setBounds(1020, 10, 60, 40);
 		btnOpciones.setOpaque(true);
 		panelNav.add(btnOpciones);
 		
@@ -139,11 +185,7 @@ public class Ventana extends JFrame {
         });
 		
 		//reproducirMusicaPrincipal();
-/*
-		Escena1 escena1 = new Escena1(panelTextos);
-		panelPrincipal.add(escena1, "Escena 1");
-		panelNav.setLayout(null);
-		*/
+
 		Escena5 escena5 = new Escena5(this);
 		panelPrincipal.add(escena5, "Escena 5");
 		
@@ -173,6 +215,40 @@ public class Ventana extends JFrame {
 		
 		cardLayout.show(panelPrincipal, "Habitacion");
 
+	}
+	
+	public PanelOpciones getPanelOpciones() {
+		return panelOpciones;
+	}
+	
+	public PanelInstrucciones getPanelInstrucciones() {
+		return panelInstrucciones;
+	}
+	
+	public JPanel getPanelPrincipal() {
+		return panelPrincipal;
+	}
+	
+	public JPanel getPanelTextos() {
+		return panelTextos;
+	}
+	
+	public JTextPane getTxtDialogo() {
+		return txtDialogo;
+	}
+	
+	public CardLayout getCardLayout() {
+		return cardLayout;
+	}
+	public Timer getTimer() {
+		return timer;
+	}
+	public static void mostrarTextoPantalla(String mensaje) {
+		txtDialogo.setText(mensaje);
+	}
+	
+	public void showEscena(String escena) {
+		cardLayout.show(panelPrincipal, escena);
 	}
 
 	public static void reproducirMusicaPrincipal() {
@@ -267,30 +343,53 @@ public class Ventana extends JFrame {
         }
     }
 
-	public PanelOpciones getPanelOpciones() {
-		return panelOpciones;
-	}
-	
-	public PanelInstrucciones getPanelInstrucciones() {
-		return panelInstrucciones;
-	}
-	
-	public JPanel getPanelPrincipal() {
-		return panelPrincipal;
-	}
-	
-	public JPanel getPanelTextos() {
-		return panelTextos;
-	}
-	
-	public CardLayout getCardLayout() {
-		return cardLayout;
-	}
-	public Timer getTimer() {
-		return timer;
-	}
-	
-	
+    
+    public void reproducirMusicaReloj() {
+        if (clipClick != null && clipClick.isRunning()) {
+        	clipClick.stop(); // Detén la música anterior si está sonando
+        }
 
-	
+        new Thread(() -> {
+            try {
+                File musica = new File("resources\\audio\\reloj.wav");
+                if (!musica.exists()) {
+                    System.err.println("El archivo no existe: " + musica.getAbsolutePath());
+                    return;
+                }
+
+                try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musica)) {
+                	clipClick = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, audioInputStream.getFormat()));
+                	clipClick.open(audioInputStream);
+                	clipClick.start();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+    
+    public void reproducirMusicaCoin() {
+        if (clipClick != null && clipClick.isRunning()) {
+        	clipClick.stop(); // Detén la música anterior si está sonando
+        }
+
+        new Thread(() -> {
+            try {
+                File musica = new File("resources\\audio\\coin.wav");
+                if (!musica.exists()) {
+                    System.err.println("El archivo no existe: " + musica.getAbsolutePath());
+                    return;
+                }
+
+                try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musica)) {
+                	clipClick = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, audioInputStream.getFormat()));
+                	clipClick.open(audioInputStream);
+                	clipClick.start();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
 }

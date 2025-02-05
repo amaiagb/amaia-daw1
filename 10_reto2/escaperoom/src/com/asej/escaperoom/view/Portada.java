@@ -85,6 +85,7 @@ public class Portada extends JPanel {
         		btnOpciones.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         	}
         });
+		
 		//NAVEGACIÓN BOTONES
 		btnJugar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {

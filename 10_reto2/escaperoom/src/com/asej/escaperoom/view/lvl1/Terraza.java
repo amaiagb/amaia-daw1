@@ -26,68 +26,56 @@ public class Terraza extends JPanel {
 	private JTextPane textPane;
 	private int contador = 0;
 	private int segundos=3600;
-	private JTextPane dialogo_textPane;
 	private Clip clipBoton;
 	private Clip clipClick;
 	
 	public Terraza(Ventana ventana) {
+		
 		setBounds(0, 0, 1100, 750);
 		setLayout(null);
 		
-		dialogo_textPane = new JTextPane();
-		dialogo_textPane.setEditable(false);
-		dialogo_textPane.setBounds(310, 580, 605, 120);
-		add(dialogo_textPane);
+		JButton btnIrPasillo = new JButton(">");
+		btnIrPasillo.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnIrPasillo.setBounds(1028, 307, 46, 69);
+		add(btnIrPasillo);
 		
-		JButton pasillo_Button = new JButton(">");
-		pasillo_Button.addActionListener(new ActionListener() {
+		JButton btnPerro = new JButton("");
+		btnPerro.setBounds(395, 499, 89, 82);
+		btnPerro.setOpaque(true); 
+		btnPerro.setContentAreaFilled(false); 
+		btnPerro.setBorderPainted(false);
+		add(btnPerro);
+		
+		JLabel lblFondo = new JLabel("");
+		lblFondo.setIcon(new ImageIcon("resources\\images\\terraza.jpg"));
+		lblFondo.setBounds(0, 0, 1084, 700);
+		add(lblFondo);
+		
+
+		btnIrPasillo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				reproducirMusicaBoton();
-				setVisible(false);
-				ventana.getCardLayout().show(ventana.getPanelPrincipal(), "Pasillo");
+				Ventana.mostrarTextoPantalla("");
+				ventana.showEscena("Pasillo");
 			}
 		});
-		
-		JButton dog_Button = new JButton("");
-		dog_Button.addActionListener(new ActionListener() {
+
+		btnPerro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ladrar();
-				 try {
-			            StyledDocument doc = dialogo_textPane.getStyledDocument();
-			            doc.insertString(doc.getLength(),"Guau", null);
-			        } catch (BadLocationException ex) {
-			            ex.printStackTrace();
-			        }
+				
 			}
 		});
-		dog_Button.setBounds(395, 499, 89, 82);
-		add(dog_Button);
-		pasillo_Button.setFont(new Font("Tahoma", Font.BOLD, 14));
-		pasillo_Button.setBounds(1028, 307, 46, 69);
-		dog_Button.setOpaque(true); 
-		dog_Button.setContentAreaFilled(false); 
-		dog_Button.setBorderPainted(false);
-		add(pasillo_Button);
-		
-		
-		JLabel fondo_Label = new JLabel("");
-		fondo_Label.setIcon(new ImageIcon("resources\\images\\terraza.jpg"));
-		fondo_Label.setBounds(0, 0, 1084, 700);
-		add(fondo_Label);
-		
 		
 	setVisible(true);	
 	}
 	public void ladrar(){
 		contador++;
-		if (contador==3) {
-			 try {
-		            StyledDocument doc = dialogo_textPane.getStyledDocument();
-		            doc.insertString(doc.getLength(),"Miau", null);
-		        } catch (BadLocationException ex) {
-		            ex.printStackTrace();
-		        }
-			 contador = 0;
+		if (contador % 3 == 0) {
+			Ventana.mostrarTextoPantalla("¡Miau!");
+			contador = 0;
+		} else {
+			Ventana.mostrarTextoPantalla("¡Guau!");
 		}
 	}
 
