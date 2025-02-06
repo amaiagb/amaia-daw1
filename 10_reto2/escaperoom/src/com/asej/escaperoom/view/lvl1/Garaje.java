@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
+import com.asej.escaperoom.model.Objeto;
 import com.asej.escaperoom.view.Ventana;
 
 public class Garaje extends JPanel {
@@ -100,8 +101,9 @@ public class Garaje extends JPanel {
         btnHerramientas.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	reproducirMusicaCoin();
-            	Ventana.mostrarTextoPantalla("¿Quién guarda una caja de herramientas en un cajón?");
+            	Ventana.mostrarTextoPantalla("¡Las herramientas de aita! Se han añadido al inventario");
                 btnHerramientas.setEnabled(false);
+                ventana.getObjetosInventario().add(new Objeto("destornillador","destornillador.png", "Un destornillador, siempre es útil tener herramientas"));
             }
         });
 

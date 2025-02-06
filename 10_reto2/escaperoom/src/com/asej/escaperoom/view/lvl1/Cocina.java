@@ -25,6 +25,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+import com.asej.escaperoom.view.PanelInventario;
 import com.asej.escaperoom.view.Ventana;
 import com.asej.escaperoom.view.lvl1.dialogos.respuesta_madre;
 import com.asej.escaperoom.view.lvl1.dialogos.respuesta_madre2;
@@ -64,9 +65,9 @@ public class Cocina extends JPanel {
 	private boolean padrePeticionHecha = false;
 	private boolean madrePeticionHecha = false;
 	private boolean hijaPeticionHecha = false;
-	private boolean objetoPadre = true;
-	private boolean objetoMadre = true;
-	private boolean objetoHija = true;
+	private String objetoPadre = "destornillador";
+	private String objetoMadre = "mochila";
+	private String objetoHija = "sopa de letras";
 	private String mensajePantalla = "";
 	private final int OBJETIVO_MISIONES = 4; // encontrar mochila, entregar objetos a padre, madre e hija.
 	private int misionesCompletadas = 0;
@@ -330,7 +331,7 @@ public class Cocina extends JPanel {
 
 	public void pasarPreguntaPadre() {
 		System.out.println("padre");
-
+		
 		if (!padrePeticionHecha) {
 			ventana.getPanelTextos().setLocation(0, 600);
 			Ventana.mostrarTextoPantalla(
@@ -339,13 +340,14 @@ public class Cocina extends JPanel {
 			padrePeticionHecha = true;
 			mensajePantalla = "padre";
 
-		} else if (padrePeticionHecha && !objetoPadre) {
+		} else if (padrePeticionHecha && !objetoPadre.equals(PanelInventario.objetoSeleccionado)) {
 			Ventana.mostrarTextoPantalla("Aita: Sigo esperando que me traigas la caja de herramientas\n");
 
-		} else if (padrePeticionHecha && objetoPadre) { // Entregar herramientas a padre
+		} else if (padrePeticionHecha && objetoPadre.equals(PanelInventario.objetoSeleccionado)) { // Entregar herramientas a padre
 			Ventana.mostrarTextoPantalla(
 					"Aita: Muchas gracias, cuando vuelvas del colegio, te llevo al cine como recompensa, que seguro ya habre arreglado el coche\n");
 			btnPadre.setVisible(false);
+			ventana.entregarObjeto(PanelInventario.objetoSeleccionadoId);
 		}
 	}
 
@@ -358,10 +360,10 @@ public class Cocina extends JPanel {
 			madrePeticionHecha = true;
 			mensajePantalla = "madre";
 
-		} else if (madrePeticionHecha && !objetoMadre) {
+		} else if (madrePeticionHecha && !objetoMadre.equals(PanelInventario.objetoSeleccionado)) {
 			Ventana.mostrarTextoPantalla("Ama: Sigo esperando que me traigas la caja de herramientas\n");
 
-		} else if (madrePeticionHecha && objetoMadre) { // Entregar objeto a madre
+		} else if (madrePeticionHecha && objetoMadre.equals(PanelInventario.objetoSeleccionado)) { // Entregar objeto a madre
 			Ventana.mostrarTextoPantalla(
 					"Ama: Muchas gracias, cuando vuelvas del colegio, te llevo al cine como recompensa, que seguro ya habre arreglado el coche\n");
 			btnMadre.setVisible(false);
@@ -376,10 +378,10 @@ public class Cocina extends JPanel {
 			hijaPeticionHecha = true;
 			mensajePantalla = "hija";
 
-		} else if (hijaPeticionHecha && !objetoHija) {
+		} else if (hijaPeticionHecha && !objetoHija.equals(PanelInventario.objetoSeleccionado)) {
 			Ventana.mostrarTextoPantalla("Hija: Sigo esperando que me traigas la caja de herramientas\n");
 
-		} else if (hijaPeticionHecha && objetoHija) { // Entregar sopa de letras
+		} else if (hijaPeticionHecha && objetoHija.equals(PanelInventario.objetoSeleccionado)) { // Entregar sopa de letras
 			Ventana.mostrarTextoPantalla(
 					"Hija: Muchas gracias, cuando vuelvas del colegio, te llevo al cine como recompensa, que seguro ya habre arreglado el coche\n");
 			btnHija.setVisible(false);

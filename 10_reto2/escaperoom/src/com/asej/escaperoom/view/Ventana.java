@@ -2,6 +2,7 @@ package com.asej.escaperoom.view;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +18,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -26,6 +28,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
@@ -58,6 +61,8 @@ public class Ventana extends JFrame {
 	private Timer timer;
 	private int segundos = 3600;
     private ResourceBundle mensajes;
+    private JButton btnSoltarObjeto;
+    private ArrayList<Objeto> objetosInventario;
     
     private static Clip clipPrincipal;
     private Clip clipBoton;
@@ -65,8 +70,13 @@ public class Ventana extends JFrame {
 
 	public Ventana(Locale locale) {
 		
+		Ventana ventana =this;
+		
 		mensajes = ResourceBundle.getBundle("com.asej.escaperoom.language.Mensajes", locale);
-		ArrayList<Objeto> objetosInventario = new ArrayList<>();
+		objetosInventario = new ArrayList<>();
+		objetosInventario.add(new Objeto("llave","llave.png", "Una llave metálica, demasiado pequeña para una puerta, quizá sea de algún candado"));
+		objetosInventario.add(new Objeto("nota","note.png", "Una nota con un código escrito"));
+		objetosInventario.add(new Objeto("sandwich","sandwich.png", "El sandwich para comer en el recreo"));
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1100, 750);
@@ -93,7 +103,17 @@ public class Ventana extends JFrame {
 		layeredPane.add(panelInstrucciones, JLayeredPane.POPUP_LAYER);
 		panelInstrucciones.setVisible(false);
 		
-		panelInventario = new PanelInventario(objetosInventario);
+		
+		btnSoltarObjeto = new JButton("Soltar Objeto");
+		btnSoltarObjeto.setBounds(456, 525, 185, 46);
+		btnSoltarObjeto.setBackground(Color.BLACK);
+		btnSoltarObjeto.setForeground(Color.WHITE);
+		btnSoltarObjeto.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		layeredPane.add(btnSoltarObjeto);
+		btnSoltarObjeto.setVisible(false);
+		
+		panelInventario = new PanelInventario(this);
+		//panelInventario.setBounds(222, 100, 640, 480);
 		layeredPane.add(panelInventario, JLayeredPane.MODAL_LAYER);
 		panelInventario.setVisible(false);
 
@@ -176,6 +196,7 @@ public class Ventana extends JFrame {
 		btnOpciones.setOpaque(true);
 		panelNav.add(btnOpciones);
 		
+		
 		timer = new Timer(1000, new ActionListener() { // Se ejecuta cada segundo
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -220,19 +241,39 @@ public class Ventana extends JFrame {
 		
 		Garaje garaje = new Garaje(this);
 		panelPrincipal.add(garaje, "Garaje");
-		
-		//cardLayout.show(panelPrincipal, "Cocina");
-		
+	
 
 		btnInventario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				panelInventario = new PanelInventario(ventana);
+				layeredPane.add(panelInventario, JLayeredPane.MODAL_LAYER);
+			}
+		});
+		
+
+		btnSoltarObjeto.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				panelPrincipal.setCursor(null);
+				panelInventario.setVisible(true);
+				panelInventario.resetearInventario();
+				btnSoltarObjeto.setVisible(false);
 				
 			}
 		});
 
 	}
 	
+	public void entregarObjeto(int objetoSeleccionadoId) {
+		panelPrincipal.setCursor(null);
+		panelInventario.setVisible(false);
+		panelInventario.resetearInventario();
+		btnSoltarObjeto.setVisible(false);
+		objetosInventario.remove(objetoSeleccionadoId);
+	}
+
+
 	public PanelOpciones getPanelOpciones() {
 		return panelOpciones;
 	}
@@ -256,9 +297,15 @@ public class Ventana extends JFrame {
 	public CardLayout getCardLayout() {
 		return cardLayout;
 	}
+	
 	public Timer getTimer() {
 		return timer;
 	}
+	
+	public JButton getBtnSoltarObjeto() {
+		return btnSoltarObjeto;
+	}
+	
 	public static void mostrarTextoPantalla(String mensaje) {
 		panelTextos.setSize(1084,60);
 		panelTextos.setVisible(true);
@@ -270,8 +317,15 @@ public class Ventana extends JFrame {
 	}
 	
 	public void showEscena(String escena) {
-		cardLayout.show(panelPrincipal, escena);
+		if(!btnSoltarObjeto.isVisible()) {
+			cardLayout.show(panelPrincipal, escena);
+		}
 	}
+	
+	public ArrayList<Objeto> getObjetosInventario () {
+		return objetosInventario;
+	}
+	
 
 	public static void reproducirMusicaPrincipal() {
 		if (clipPrincipal != null && clipPrincipal.isRunning()) {
@@ -414,4 +468,5 @@ public class Ventana extends JFrame {
         }).start();
     }
 
+	
 }
