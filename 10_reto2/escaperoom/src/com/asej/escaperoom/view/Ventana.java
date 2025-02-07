@@ -34,6 +34,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+import com.asej.escaperoom.juegos.SopaLetras;
 import com.asej.escaperoom.model.Objeto;
 import com.asej.escaperoom.view.lvl1.Cocina;
 import com.asej.escaperoom.view.lvl1.Garaje;
@@ -241,6 +242,9 @@ public class Ventana extends JFrame {
 		
 		Garaje garaje = new Garaje(this);
 		panelPrincipal.add(garaje, "Garaje");
+		
+		SopaLetras sopa = new SopaLetras(this);
+		panelPrincipal.add(sopa, "Sopa de letras");
 	
 
 		btnInventario.addMouseListener(new MouseAdapter() {
@@ -259,7 +263,7 @@ public class Ventana extends JFrame {
 				panelInventario.setVisible(true);
 				panelInventario.resetearInventario();
 				btnSoltarObjeto.setVisible(false);
-				
+				reproducirEfectos("coin.wav");
 			}
 		});
 
@@ -428,6 +432,29 @@ public class Ventana extends JFrame {
         new Thread(() -> {
             try {
                 File musica = new File("resources\\audio\\reloj.wav");
+                if (!musica.exists()) {
+                    System.err.println("El archivo no existe: " + musica.getAbsolutePath());
+                    return;
+                }
+
+                try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musica)) {
+                	clipClick = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, audioInputStream.getFormat()));
+                	clipClick.open(audioInputStream);
+                	clipClick.start();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+    public void reproducirEfectos(String nombreArchivo) {
+        if (clipClick != null && clipClick.isRunning()) {
+        	clipClick.stop(); // Detén la música anterior si está sonando
+        }
+
+        new Thread(() -> {
+            try {
+                File musica = new File("resources\\audio\\"+nombreArchivo);
                 if (!musica.exists()) {
                     System.err.println("El archivo no existe: " + musica.getAbsolutePath());
                     return;
