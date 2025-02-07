@@ -91,7 +91,7 @@ public class Portada extends JPanel {
         	public void actionPerformed(ActionEvent e) {
         		setVisible(false);
         		ventana.getTimer().start();
-        		ventana.showEscena("Habitacion");
+        		ventana.showEscena("Escena 5");
         		ventana.getPanelTextos().setVisible(true);
         	}
         });

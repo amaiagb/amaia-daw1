@@ -28,14 +28,18 @@ public class SopaLetras extends JPanel {
     private final Set<String> palabrasCorrectas = Set.of("AMOR", "COOPERAR", "DIVERSION", "ASIGNATURA", "CLASE", "PAZ");
     
     public SopaLetras(Ventana ventana) {
-        setBounds(0, 0, 1100, 750);
+        setBounds(0, 50, 1100, 750);
         setBackground(Color.WHITE);
         setBorder(new EmptyBorder(5, 5, 5, 5));
         setLayout(null);
+        
+        JButton btnSalir = new JButton("<");
+        btnSalir.setBounds(100, 100, 48, 23);
+        add(btnSalir);
 
-        JLabel imagenSL_Label = new JLabel(new ImageIcon("resources\\images\\sopaLetras.png"));
-        imagenSL_Label.setBounds(63, 140, 380, 387);
-        add(imagenSL_Label);
+        JLabel lblSopaLetras = new JLabel(new ImageIcon("resources\\images\\sopaLetras.png"));
+        lblSopaLetras.setBounds(63, 140, 380, 387);
+        add(lblSopaLetras);
 
         for (int i = 0; i < 6; i++) {
             palabraFields[i] = new JTextField();
@@ -44,24 +48,10 @@ public class SopaLetras extends JPanel {
             palabraFields[i].setColumns(10);
         }
 
-        JButton comprobar_Button = new JButton("Comprobar");
-        comprobar_Button.setFont(new Font("Tahoma", Font.BOLD, 14));
-        comprobar_Button.setBounds(500, 478, 440, 43);
-        comprobar_Button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Set<String> palabrasIngresadas = new HashSet<>();
-                for (JTextField field : palabraFields) {
-                    palabrasIngresadas.add(field.getText().trim().toUpperCase());
-                }
-                if (palabrasIngresadas.equals(palabrasCorrectas)) {
-                    //dispose();
-                    //new view_sala();
-                } else {
-                    String fallo = JOptionPane.showInputDialog(null, "Prueba otra vez");
-                }
-            }
-        });
-        add(comprobar_Button);
+        JButton btnComprobarPalabras = new JButton("Comprobar");
+        btnComprobarPalabras.setFont(new Font("Tahoma", Font.BOLD, 14));
+        btnComprobarPalabras.setBounds(500, 478, 440, 43);
+        add(btnComprobarPalabras);
 
         JTextArea introduccion_Area = new JTextArea("Has encontrado la sopa de letras de tu hermana");
         introduccion_Area.setBackground(Color.LIGHT_GRAY);
@@ -71,16 +61,28 @@ public class SopaLetras extends JPanel {
         introduccion_Area.setBounds(63, 11, 877, 118);
         add(introduccion_Area);
         
-        JButton salir_Button = new JButton("<");
-        salir_Button.addActionListener(new ActionListener() {
+        setVisible(true);
+        
+        btnComprobarPalabras.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Set<String> palabrasIngresadas = new HashSet<>();
+                for (JTextField field : palabraFields) {
+                    palabrasIngresadas.add(field.getText().trim().toUpperCase());
+                }
+                if (palabrasIngresadas.equals(palabrasCorrectas)) {
+                	
+                    ventana.showEscena("Salon");
+                    Ventana.mostrarTextoPantalla("¡Enhorabuena! ¡Lo has conseguido!\nLa sopa de letras solucionada se ha añadido al inventario");
+                } else {
+                	Ventana.mostrarTextoPantalla("Prueba de nuevo");
+                }
+            }
+        });
+
+        btnSalir.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		//dispose();
-        		//new view_sala();
+        		setVisible(false);
         	}
         });
-        salir_Button.setBounds(10, 11, 48, 23);
-        add(salir_Button);
-        
-        setVisible(true);
     }
 }

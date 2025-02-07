@@ -2,10 +2,11 @@ package com.asej.escaperoom.view;
 
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -28,7 +29,6 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
@@ -251,6 +251,7 @@ public class Ventana extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				panelInventario = new PanelInventario(ventana);
+				panelInventario.setVisible(true);
 				layeredPane.add(panelInventario, JLayeredPane.MODAL_LAYER);
 			}
 		});
@@ -264,6 +265,21 @@ public class Ventana extends JFrame {
 				panelInventario.resetearInventario();
 				btnSoltarObjeto.setVisible(false);
 				reproducirEfectos("coin.wav");
+			}
+		});
+		setFocusable(false);
+		addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				System.out.println("LETRA");
+				if (e.getKeyCode() == KeyEvent.VK_I) {
+					System.out.println("LETRA I");
+					 if (panelInventario.isVisible()) {
+						 panelInventario.setVisible(false); // Cerrar el inventario
+	                    } else {
+	                    	panelInventario.setVisible(true);
+	                    }
+				}
 			}
 		});
 
