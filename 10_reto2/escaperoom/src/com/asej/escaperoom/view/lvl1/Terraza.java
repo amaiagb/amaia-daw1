@@ -3,6 +3,8 @@ package com.asej.escaperoom.view.lvl1;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 
 import javax.sound.sampled.AudioInputStream;
@@ -18,6 +20,7 @@ import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
 
+import com.asej.escaperoom.controlador.Audio;
 import com.asej.escaperoom.view.Ventana;
 
 public class Terraza extends JPanel {
@@ -34,9 +37,12 @@ public class Terraza extends JPanel {
 		setBounds(0, 0, 1100, 750);
 		setLayout(null);
 		
-		JButton btnIrPasillo = new JButton(">");
-		btnIrPasillo.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnIrPasillo.setBounds(1028, 307, 46, 69);
+		JButton btnIrPasillo = new JButton();
+		btnIrPasillo.setIcon(new ImageIcon("resources\\images\\flechaDerecha.png"));
+		btnIrPasillo.setBounds(1000, 350, 70, 65);
+		btnIrPasillo.setContentAreaFilled(false); 
+		btnIrPasillo.setBorderPainted(false); 
+		btnIrPasillo.setFocusable(false);
 		add(btnIrPasillo);
 		
 		JButton btnPerro = new JButton("");
@@ -54,7 +60,7 @@ public class Terraza extends JPanel {
 
 		btnIrPasillo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				reproducirMusicaBoton();
+				Audio.reproducirEfectoSonido("boton");
 				Ventana.quitarTextoPantalla();
 				ventana.showEscena("Pasillo");
 			}
@@ -64,6 +70,17 @@ public class Terraza extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				ladrar();
 				
+			}
+		});
+		
+		btnIrPasillo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnIrPasillo.setIcon(new ImageIcon("resources\\images\\flechaDerechaPintada.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnIrPasillo.setIcon(new ImageIcon("resources\\images\\flechaDerecha.png"));
 			}
 		});
 		
@@ -78,52 +95,4 @@ public class Terraza extends JPanel {
 			Ventana.mostrarTextoPantalla("¡Guau!");
 		}
 	}
-
-	    public void reproducirMusicaBoton() {
-	        if (clipBoton != null && clipBoton.isRunning()) {
-	        	clipBoton.stop(); // Detén la música anterior si está sonando
-	        }
-
-	        new Thread(() -> {
-	            try {
-	                File musica = new File("D:\\music\\boton.wav");
-	                if (!musica.exists()) {
-	                    System.err.println("El archivo no existe: " + musica.getAbsolutePath());
-	                    return;
-	                }
-
-	                try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musica)) {
-	                	clipBoton = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, audioInputStream.getFormat()));
-	                	clipBoton.open(audioInputStream);
-	                	clipBoton.start();
-	                }
-	            } catch (Exception e) {
-	                e.printStackTrace();
-	            }
-	        }).start();
-	    }
-	    
-	    public void reproducirMusicaClick() {
-	        if (clipClick != null && clipClick.isRunning()) {
-	        	clipClick.stop(); // Detén la música anterior si está sonando
-	        }
-
-	        new Thread(() -> {
-	            try {
-	                File musica = new File("D:\\music\\click.wav");
-	                if (!musica.exists()) {
-	                    System.err.println("El archivo no existe: " + musica.getAbsolutePath());
-	                    return;
-	                }
-
-	                try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musica)) {
-	                	clipClick = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, audioInputStream.getFormat()));
-	                	clipClick.open(audioInputStream);
-	                	clipClick.start();
-	                }
-	            } catch (Exception e) {
-	                e.printStackTrace();
-	            }
-	        }).start();
-	    }
 }

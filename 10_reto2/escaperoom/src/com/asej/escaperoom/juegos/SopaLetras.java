@@ -9,14 +9,14 @@ import java.util.Set;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import com.asej.escaperoom.controlador.Audio;
+import com.asej.escaperoom.model.Objeto;
 import com.asej.escaperoom.view.Ventana;
 
 
@@ -25,7 +25,8 @@ public class SopaLetras extends JPanel {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JTextField[] palabraFields = new JTextField[6];
-    private final Set<String> palabrasCorrectas = Set.of("AMOR", "COOPERAR", "DIVERSION", "ASIGNATURA", "CLASE", "PAZ");
+    private final Set<String> palabrasCorrectas = Set.of("RAMPA", "PARDO", "DIVERSION", "ASIGNATURA", "CLASE", "PAZ");
+  //private final String[] palabrasCorrectas = {"AMOR", "COOPERAR", "DIVERSION", "ASIGNATURA", "CLASE", "PAZ"};
     
     public SopaLetras(Ventana ventana) {
         setBounds(0, 50, 1100, 750);
@@ -72,7 +73,11 @@ public class SopaLetras extends JPanel {
                 if (palabrasIngresadas.equals(palabrasCorrectas)) {
                 	
                     ventana.showEscena("Salon");
+                    Audio.reproducirEfectoSonido(Audio.COIN);
                     Ventana.mostrarTextoPantalla("¡Enhorabuena! ¡Lo has conseguido!\nLa sopa de letras solucionada se ha añadido al inventario");
+                    Objeto revista = new Objeto("revista","revista.png","La revista de mi hermana con su sopa de letras resuelta");
+                    ventana.getObjetosInventario().add(revista);
+                    
                 } else {
                 	Ventana.mostrarTextoPantalla("Prueba de nuevo");
                 }
@@ -81,7 +86,8 @@ public class SopaLetras extends JPanel {
 
         btnSalir.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		setVisible(false);
+        		ventana.showEscena("Salon");
+        		Audio.reproducirEfectoSonido(Audio.BOTON);
         	}
         });
     }

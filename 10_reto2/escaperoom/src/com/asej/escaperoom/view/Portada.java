@@ -4,6 +4,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
+
+import com.asej.escaperoom.controlador.Audio;
+
 import javax.swing.JLabel;
 
 import java.awt.Color;
@@ -34,7 +37,7 @@ public class Portada extends JPanel {
 		setLayout(null);
 		
 		this.ventana = ventana;
-
+/*
 		JLabel lblTitulo = new JLabel();
 		lblTitulo.setIcon(new ImageIcon("resources\\images\\titulo.png"));
         lblTitulo.setForeground(Color.WHITE);
@@ -42,7 +45,7 @@ public class Portada extends JPanel {
         lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
         lblTitulo.setBounds(-10, 50, 450, 220);
         add(lblTitulo);
-        
+        */
         btnJugar = new JButton("Jugar");
         btnJugar.setFont(new Font("Segoe UI", Font.BOLD, 16));
         btnJugar.setBackground(Color.WHITE);
@@ -62,7 +65,7 @@ public class Portada extends JPanel {
 		add(btnOpciones);
         
         JLabel lblPortadaFondo = new JLabel("");
-		lblPortadaFondo.setIcon(new ImageIcon("resources\\images\\portada.jpg"));
+		lblPortadaFondo.setIcon(new ImageIcon("resources\\images\\portada2b.jpg"));
 		lblPortadaFondo.setBounds(0, 0, 1084, 711);
 		add(lblPortadaFondo);
 		
@@ -91,8 +94,9 @@ public class Portada extends JPanel {
         	public void actionPerformed(ActionEvent e) {
         		setVisible(false);
         		ventana.getTimer().start();
-        		ventana.showEscena("Escena 5");
+        		ventana.showEscena("Habitacion");
         		ventana.getPanelTextos().setVisible(true);
+        		Audio.reproducirEfectoSonido(Audio.BOTON);
         	}
         });
 		btnInstrucciones.addActionListener(new ActionListener() {	// Abrir panel instrucciones de juego

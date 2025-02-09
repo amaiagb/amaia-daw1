@@ -51,6 +51,7 @@ public class PanelInventario extends JPanel {
 
 		setBackground(new Color(153, 204, 204));
 		setBounds(320, 200, 486, 352);
+		setBorder(BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 		//setOpaque(true);
 		setLayout(null);
 		
@@ -205,9 +206,7 @@ public class PanelInventario extends JPanel {
 		lblInventarioObjeto1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				System.out.println(objetoSeleccionadoId);
 				if(objetoSeleccionadoId == -1) {
-					System.out.println("cursor");
 					//lblInventarioObjeto1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 				}
 			}
@@ -346,7 +345,6 @@ public class PanelInventario extends JPanel {
 	private void mostrarObjetosInventario(ArrayList<Objeto> objetos) {
 		for (int i = 0; i < objetos.size(); i++) {
 			String urlImg = IMG_FOLDER+objetos.get(i).getUrlImg();
-			System.out.println(urlImg);
 			labels.get(i).setIcon(new ImageIcon(urlImg));
 			/*
 			labels.get(i).addMouseListener(new MouseAdapter() {
@@ -389,13 +387,11 @@ public class PanelInventario extends JPanel {
 		}
 	}
 	public void resetearInventario() {
-		System.out.println("reset: "+objetoSeleccionadoId);
 		labels.get(objetoSeleccionadoId).setBorder(BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 		labels.get(objetoSeleccionadoId).setIcon(new ImageIcon(IMG_FOLDER+objetos.get(objetoSeleccionadoId).getUrlImg()));
 		labels.get(objetoSeleccionadoId).setBackground(null);
 		objetoSeleccionadoId = -1;
 		setCursor(null);
 		txtObjDescripcion.setText("Selecciona un objeto del inventario para ver su descripción");
-		System.out.println(objetoSeleccionadoId);
 	}
 }

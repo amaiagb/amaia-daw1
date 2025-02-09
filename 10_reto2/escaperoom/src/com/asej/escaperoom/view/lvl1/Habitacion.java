@@ -1,39 +1,31 @@
 package com.asej.escaperoom.view.lvl1;
 
-import java.awt.Color;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.DataLine;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
 
+import com.asej.escaperoom.controlador.Audio;
 import com.asej.escaperoom.view.Ventana;
-import java.awt.Font;
-import java.awt.Component;
 
 public class Habitacion extends JPanel {
 
-	private JPanel contentPane;
-	private JTextField tiempo_textField;
-	private JTextPane textPane;
-	private int contador = 0;
-	private int segundos=3600;
-    private JTextPane txtDialogo;
-    private Clip clipBoton;
-	private Clip clipClick;
+	//private JPanel contentPane;
+	//private JTextField tiempo_textField;
+	//private JTextPane textPane;
+	//private int contador = 0;
+	//private int segundos=3600;
+    //private JTextPane txtDialogo;
+    //private Clip clipBoton;
+	//private Clip clipClick;
 	private Ventana ventana;
 	
 	public Habitacion(Ventana ventana) {
@@ -43,16 +35,20 @@ public class Habitacion extends JPanel {
 		setBounds(0, 0, 1100, 750);
 		setLayout(null);
 		
-		JButton btnIrPasillo = new JButton("<");
-		btnIrPasillo.setBounds(10, 344, 46, 64);
+		JButton btnIrPasillo = new JButton();
+		btnIrPasillo.setBounds(10, 350, 70, 65);
+		btnIrPasillo.setIcon(new ImageIcon("resources\\images\\flechaIzquierda.png"));
+		btnIrPasillo.setContentAreaFilled(false); 
+		btnIrPasillo.setBorderPainted(false); 
+		btnIrPasillo.setFocusable(false);
 		add(btnIrPasillo);
 		
-		JButton btnMochila = new JButton("");
-		btnMochila.setOpaque(true); 
-		btnMochila.setContentAreaFilled(false); 
-		btnMochila.setBorderPainted(false); 
-		btnMochila.setBounds(430, 440, 40, 40);
-		add(btnMochila);
+		JButton btnCama = new JButton("");
+		btnCama.setOpaque(true); 
+		btnCama.setContentAreaFilled(false); 
+		btnCama.setBorderPainted(false); 
+		btnCama.setBounds(307, 529, 306, 101);
+		add(btnCama);
 		
 		JButton btnCajon = new JButton("");
 		btnCajon.setOpaque(true); 
@@ -82,7 +78,7 @@ public class Habitacion extends JPanel {
 		
 		btnIrPasillo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ventana.reproducirMusicaBoton();
+				Audio.reproducirEfectoSonido(Audio.BOTON);
 				Ventana.quitarTextoPantalla();
 				ventana.showEscena("Pasillo");
 			}
@@ -106,9 +102,22 @@ public class Habitacion extends JPanel {
 			}
 		});
 
-		btnMochila.addActionListener(new ActionListener() {
+		btnCama.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ventana.mostrarTextoPantalla("¡Bien! ¡Has encontrado la mochila!");
+				ventana.showEscena("Cama");
+			}
+		});
+
+		btnIrPasillo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnIrPasillo.setIcon(new ImageIcon("resources\\images\\flechaIzquierdaPintada.png"));
+
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnIrPasillo.setIcon(new ImageIcon("resources\\images\\flechaIzquierda.png"));
+
 			}
 		});
 		

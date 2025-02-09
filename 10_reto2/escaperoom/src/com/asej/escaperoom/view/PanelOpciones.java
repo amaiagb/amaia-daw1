@@ -15,6 +15,9 @@ import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;
+
+import com.asej.escaperoom.controlador.Audio;
+
 import javax.swing.event.ChangeEvent;
 
 public class PanelOpciones extends JPanel {
@@ -113,7 +116,7 @@ public class PanelOpciones extends JPanel {
         			tglbtnSonido.setOpaque(true);
         			tglbtnSonido.setBackground(Color.BLACK);
         			tglbtnSilenciado.setBackground(Color.DARK_GRAY);
-        			Ventana.reproducirMusicaPrincipal();
+        			Audio.reproducirMusica("op");
         		}
         	}
         });
@@ -126,7 +129,7 @@ public class PanelOpciones extends JPanel {
         			tglbtnSilenciado.setOpaque(true);
         			tglbtnSilenciado.setBackground(Color.BLACK);
         			tglbtnSonido.setBackground(Color.DARK_GRAY);
-        			Ventana.detenerMusicaPrincipal();
+        			Audio.detenerMusica();
         		}
         	}
         });

@@ -15,35 +15,59 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
+import com.asej.escaperoom.controlador.Audio;
 import com.asej.escaperoom.view.Ventana;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Pasillo extends JPanel {
 	
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private JTextField tiempo_textField;
-	private JTextPane textPane;
-	private int contador = 0;
-	private int segundos=3600;
-	private Clip clipBoton;
-	private Clip clipClick;
+	//private static final long serialVersionUID = 1L;
+	//private JPanel contentPane;
+	//private JTextField tiempo_textField;
+	//private JTextPane textPane;
+	//private int contador = 0;
+	//private int segundos=3600;
+	//private Clip clipBoton;
+	//private Clip clipClick;
 	
 	public Pasillo(Ventana ventana) {
 		
 		setBounds(0, 0, 1100, 750);
 		setLayout(null);
 		
-		JButton btnIrHabitacion = new JButton(">");
-		btnIrHabitacion.setBounds(1038, 344, 46, 64);
+		JButton btnIrHabitacion = new JButton();
+		btnIrHabitacion.setIcon(new ImageIcon("resources\\images\\flechaDerecha.png"));
+		btnIrHabitacion.setBounds(1000, 350, 70, 65);
+		btnIrHabitacion.setContentAreaFilled(false); 
+		btnIrHabitacion.setBorderPainted(false); 
+		btnIrHabitacion.setFocusable(false);
 		add(btnIrHabitacion);
 		
-		JButton btnTerraza = new JButton("<");
-		btnTerraza.setBounds(10, 344, 46, 64);
-		add(btnTerraza);
+		JButton btnIrTerraza = new JButton();
+		btnIrTerraza.setIcon(new ImageIcon("resources\\images\\flechaIzquierda.png"));
+		btnIrTerraza.setBounds(10, 350, 70, 65);
+		btnIrTerraza.setContentAreaFilled(false); 
+		btnIrTerraza.setBorderPainted(false); 
+		btnIrTerraza.setFocusable(false);
+		add(btnIrTerraza);
 		
-		JButton btnSalon = new JButton("^");
-		btnSalon.setBounds(519, 540, 46, 35);
-		add(btnSalon);
+		JButton btnIrSalon = new JButton();
+		btnIrSalon.setIcon(new ImageIcon("resources\\images\\flechaAbajo.png"));
+		btnIrSalon.setBounds(510, 550, 70, 65);
+		btnIrSalon.setContentAreaFilled(false); 
+		btnIrSalon.setBorderPainted(false); 
+		btnIrSalon.setFocusable(false);
+		add(btnIrSalon);
+		
+		JLabel lblPuertaSalir = new JLabel("");
+		lblPuertaSalir.setBounds(405, 143, 281, 396);
+		add(lblPuertaSalir);
+		
+		JLabel lblIrCalle = new JLabel("");
+		lblIrCalle.setBounds(540, 156, 124, 383);
+		lblIrCalle.setVisible(false);
+		add(lblIrCalle);
 		
 		JLabel lblFondo = new JLabel("");
 		lblFondo.setIcon(new ImageIcon("resources\\images\\pasillo.jpg"));
@@ -53,76 +77,82 @@ public class Pasillo extends JPanel {
 
 		btnIrHabitacion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				reproducirMusicaBoton();
+				Audio.reproducirEfectoSonido(Audio.BOTON);
 				ventana.showEscena("Habitacion");
 			}
 		});
 		
-		btnTerraza.addActionListener(new ActionListener() {
+		btnIrTerraza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				reproducirMusicaBoton();
+				Audio.reproducirEfectoSonido(Audio.BOTON);
 				ventana.showEscena("Terraza");
 			}
 		});		
 
-		btnSalon.addActionListener(new ActionListener() {
+		btnIrSalon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				reproducirMusicaBoton();
+				Audio.reproducirEfectoSonido(Audio.BOTON);
 				ventana.showEscena("Salon");
+			}
+		});
+
+		lblPuertaSalir.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(Cocina.misionesCompletadas == Cocina.OBJETIVO_MISIONES) {
+					lblFondo.setIcon(new ImageIcon("resources\\images\\puerta_abierta.jpg"));
+					lblPuertaSalir.setVisible(false);
+					lblIrCalle.setVisible(true);
+				} else {
+					Ventana.mostrarTextoPantalla("Tienes que terminar las tareas antes de salir de casa");
+					
+				}
+			}
+		});
+
+		lblIrCalle.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ventana.showEscena("Calle");
+				Ventana.mostrarTextoPantalla("¡Justo llega el bus! ¡Genial!");
+			}
+		});
+		
+		btnIrSalon.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnIrSalon.setIcon(new ImageIcon("resources\\images\\flechaAbajoPintada.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnIrSalon.setIcon(new ImageIcon("resources\\images\\flechaAbajo.png"));
+			}
+		});
+		
+		btnIrTerraza.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnIrTerraza.setIcon(new ImageIcon("resources\\images\\flechaIzquierdaPintada.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnIrTerraza.setIcon(new ImageIcon("resources\\images\\flechaIzquierda.png"));
+			}
+		});
+		btnIrHabitacion.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnIrHabitacion.setIcon(new ImageIcon("resources\\images\\flechaDerechaPintada.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnIrHabitacion.setIcon(new ImageIcon("resources\\images\\flechaDerecha.png"));
 			}
 		});
 		
 		setVisible(true);
 	}
 	
-
-	    public void reproducirMusicaBoton() {
-	        if (clipBoton != null && clipBoton.isRunning()) {
-	        	clipBoton.stop(); // Detén la música anterior si está sonando
-	        }
-
-	        new Thread(() -> {
-	            try {
-	                File musica = new File("resources\\audio\\boton.wav");
-	                if (!musica.exists()) {
-	                    System.err.println("El archivo no existe: " + musica.getAbsolutePath());
-	                    return;
-	                }
-
-	                try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musica)) {
-	                	clipBoton = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, audioInputStream.getFormat()));
-	                	clipBoton.open(audioInputStream);
-	                	clipBoton.start();
-	                }
-	            } catch (Exception e) {
-	                e.printStackTrace();
-	            }
-	        }).start();
-	    }
-	    
-	    public void reproducirMusicaClick() {
-	        if (clipClick != null && clipClick.isRunning()) {
-	        	clipClick.stop(); // Detén la música anterior si está sonando
-	        }
-
-	        new Thread(() -> {
-	            try {
-	                File musica = new File("resources\\audio\\click.wav");
-	                if (!musica.exists()) {
-	                    System.err.println("El archivo no existe: " + musica.getAbsolutePath());
-	                    return;
-	                }
-
-	                try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musica)) {
-	                	clipClick = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, audioInputStream.getFormat()));
-	                	clipClick.open(audioInputStream);
-	                	clipClick.start();
-	                }
-	            } catch (Exception e) {
-	                e.printStackTrace();
-	            }
-	        }).start();
-	    }
 
 
 }

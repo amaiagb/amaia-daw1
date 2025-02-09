@@ -2,6 +2,8 @@ package com.asej.escaperoom.view.lvl1;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 
 import javax.sound.sampled.AudioInputStream;
@@ -16,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
+import com.asej.escaperoom.controlador.Audio;
 import com.asej.escaperoom.view.Ventana;
 
 public class Salon extends JPanel {
@@ -33,16 +36,28 @@ public class Salon extends JPanel {
 		setBounds(0, 0, 1100, 750);
 		setLayout(null);
 
-		JButton btnIrPasillo = new JButton("v");
-		btnIrPasillo.setBounds(516, 540, 46, 35);
+		JButton btnIrPasillo = new JButton();
+		btnIrPasillo.setBounds(510, 550, 70, 65);
+		btnIrPasillo.setContentAreaFilled(false); 
+		btnIrPasillo.setBorderPainted(false); 
+		btnIrPasillo.setFocusable(false);
+		btnIrPasillo.setIcon(new ImageIcon("resources\\images\\flechaAbajo.png"));
 		add(btnIrPasillo);
 		
-		JButton btnIrCocina = new JButton(">");
-		btnIrCocina.setBounds(1028, 344, 46, 64);
+		JButton btnIrCocina = new JButton();
+		btnIrCocina.setIcon(new ImageIcon("resources\\images\\flechaDerecha.png"));
+		btnIrCocina.setBounds(1000, 350, 70, 65);
+		btnIrCocina.setContentAreaFilled(false); 
+		btnIrCocina.setBorderPainted(false); 
+		btnIrCocina.setFocusable(false);
 		add(btnIrCocina);
 		
-		JButton btnIrGaraje = new JButton("<");
-		btnIrGaraje.setBounds(10, 344, 46, 64);
+		JButton btnIrGaraje = new JButton();
+		btnIrGaraje.setIcon(new ImageIcon("resources\\images\\flechaIzquierda.png"));
+		btnIrGaraje.setBounds(10, 350, 70, 65);
+		btnIrGaraje.setContentAreaFilled(false); 
+		btnIrGaraje.setBorderPainted(false); 
+		btnIrGaraje.setFocusable(false);
 		add(btnIrGaraje);
 		
 		JButton btnSopaLetras = new JButton("");
@@ -73,7 +88,7 @@ public class Salon extends JPanel {
 		btnSillon.setBorderPainted(false); 
 		add(btnSillon);
 
-		JLabel lblFondo = new JLabel("New label");
+		JLabel lblFondo = new JLabel("");
 		lblFondo.setIcon(new ImageIcon("resources\\images\\salon.jpg"));
 		lblFondo.setBounds(0, 0, 1084, 711);
 		add(lblFondo);
@@ -81,7 +96,7 @@ public class Salon extends JPanel {
 
 		btnIrPasillo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				reproducirMusicaBoton();
+				Audio.reproducirEfectoSonido(Audio.BOTON);
 				Ventana.quitarTextoPantalla();
 				ventana.showEscena("Pasillo");
 			}
@@ -89,7 +104,7 @@ public class Salon extends JPanel {
 
 		btnIrCocina.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				reproducirMusicaBoton();
+				Audio.reproducirEfectoSonido(Audio.BOTON);
 				Ventana.quitarTextoPantalla();
 				ventana.showEscena("Cocina");
 			}
@@ -97,7 +112,7 @@ public class Salon extends JPanel {
 
 		btnIrGaraje.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				reproducirMusicaBoton();
+				Audio.reproducirEfectoSonido(Audio.BOTON);
 				Ventana.quitarTextoPantalla();
 				ventana.showEscena("Garaje");
 			}
@@ -127,59 +142,39 @@ public class Salon extends JPanel {
 			}
 		});
 		
+		btnIrCocina.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnIrCocina.setIcon(new ImageIcon("resources\\images\\flechaDerechaPintada.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnIrCocina.setIcon(new ImageIcon("resources\\images\\flechaDerecha.png"));
+			}
+		});
+		btnIrGaraje.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnIrGaraje.setIcon(new ImageIcon("resources\\images\\flechaIzquierdaPintada.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnIrGaraje.setIcon(new ImageIcon("resources\\images\\flechaIzquierda.png"));
+			}
+		});
+		btnIrPasillo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnIrPasillo.setIcon(new ImageIcon("resources\\images\\flechaAbajoPintada.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnIrPasillo.setIcon(new ImageIcon("resources\\images\\flechaAbajo.png"));
+			}
+		});
+		
 		setVisible(true);
 		
 	}
-	 public void actualizarDialogo(String mensaje) {
-	        dialogo_textPane.setText(""); // Borra el mensaje anterior
-	        dialogo_textPane.setText(mensaje); // Muestra el nuevo mensaje
-	    }
 	
-	    public void reproducirMusicaBoton() {
-	        if (clipBoton != null && clipBoton.isRunning()) {
-	        	clipBoton.stop(); // Detén la música anterior si está sonando
-	        }
-
-	        new Thread(() -> {
-	            try {
-	                File musica = new File("D:\\music\\boton.wav");
-	                if (!musica.exists()) {
-	                    System.err.println("El archivo no existe: " + musica.getAbsolutePath());
-	                    return;
-	                }
-
-	                try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musica)) {
-	                	clipBoton = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, audioInputStream.getFormat()));
-	                	clipBoton.open(audioInputStream);
-	                	clipBoton.start();
-	                }
-	            } catch (Exception e) {
-	                e.printStackTrace();
-	            }
-	        }).start();
-	    }
-	    
-	    public void reproducirMusicaClick() {
-	        if (clipClick != null && clipClick.isRunning()) {
-	        	clipClick.stop(); // Detén la música anterior si está sonando
-	        }
-
-	        new Thread(() -> {
-	            try {
-	                File musica = new File("D:\\music\\click.wav");
-	                if (!musica.exists()) {
-	                    System.err.println("El archivo no existe: " + musica.getAbsolutePath());
-	                    return;
-	                }
-
-	                try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musica)) {
-	                	clipClick = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, audioInputStream.getFormat()));
-	                	clipClick.open(audioInputStream);
-	                	clipClick.start();
-	                }
-	            } catch (Exception e) {
-	                e.printStackTrace();
-	            }
-	        }).start();
-	    }
 }

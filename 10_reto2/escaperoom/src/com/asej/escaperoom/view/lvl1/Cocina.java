@@ -4,56 +4,42 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.DataLine;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.Timer;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
 
+import com.asej.escaperoom.controlador.Audio;
+import com.asej.escaperoom.model.Objeto;
 import com.asej.escaperoom.view.PanelInventario;
 import com.asej.escaperoom.view.Ventana;
-import com.asej.escaperoom.view.lvl1.dialogos.respuesta_madre;
-import com.asej.escaperoom.view.lvl1.dialogos.respuesta_madre2;
-import com.asej.escaperoom.view.lvl1.dialogos.respuesta_madre3;
-import com.asej.escaperoom.view.lvl1.dialogos.respuesta_nina;
-import com.asej.escaperoom.view.lvl1.dialogos.respuesta_nina2;
-import com.asej.escaperoom.view.lvl1.dialogos.respuesta_nina3;
-import com.asej.escaperoom.view.lvl1.dialogos.respuesta_padre;
-import com.asej.escaperoom.view.lvl1.dialogos.respuesta_padre2;
-import com.asej.escaperoom.view.lvl1.dialogos.respuesta_padre3;
 
 public class Cocina extends JPanel {
 
-	private JTextField tiempo_textField;
+	//private JTextField tiempo_textField;
 	private JLabel lblFondoBotones;
-	private JTextPane textPane;
+	//private JTextPane textPane;
 	private int contador = 0;
-	private int contadorPadre = 0;
-	private int contadorMadre = 0;
-	private int contadorHija = 0;
-	private int contadorPreguntaPadre = 0;
-	private int contadorPreguntaMadre = 0;
-	private int contadorPreguntaHija = 0;
-	private int segundos = 3600;
-	private JTextPane txtDialogo;
-	private Clip clipPrincipal;
-	private Clip clipBoton;
-	private Clip clipClick;
+	//private int contadorPadre = 0;
+	//private int contadorMadre = 0;
+	//private int contadorHija = 0;
+	//private int contadorPreguntaPadre = 0;
+	//private int contadorPreguntaMadre = 0;
+	//private int contadorPreguntaHija = 0;
+	//private int segundos = 3600;
+	//private JTextPane txtDialogo;
+	//private Clip clipPrincipal;
+	//private Clip clipBoton;
+	//private Clip clipClick;
 	private Ventana ventana;
 	private JPanel mensajes;
 	private JButton btnPadre;
@@ -64,81 +50,69 @@ public class Cocina extends JPanel {
 	private JButton btnOpcion3;
 	private boolean padrePeticionHecha = false;
 	private boolean madrePeticionHecha = false;
+	private boolean madreInteraccion = false; //hasta que no termine la tarea de madre no puede empezar las otras
 	private boolean hijaPeticionHecha = false;
 	private String objetoPadre = "destornillador";
 	private String objetoMadre = "mochila";
-	private String objetoHija = "sopa de letras";
+	private String objetoHija = "revista";
 	private String mensajePantalla = "";
-	private final int OBJETIVO_MISIONES = 4; // encontrar mochila, entregar objetos a padre, madre e hija.
-	private int misionesCompletadas = 0;
+	static final int OBJETIVO_MISIONES = 3; // encontrar mochila, entregar objetos a padre y a hermana.
+	static int misionesCompletadas = 0;
+	private Timer timer;
 
 	public Cocina(Ventana ventana) {
 		setBounds(0, 0, 1100, 750);
 		setLayout(null);
 
 		this.ventana = ventana;
-		// ventana.getPanelTextos().setVisible(false);
-		System.out.println(ventana.getPanelTextos().isVisible());
 
-		Border roundedBorder = new LineBorder(Color.BLACK, 3, true);
+		//Border roundedBorder = new LineBorder(Color.BLACK, 3, true);
 
-		JButton btnIrSalon = new JButton("<");
-		btnIrSalon.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnIrSalon.setBounds(10, 317, 46, 69);
+		JButton btnIrSalon = new JButton();
+		btnIrSalon.setIcon(new ImageIcon("resources\\images\\flechaIzquierda.png"));
+		btnIrSalon.setBounds(10, 350, 70, 65);
+		btnIrSalon.setContentAreaFilled(false); 
+		btnIrSalon.setBorderPainted(false); 
+		btnIrSalon.setFocusable(false);
 		add(btnIrSalon);
 
-		/*
-		 * ventana.getPanelTextos().setBounds(0,640,0,10);
-		 * ventana.getTxtDialogo().setBounds(0,10,1084,70);
-		 */
-		/*
-		 * mensajes = new JPanel(); mensajes.setBounds(0, 600, 1084, 130);
-		 * mensajes.setBackground(Color.DARK_GRAY); add(mensajes,
-		 * JLayeredPane.PALETTE_LAYER); mensajes.setLayout(null);
-		 * 
-		 * txtDialogo = new JTextPane(); txtDialogo.setEditable(false);
-		 * txtDialogo.setOpaque(false); txtDialogo.setAlignmentX(CENTER_ALIGNMENT);
-		 * txtDialogo.setForeground(Color.white); txtDialogo.setBounds(0, 0, 745, 60);
-		 * mensajes.add(txtDialogo); StyledDocument doc =
-		 * txtDialogo.getStyledDocument(); SimpleAttributeSet center = new
-		 * SimpleAttributeSet(); StyleConstants.setAlignment(center,
-		 * StyleConstants.ALIGN_CENTER); doc.setParagraphAttributes(0, doc.getLength(),
-		 * center, false);
-		 */
 		btnOpcion1 = new JButton("");
 		btnOpcion1.setBounds(20, 660, 340, 40);
 		btnOpcion1.setBackground(Color.ORANGE);
+		btnOpcion1.setFont(new Font("Tahoma",0,15));
 		add(btnOpcion1);
 		btnOpcion1.setVisible(false);
 
 		btnOpcion2 = new JButton("");
 		btnOpcion2.setBounds(370, 660, 340, 40);
 		btnOpcion2.setBackground(Color.ORANGE);
+		btnOpcion2.setFont(new Font("Tahoma",0,15));
 		add(btnOpcion2);
 		btnOpcion2.setVisible(false);
 
 		btnOpcion3 = new JButton("");
 		btnOpcion3.setBounds(720, 660, 340, 40);
 		btnOpcion3.setBackground(Color.ORANGE);
+		btnOpcion3.setFont(new Font("Tahoma",0,15));
 		add(btnOpcion3);
 		btnOpcion3.setVisible(false);
 
 		btnPadre = new JButton("");
-		btnPadre.setBounds(175, 176, 125, 481);
+		btnPadre.setBounds(135, 76, 281, 481);
 		btnPadre.setOpaque(true);
 		btnPadre.setContentAreaFilled(false);
 		btnPadre.setBorderPainted(false);
 		add(btnPadre);
 
 		btnMadre = new JButton("");
-		btnMadre.setBounds(806, 295, 109, 284);
+		btnMadre.setBounds(752, 104, 262, 475);
 		btnMadre.setOpaque(true);
 		btnMadre.setContentAreaFilled(false);
 		btnMadre.setBorderPainted(false);
 		add(btnMadre);
 
 		btnHija = new JButton("");
-		btnHija.setBounds(342, 317, 84, 264);
+		btnHija.setBounds(481, 275, 156, 262);
 		btnHija.setOpaque(true);
 		btnHija.setContentAreaFilled(false);
 		btnHija.setBorderPainted(false);
@@ -152,14 +126,14 @@ public class Cocina extends JPanel {
 		lblFondoBotones.setVisible(false);
 		
 		JLabel lblFondo = new JLabel("");
-		lblFondo.setIcon(new ImageIcon("resources\\images\\cocina.jpg"));
+		lblFondo.setIcon(new ImageIcon("resources\\images\\cocina2.jpg"));
 		lblFondo.setBounds(0, 0, 1084, 711);
 		add(lblFondo);
 
 		btnIrSalon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (!btnOpcion1.isVisible()) {
-					reproducirMusicaBoton();
+					Audio.reproducirEfectoSonido(Audio.BOTON);
 					Ventana.quitarTextoPantalla();
 					ventana.showEscena("Salon");
 				}
@@ -168,186 +142,89 @@ public class Cocina extends JPanel {
 
 		btnPadre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pasarPreguntaPadre();
+				if(btnPadre.getCursor().getType() == 0 || (btnPadre.getCursor().getType() != 0 && objetoPadre.equals(PanelInventario.objetoSeleccionado))) {
+					if(madreInteraccion) {
+						pasarPreguntaPadre();
+					} else {
+						Ventana.mostrarTextoPantalla("Haz caso a ama primero, hijo");
+					}
+					
+				}
 			}
 		});
 
 		btnMadre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pasarPreguntaMadre();
+				if(btnMadre.getCursor().getType() == 0 || (btnMadre.getCursor().getType() != 0 && objetoMadre.equals(PanelInventario.objetoSeleccionado))) {
+					pasarPreguntaMadre();
+				}
 			}
 		});
 
 		btnHija.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pasarPreguntaHija();
+				if(btnHija.getCursor().getType() == 0 || (btnHija.getCursor().getType() != 0 && objetoHija.equals(PanelInventario.objetoSeleccionado))) {
+					if(madreInteraccion) {
+						pasarPreguntaHija();
+					} else {
+						Ventana.mostrarTextoPantalla("Cuando termines lo de ama te cuento una cosa");
+					}
+				}
 			}
 		});
 
 		btnOpcion1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				if (mensajePantalla.equals("padre")) {
-					btnPadre.setEnabled(false);
-					Ventana.mostrarTextoPantalla(
-							"Aita: Hijo, ya que estas aqui, hazme un favor, ve al garaje y traeme mi caja de herramientas porfavor, creo que la deje cerca del coche\n");
-					mostrarBotones("¡Claro, ahora mismo!", "No me apetece mucho", "opción 3");
-					mensajePantalla = "";
-
-				} else if (mensajePantalla.equals("madre")) {
-					btnMadre.setEnabled(false);
-					Ventana.mostrarTextoPantalla(
-							"Ama: Hijo, ya que estas aqui, hazme un favor, ve al garaje y traeme mi caja de herramientas porfavor, creo que la deje cerca del coche\n");
-					mostrarBotones("¡Claro, ahora mismo!", "No me apetece mucho", "opción 3");
-					mensajePantalla = "";
-
-				} else if (mensajePantalla.equals("hija")) {
-					btnHija.setEnabled(false);
-					Ventana.mostrarTextoPantalla(
-							"Niña: Hermano, ya que estas aqui, hazme un favor, ve al garaje y traeme mi caja de herramientas porfavor, creo que la deje cerca del coche\n");
-					mostrarBotones("¡Claro, ahora mismo!", "No me apetece mucho", "opción 3");
-					mensajePantalla = "";
-
-				} else {
-					Ventana.quitarTextoPantalla();
-					ventana.getPanelTextos().setLocation(0,650);
-					lblFondoBotones.setVisible(false);
-					btnOpcion1.setVisible(false);
-					btnOpcion2.setVisible(false);
-					btnOpcion3.setVisible(false);
-					btnPadre.setEnabled(true);
-					btnMadre.setEnabled(true);
-					btnHija.setEnabled(true);
-				}
+				mostrarSegundoDialogo();
 			}
+
 		});
 		btnOpcion2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (mensajePantalla.equals("padre")) {
-					btnPadre.setEnabled(false);
-					Ventana.mostrarTextoPantalla(
-							"Aita: Hijo, ya que estas aqui, hazme un favor, ve al garaje y traeme mi caja de herramientas porfavor, creo que la deje cerca del coche\n");
-					btnOpcion1.setText("¡Claro, ahora mismo!");
-					btnOpcion2.setText("No me apetece mucho");
-					btnOpcion3.setText("Zzzzz");
-					btnOpcion1.setVisible(true);
-					btnOpcion2.setVisible(true);
-					btnOpcion3.setVisible(true);
-					mensajePantalla = "";
-
-				} else if (mensajePantalla.equals("madre")) {
-					btnMadre.setEnabled(false);
-					Ventana.mostrarTextoPantalla(
-							"Ama: Hijo, ya que estas aqui, hazme un favor, ve al garaje y traeme mi caja de herramientas porfavor, creo que la deje cerca del coche\n");
-					btnOpcion1.setText("¡Claro, ahora mismo!");
-					btnOpcion2.setText("No me apetece mucho");
-					btnOpcion3.setText("Zzzzz");
-					btnOpcion1.setVisible(true);
-					btnOpcion2.setVisible(true);
-					btnOpcion3.setVisible(true);
-					mensajePantalla = "";
-
-				} else if (mensajePantalla.equals("hija")) {
-					btnHija.setEnabled(false);
-					Ventana.mostrarTextoPantalla(
-							"Niña: Hijo, ya que estas aqui, hazme un favor, ve al garaje y traeme mi caja de herramientas porfavor, creo que la deje cerca del coche\n");
-					btnOpcion1.setText("¡Claro, ahora mismo!");
-					btnOpcion2.setText("No me apetece mucho");
-					btnOpcion3.setText("Zzzzz");
-					btnOpcion1.setVisible(true);
-					btnOpcion2.setVisible(true);
-					btnOpcion3.setVisible(true);
-					mensajePantalla = "";
-
-				} else {
-					Ventana.quitarTextoPantalla();
-					ventana.getPanelTextos().setLocation(0,650);
-					lblFondoBotones.setVisible(false);
-					btnOpcion1.setVisible(false);
-					btnOpcion2.setVisible(false);
-					btnOpcion3.setVisible(false);
-					btnPadre.setEnabled(true);
-					btnMadre.setEnabled(true);
-					btnHija.setEnabled(true);
-				}
+				mostrarSegundoDialogo();
 			}
 		});
 
 		btnOpcion3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (mensajePantalla.equals("padre")) {
-					btnPadre.setEnabled(false);
-					Ventana.mostrarTextoPantalla(
-							"Aita: Hijo, ya que estas aqui, hazme un favor, ve al garaje y traeme mi caja de herramientas porfavor, creo que la deje cerca del coche\n");
-					btnOpcion1.setText("¡Claro, ahora mismo!");
-					btnOpcion2.setText("No me apetece mucho");
-					btnOpcion3.setText("Zzzzz");
-					btnOpcion1.setVisible(true);
-					btnOpcion2.setVisible(true);
-					btnOpcion3.setVisible(true);
-					mensajePantalla = "";
-
-				} else if (mensajePantalla.equals("madre")) {
-					btnMadre.setEnabled(false);
-					Ventana.mostrarTextoPantalla(
-							"Ama: Hijo, ya que estas aqui, hazme un favor, ve al garaje y traeme mi caja de herramientas porfavor, creo que la deje cerca del coche\n");
-					btnOpcion1.setText("¡Claro, ahora mismo!");
-					btnOpcion2.setText("No me apetece mucho");
-					btnOpcion3.setText("Zzzzz");
-					btnOpcion1.setVisible(true);
-					btnOpcion2.setVisible(true);
-					btnOpcion3.setVisible(true);
-					mensajePantalla = "";
-
-				} else if (mensajePantalla.equals("hija")) {
-					btnHija.setEnabled(false);
-					Ventana.mostrarTextoPantalla(
-							"Niña: Hermano, ya que estas aqui, hazme un favor, ve al garaje y traeme mi caja de herramientas porfavor, creo que la deje cerca del coche\n");
-					btnOpcion1.setText("¡Claro, ahora mismo!");
-					btnOpcion2.setText("No me apetece mucho");
-					btnOpcion3.setText("Zzzzz");
-					btnOpcion1.setVisible(true);
-					btnOpcion2.setVisible(true);
-					btnOpcion3.setVisible(true);
-					mensajePantalla = "";
-
-				} else {
-					Ventana.quitarTextoPantalla();
-					ventana.getPanelTextos().setLocation(0,650);
-					lblFondoBotones.setVisible(false);
-					btnOpcion1.setVisible(false);
-					btnOpcion2.setVisible(false);
-					btnOpcion3.setVisible(false);
-					btnPadre.setEnabled(true);
-					btnMadre.setEnabled(true);
-					btnHija.setEnabled(true);
-				}
+				mostrarSegundoDialogo();
 			}
-		});
-
-		reproducirMusicaPrincipal();
+		 });
+		
+		 btnIrSalon.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					btnIrSalon.setIcon(new ImageIcon("resources\\images\\flechaIzquierdaPintada.png"));
+				}
+				@Override
+				public void mouseExited(MouseEvent e) {
+					btnIrSalon.setIcon(new ImageIcon("resources\\images\\flechaIzquierda.png"));
+				}
+		 });
+		 
 		setVisible(true);
 	}
 
 	public void pasarPreguntaPadre() {
-		System.out.println("padre");
 		
 		if (!padrePeticionHecha) {
 			ventana.getPanelTextos().setLocation(0, 600);
 			Ventana.mostrarTextoPantalla(
-					"Aita: Hombreeeeee, mi niño favorito, ¡¿Que?! con ganas de ir a clase, se que no, igual que yo al trabajo JAUJAUSJAUSJAUJSUA.\n");
-			mostrarBotones("Ay, qué sueño tengo", "Egun on aita!", "Zzzzz");
+					"Se nos han pegado las sábanas hoy, eh... Menos mal que todavía llegas al autobús");
+			mostrarBotones("Ay, qué sueño tengo", "Egun on aita!", "Qué buena pinta tienen esas tostadas");
 			padrePeticionHecha = true;
 			mensajePantalla = "padre";
 
 		} else if (padrePeticionHecha && !objetoPadre.equals(PanelInventario.objetoSeleccionado)) {
-			Ventana.mostrarTextoPantalla("Aita: Sigo esperando que me traigas la caja de herramientas\n");
+			Ventana.mostrarTextoPantalla("Sigo esperando que me traigas el destornillador");
 
 		} else if (padrePeticionHecha && objetoPadre.equals(PanelInventario.objetoSeleccionado)) { // Entregar herramientas a padre
 			Ventana.mostrarTextoPantalla(
-					"Aita: Muchas gracias, cuando vuelvas del colegio, te llevo al cine como recompensa, que seguro ya habre arreglado el coche\n");
+					"Muchas gracias campeón, cuando vuelvas del colegio te llevo al cine como recompensa, que seguro ya habré arreglado el coche");
 			btnPadre.setVisible(false);
 			ventana.entregarObjeto(PanelInventario.objetoSeleccionadoId);
+			Audio.reproducirEfectoSonido(Audio.COIN);
+			misionesCompletadas++;
 		}
 	}
 
@@ -355,36 +232,52 @@ public class Cocina extends JPanel {
 		if (!madrePeticionHecha) {
 			ventana.getPanelTextos().setLocation(0, 600);
 			Ventana.mostrarTextoPantalla(
-					"Ama: Hombreeeeee, mi niño favorito, ¡¿Que?! con ganas de ir a clase, se que no, igual que yo al trabajo JAUJAUSJAUSJAUJSUA.\n");
-			mostrarBotones("Ay, qué sueño tengo", "Egun on ama!", "Zzzzz");
+					"Buenos días hijo, no sé si has oído la alarma así que he ido a despertarte");
+			mostrarBotones("Estaba durmiendo como una marmota", "Egun on ama!", "Odio esa alarma");
 			madrePeticionHecha = true;
 			mensajePantalla = "madre";
 
-		} else if (madrePeticionHecha && !objetoMadre.equals(PanelInventario.objetoSeleccionado)) {
-			Ventana.mostrarTextoPantalla("Ama: Sigo esperando que me traigas la caja de herramientas\n");
+		} else if (madrePeticionHecha && !Cama.mochilaEncontrada) {
+			Ventana.mostrarTextoPantalla("¿Todavía no has encontrado la mochila? Esa habitación tuya es una leonera...");
 
-		} else if (madrePeticionHecha && objetoMadre.equals(PanelInventario.objetoSeleccionado)) { // Entregar objeto a madre
-			Ventana.mostrarTextoPantalla(
-					"Ama: Muchas gracias, cuando vuelvas del colegio, te llevo al cine como recompensa, que seguro ya habre arreglado el coche\n");
+		} else if (madrePeticionHecha && Cama.mochilaEncontrada) { // Entregar objeto a madre
+			Ventana.mostrarTextoPantalla("¡Bien! Te meto el sandwich en el bolsillo grande, ¿vale? Hoy te he hecho tu favorito, para que estés contento");
+			ventana.getObjetosInventario().add(new Objeto("sandwich","sandwich.png", "El sandwich para comer en el recreo"));
 			btnMadre.setVisible(false);
+			timer = new Timer(2000, new ActionListener() {
+	            public void actionPerformed(ActionEvent evt) {
+	            	ventana.mostrarInventario(ventana);
+	            	ventana.getBtnInventario().setVisible(true);
+	                Ventana.mostrarTextoPantalla("Ahora puedes acceder a tu mochila en cualquier momento, \nahí se guardarán todos los objetos útiles que encuentres para usarlos cuando necesites");
+	            	
+	                if (ventana.getPanelInventario().isVisible()) {
+	                    timer.stop();
+	                }
+	            }
+	        });
+			timer.start();
+			madreInteraccion = true;
+			misionesCompletadas++;
 		}
 	}
 
 	public void pasarPreguntaHija() {
 		if (!hijaPeticionHecha) {
 			ventana.getPanelTextos().setLocation(0, 600);
-			Ventana.mostrarTextoPantalla("Hija: Hombreeeeee, mi niño favorito, ¡¿Que?! con ganas de ir a clase, se que no, igual que yo al trabajo JAUJAUSJAUSJAUJSUA.\n");
-			mostrarBotones("Ay, qué sueño tengo", "Egun on hermana!", "Zzzzz");
+			Ventana.mostrarTextoPantalla("Egun on hermanito! ");
+			mostrarBotones("Hola hermanita", "No te comas todos los cereales, eh", "Qué madrugadora estás hoy");
 			hijaPeticionHecha = true;
 			mensajePantalla = "hija";
 
 		} else if (hijaPeticionHecha && !objetoHija.equals(PanelInventario.objetoSeleccionado)) {
-			Ventana.mostrarTextoPantalla("Hija: Sigo esperando que me traigas la caja de herramientas\n");
+			Ventana.mostrarTextoPantalla("¿Has podido terminar mi sopa de letras?");
 
 		} else if (hijaPeticionHecha && objetoHija.equals(PanelInventario.objetoSeleccionado)) { // Entregar sopa de letras
-			Ventana.mostrarTextoPantalla(
-					"Hija: Muchas gracias, cuando vuelvas del colegio, te llevo al cine como recompensa, que seguro ya habre arreglado el coche\n");
+			Ventana.mostrarTextoPantalla("Muchas gracias, eres es el hermano más listo de todos");
 			btnHija.setVisible(false);
+			ventana.entregarObjeto(PanelInventario.objetoSeleccionadoId);
+			Audio.reproducirEfectoSonido(Audio.COIN);
+			misionesCompletadas++;
 		}
 	}
 	private void mostrarBotones(String txtBoton1, String txtBoton2, String txtBoton3) {
@@ -399,79 +292,39 @@ public class Cocina extends JPanel {
 		btnHija.setEnabled(false);
 		lblFondoBotones.setVisible(true);
 	}
+	private void mostrarSegundoDialogo() {
+		if (mensajePantalla.equals("padre")) {
+			btnPadre.setEnabled(false);
+			Ventana.mostrarTextoPantalla(
+					"La tostadora siempre dando problemas... Hijo, ya que estas aquí hazme un favor, ve al garaje y traeme mi destronillador a ver si puedo arreglarla");
+			mostrarBotones("Vale, aita", "¡Bien, a por las herramientas!", "Vaya momento para ponerse...");
+			mensajePantalla = "";
 
-	public void reproducirMusicaPrincipal() {
-		if (clipPrincipal != null && clipPrincipal.isRunning()) {
-			clipPrincipal.stop(); // Detén la música anterior si está sonando
+		} else if (mensajePantalla.equals("madre")) {
+			btnMadre.setEnabled(false);
+			Ventana.mostrarTextoPantalla(
+					"Vete a coger tu mochila y traémela anda, que ya tengo tu bocata del recreo preparado");
+			mostrarBotones("¡Claro, ahora mismo!", "Bueeeno, vale, voy", "Uf, pues a ver dónde está...");
+			mensajePantalla = "";
+
+		} else if (mensajePantalla.equals("hija")) {
+			btnHija.setEnabled(false);
+			Ventana.mostrarTextoPantalla(
+					" Oye, antes estaba en el salón haciendo los pasatiempos de mi revista y jo... no he encontrado ni una palabra de la sopa de letras... ¿Me ayudarías porfa?");
+			mostrarBotones("Venga, voy a por la revista", "A estas horas... bueno, va", "¡Sí! ¡Me encantan!");
+			mensajePantalla = "";
+
+		} else {
+			Ventana.quitarTextoPantalla();
+			ventana.getPanelTextos().setLocation(0,650);
+			lblFondoBotones.setVisible(false);
+			btnOpcion1.setVisible(false);
+			btnOpcion2.setVisible(false);
+			btnOpcion3.setVisible(false);
+			btnPadre.setEnabled(true);
+			btnMadre.setEnabled(true);
+			btnHija.setEnabled(true);
 		}
-
-		new Thread(() -> {
-			try {
-				File musica = new File("D:\\music\\casa.wav");
-				if (!musica.exists()) {
-					System.err.println("El archivo no existe: " + musica.getAbsolutePath());
-					return;
-				}
-
-				try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musica)) {
-					clipPrincipal = (Clip) AudioSystem
-							.getLine(new DataLine.Info(Clip.class, audioInputStream.getFormat()));
-					clipPrincipal.open(audioInputStream);
-					clipPrincipal.loop(Clip.LOOP_CONTINUOUSLY); // Reproduce en bucle
-					clipPrincipal.start(); // Inicia la reproducción
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}).start();
-	}
-
-	public void reproducirMusicaBoton() {
-		if (clipBoton != null && clipBoton.isRunning()) {
-			clipBoton.stop(); // Detén la música anterior si está sonando
-		}
-
-		new Thread(() -> {
-			try {
-				File musica = new File("D:\\music\\boton.wav");
-				if (!musica.exists()) {
-					System.err.println("El archivo no existe: " + musica.getAbsolutePath());
-					return;
-				}
-
-				try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musica)) {
-					clipBoton = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, audioInputStream.getFormat()));
-					clipBoton.open(audioInputStream);
-					clipBoton.start();
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}).start();
-	}
-
-	public void reproducirMusicaClick() {
-		if (clipClick != null && clipClick.isRunning()) {
-			clipClick.stop(); // Detén la música anterior si está sonando
-		}
-
-		new Thread(() -> {
-			try {
-				File musica = new File("D:\\music\\click.wav");
-				if (!musica.exists()) {
-					System.err.println("El archivo no existe: " + musica.getAbsolutePath());
-					return;
-				}
-
-				try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musica)) {
-					clipClick = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, audioInputStream.getFormat()));
-					clipClick.open(audioInputStream);
-					clipClick.start();
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}).start();
 	}
 
 }

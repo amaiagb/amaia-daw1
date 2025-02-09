@@ -9,15 +9,11 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.DataLine;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -34,8 +30,11 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+import com.asej.escaperoom.controlador.Audio;
 import com.asej.escaperoom.juegos.SopaLetras;
 import com.asej.escaperoom.model.Objeto;
+import com.asej.escaperoom.view.lvl1.Calle;
+import com.asej.escaperoom.view.lvl1.Cama;
 import com.asej.escaperoom.view.lvl1.Cocina;
 import com.asej.escaperoom.view.lvl1.Garaje;
 import com.asej.escaperoom.view.lvl1.Habitacion;
@@ -67,6 +66,7 @@ public class Ventana extends JFrame {
     
     private static Clip clipPrincipal;
     private Clip clipBoton;
+	private JLabel btnInventario;
     private static Clip clipClick;
 
 	public Ventana(Locale locale) {
@@ -75,9 +75,8 @@ public class Ventana extends JFrame {
 		
 		mensajes = ResourceBundle.getBundle("com.asej.escaperoom.language.Mensajes", locale);
 		objetosInventario = new ArrayList<>();
-		objetosInventario.add(new Objeto("llave","llave.png", "Una llave metálica, demasiado pequeña para una puerta, quizá sea de algún candado"));
-		objetosInventario.add(new Objeto("nota","note.png", "Una nota con un código escrito"));
-		objetosInventario.add(new Objeto("sandwich","sandwich.png", "El sandwich para comer en el recreo"));
+		
+		Audio.reproducirMusica(Audio.CANCION_PRINCIPAL);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1100, 750);
@@ -104,10 +103,9 @@ public class Ventana extends JFrame {
 		layeredPane.add(panelInstrucciones, JLayeredPane.POPUP_LAYER);
 		panelInstrucciones.setVisible(false);
 		
-		
 		btnSoltarObjeto = new JButton("Soltar Objeto");
 		btnSoltarObjeto.setBounds(456, 525, 185, 46);
-		btnSoltarObjeto.setBackground(Color.BLACK);
+		btnSoltarObjeto.setBackground(Color.ORANGE);
 		btnSoltarObjeto.setForeground(Color.WHITE);
 		btnSoltarObjeto.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		layeredPane.add(btnSoltarObjeto);
@@ -129,7 +127,6 @@ public class Ventana extends JFrame {
 		panelNav.setLayout(null);
 		
 		panelTextos = new JPanel();
-		//panelTextos.setBounds(0, 650, 1084, 70);
 		panelTextos.setBackground(Color.DARK_GRAY);
 		layeredPane.add(panelTextos, JLayeredPane.PALETTE_LAYER);
 		panelTextos.setLayout(null);
@@ -168,7 +165,7 @@ public class Ventana extends JFrame {
 		panelNav.add(txtTimer);
 		txtTimer.setColumns(10);
 		
-		JLabel btnInventario = new JLabel();
+		btnInventario = new JLabel();
 		btnInventario.setHorizontalAlignment(SwingConstants.CENTER);
 		btnInventario.setForeground(Color.WHITE);
 		btnInventario.setBackground(Color.GRAY);
@@ -176,6 +173,7 @@ public class Ventana extends JFrame {
 		btnInventario.setSize(100, 40);
 		btnInventario.setText(mensajes.getString("btnInventario"));
 		btnInventario.setOpaque(true);
+		btnInventario.setVisible(false);
 		panelNav.add(btnInventario);
 		
 		JLabel btnPista = new JLabel();
@@ -209,12 +207,8 @@ public class Ventana extends JFrame {
             		timer.stop();
             		JOptionPane.showMessageDialog(txtTimer,"FIN","Mensaje",JOptionPane.INFORMATION_MESSAGE);
             	}
-            	
-                
             }
         });
-		
-		//reproducirMusicaPrincipal();
 
 		Escena5 escena5 = new Escena5(this);
 		panelPrincipal.add(escena5, "Escena 5");
@@ -245,14 +239,17 @@ public class Ventana extends JFrame {
 		
 		SopaLetras sopa = new SopaLetras(this);
 		panelPrincipal.add(sopa, "Sopa de letras");
+		
+		Calle calle = new Calle(this);
+		panelPrincipal.add(calle, "Calle");
 	
+		Cama cama = new Cama(this);
+		panelPrincipal.add(cama, "Cama");
 
 		btnInventario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				panelInventario = new PanelInventario(ventana);
-				panelInventario.setVisible(true);
-				layeredPane.add(panelInventario, JLayeredPane.MODAL_LAYER);
+				mostrarInventario(ventana);
 			}
 		});
 		
@@ -264,7 +261,7 @@ public class Ventana extends JFrame {
 				panelInventario.setVisible(true);
 				panelInventario.resetearInventario();
 				btnSoltarObjeto.setVisible(false);
-				reproducirEfectos("coin.wav");
+				Audio.reproducirEfectoSonido(Audio.COIN);
 			}
 		});
 		setFocusable(false);
@@ -283,6 +280,14 @@ public class Ventana extends JFrame {
 			}
 		});
 
+	}
+	public void mostrarInventario(Ventana ventana) {
+		if(panelInventario.isVisible()) {
+			panelInventario.setVisible(false);
+		}
+		panelInventario = new PanelInventario(ventana);
+		panelInventario.setVisible(true);
+		getLayeredPane().add(panelInventario, JLayeredPane.MODAL_LAYER);
 	}
 	
 	public void entregarObjeto(int objetoSeleccionadoId) {
@@ -312,6 +317,10 @@ public class Ventana extends JFrame {
 	
 	public JTextPane getTxtDialogo() {
 		return txtDialogo;
+	}
+
+	public JPanel getPanelInventario() {
+		return panelInventario;
 	}
 	
 	public CardLayout getCardLayout() {
@@ -345,171 +354,10 @@ public class Ventana extends JFrame {
 	public ArrayList<Objeto> getObjetosInventario () {
 		return objetosInventario;
 	}
-	
 
-	public static void reproducirMusicaPrincipal() {
-		if (clipPrincipal != null && clipPrincipal.isRunning()) {
-            clipPrincipal.stop(); // Detén la música anterior si está sonando
-        }
-
-        new Thread(() -> {
-            try {
-                File musica = new File("resources//audio//op.wav");
-                if (!musica.exists()) {
-                    System.err.println("El archivo no existe: " + musica.getAbsolutePath());
-                    return;
-                }
-
-                try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musica)) {
-                    clipPrincipal = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, audioInputStream.getFormat()));
-                    clipPrincipal.open(audioInputStream);
-                    clipPrincipal.loop(Clip.LOOP_CONTINUOUSLY); // Reproduce en bucle
-                    clipPrincipal.start(); // Inicia la reproducción
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }).start();
-		
+	public JLabel getBtnInventario() {
+		return btnInventario;
 	}
-	public static void detenerMusicaPrincipal() {
-        if (clipPrincipal != null && clipPrincipal.isRunning()) {
-        	clipPrincipal.stop();
-        }
-    }
-	
-	public void reproducirMusicaBoton() {
-        if (clipBoton != null && clipBoton.isRunning()) {
-        	clipBoton.stop(); // Detén la música anterior si está sonando
-        }
-
-        new Thread(() -> {
-            try {
-                File musica = new File("resources//audio//boton.wav");
-                if (!musica.exists()) {
-                    System.err.println("El archivo no existe: " + musica.getAbsolutePath());
-                    return;
-                }
-
-                try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musica)) {
-                	clipBoton = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, audioInputStream.getFormat()));
-                	clipBoton.open(audioInputStream);
-                	clipBoton.start();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }).start();
-    }
-
-    public void detenerMusicaBoton() {
-        if (clipBoton != null && clipBoton.isRunning()) {
-        	clipBoton.stop();
-        }
-    }
-    
-    
-    public void reproducirMusicaClick() {
-        if (clipClick != null && clipClick.isRunning()) {
-        	clipClick.stop(); // Detén la música anterior si está sonando
-        }
-
-        new Thread(() -> {
-            try {
-                File musica = new File("resources//audio//click.wav");
-                if (!musica.exists()) {
-                    System.err.println("El archivo no existe: " + musica.getAbsolutePath());
-                    return;
-                }
-
-                try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musica)) {
-                	clipClick = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, audioInputStream.getFormat()));
-                	clipClick.open(audioInputStream);
-                	clipClick.start();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }).start();
-    }
-
-    public static void detenerMusicaClick() {
-        if (clipClick != null && clipClick.isRunning()) {
-        	clipClick.stop();
-        }
-    }
-
-    
-    public void reproducirMusicaReloj() {
-        if (clipClick != null && clipClick.isRunning()) {
-        	clipClick.stop(); // Detén la música anterior si está sonando
-        }
-
-        new Thread(() -> {
-            try {
-                File musica = new File("resources\\audio\\reloj.wav");
-                if (!musica.exists()) {
-                    System.err.println("El archivo no existe: " + musica.getAbsolutePath());
-                    return;
-                }
-
-                try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musica)) {
-                	clipClick = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, audioInputStream.getFormat()));
-                	clipClick.open(audioInputStream);
-                	clipClick.start();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }).start();
-    }
-    public void reproducirEfectos(String nombreArchivo) {
-        if (clipClick != null && clipClick.isRunning()) {
-        	clipClick.stop(); // Detén la música anterior si está sonando
-        }
-
-        new Thread(() -> {
-            try {
-                File musica = new File("resources\\audio\\"+nombreArchivo);
-                if (!musica.exists()) {
-                    System.err.println("El archivo no existe: " + musica.getAbsolutePath());
-                    return;
-                }
-
-                try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musica)) {
-                	clipClick = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, audioInputStream.getFormat()));
-                	clipClick.open(audioInputStream);
-                	clipClick.start();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }).start();
-    }
-    
-    public void reproducirMusicaCoin() {
-        if (clipClick != null && clipClick.isRunning()) {
-        	clipClick.stop(); // Detén la música anterior si está sonando
-        }
-
-        new Thread(() -> {
-            try {
-                File musica = new File("resources\\audio\\coin.wav");
-                if (!musica.exists()) {
-                    System.err.println("El archivo no existe: " + musica.getAbsolutePath());
-                    return;
-                }
-
-                try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musica)) {
-                	clipClick = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, audioInputStream.getFormat()));
-                	clipClick.open(audioInputStream);
-                	clipClick.start();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }).start();
-    }
 
 	
 }
