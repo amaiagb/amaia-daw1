@@ -38,6 +38,7 @@ import com.asej.escaperoom.view.lvl1.Cama;
 import com.asej.escaperoom.view.lvl1.Cocina;
 import com.asej.escaperoom.view.lvl1.Garaje;
 import com.asej.escaperoom.view.lvl1.Habitacion;
+import com.asej.escaperoom.view.lvl1.Intro;
 import com.asej.escaperoom.view.lvl1.Pasillo;
 import com.asej.escaperoom.view.lvl1.Salon;
 import com.asej.escaperoom.view.lvl1.Terraza;
@@ -60,20 +61,23 @@ public class Ventana extends JFrame {
     private JTextField txtTimer;
 	private Timer timer;
 	private int segundos = 3600;
-    private ResourceBundle mensajes;
+    public static ResourceBundle mensajes;
     private JButton btnSoltarObjeto;
     private ArrayList<Objeto> objetosInventario;
     
-    private static Clip clipPrincipal;
-    private Clip clipBoton;
+    //private static Clip clipPrincipal;
+    //private Clip clipBoton;
 	private JLabel btnInventario;
-    private static Clip clipClick;
+    //private static Clip clipClick;
+    private static Locale locale;
 
-	public Ventana(Locale locale) {
+	public Ventana() {
 		
-		Ventana ventana =this;
+		Ventana ventana = this;
+		//this.locale = locale;
 		
-		mensajes = ResourceBundle.getBundle("com.asej.escaperoom.language.Mensajes", locale);
+		mensajes = ResourceBundle.getBundle("com.asej.escaperoom.language.Mensajes", Locale.getDefault());
+		System.out.println(mensajes.getLocale());
 		objetosInventario = new ArrayList<>();
 		
 		Audio.reproducirMusica(Audio.CANCION_PRINCIPAL);
@@ -95,7 +99,7 @@ public class Ventana extends JFrame {
 		Portada portada = new Portada(this);
 		layeredPane.add(portada, JLayeredPane.MODAL_LAYER);
 		
-		panelOpciones = new PanelOpciones();
+		panelOpciones = new PanelOpciones(this);
 		layeredPane.add(panelOpciones, JLayeredPane.POPUP_LAYER);
 		panelOpciones.setVisible(false);
 		
@@ -219,6 +223,9 @@ public class Ventana extends JFrame {
 		Escena5_escritorio escena5_escritorio = new Escena5_escritorio(this);
 		panelPrincipal.add(escena5_escritorio, "Pantalla ordenador");
 		
+		Intro intro = new Intro(this);
+		panelPrincipal.add(intro, "Intro");
+		
 		Habitacion habitacion = new Habitacion(this);
 		panelPrincipal.add(habitacion, "Habitacion");
 		
@@ -331,6 +338,16 @@ public class Ventana extends JFrame {
 		return timer;
 	}
 	
+	public Locale getLocale() {
+		return locale;
+	}
+
+	public void setLocale(Locale locale) {
+		this.locale = locale;
+	}
+	public ResourceBundle getMensajes() {
+		return mensajes;
+	}
 	public JButton getBtnSoltarObjeto() {
 		return btnSoltarObjeto;
 	}

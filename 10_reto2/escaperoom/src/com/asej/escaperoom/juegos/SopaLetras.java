@@ -34,8 +34,12 @@ public class SopaLetras extends JPanel {
         setBorder(new EmptyBorder(5, 5, 5, 5));
         setLayout(null);
         
-        JButton btnSalir = new JButton("<");
-        btnSalir.setBounds(100, 100, 48, 23);
+        JButton btnSalir = new JButton();
+        btnSalir.setBounds(100, 100, 70, 65);
+        btnSalir.setIcon(new ImageIcon("resources\\images\\flechaIzquierda.png"));
+        btnSalir.setContentAreaFilled(false); 
+        btnSalir.setBorderPainted(false); 
+        btnSalir.setFocusable(false);
         add(btnSalir);
 
         JLabel lblSopaLetras = new JLabel(new ImageIcon("resources\\images\\sopaLetras.png"));
@@ -68,7 +72,11 @@ public class SopaLetras extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 Set<String> palabrasIngresadas = new HashSet<>();
                 for (JTextField field : palabraFields) {
-                    palabrasIngresadas.add(field.getText().trim().toUpperCase());
+                	String texto = field.getText().trim().toUpperCase();
+                    if (!texto.isEmpty()) {
+                        palabrasIngresadas.add(texto);
+                    }
+
                 }
                 if (palabrasIngresadas.equals(palabrasCorrectas)) {
                 	
@@ -81,6 +89,16 @@ public class SopaLetras extends JPanel {
                 } else {
                 	Ventana.mostrarTextoPantalla("Prueba de nuevo");
                 }
+                for (JTextField field : palabraFields) {
+                    String texto = field.getText().trim().toUpperCase();
+                    if (palabrasCorrectas.contains(texto)) {
+                        field.setEditable(false);
+                        field.setBackground(Color.GREEN);
+                    } else {
+                        field.setText("");
+                    }
+                }
+
             }
         });
 

@@ -8,7 +8,7 @@ public class App {
 
 	public static void main(String[] args) {
 		
-		Ventana frame = new Ventana(Locale.ENGLISH);
+		Ventana frame = new Ventana();
 		frame.setVisible(true);
 
 	}

@@ -27,6 +27,7 @@ public class Habitacion extends JPanel {
     //private Clip clipBoton;
 	//private Clip clipClick;
 	private Ventana ventana;
+	static JButton btnCama;
 	
 	public Habitacion(Ventana ventana) {
 		
@@ -43,12 +44,13 @@ public class Habitacion extends JPanel {
 		btnIrPasillo.setFocusable(false);
 		add(btnIrPasillo);
 		
-		JButton btnCama = new JButton("");
+		btnCama = new JButton("");
 		btnCama.setOpaque(true); 
 		btnCama.setContentAreaFilled(false); 
 		btnCama.setBorderPainted(false); 
 		btnCama.setBounds(307, 529, 306, 101);
 		add(btnCama);
+		btnCama.setVisible(false);
 		
 		JButton btnCajon = new JButton("");
 		btnCajon.setOpaque(true); 

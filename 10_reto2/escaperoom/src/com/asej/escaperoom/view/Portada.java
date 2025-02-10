@@ -23,13 +23,14 @@ import java.awt.event.MouseEvent;
 public class Portada extends JPanel {
 
 	private Ventana ventana;
-	private JButton btnOpciones;
-	private JButton btnInstrucciones;
-	private JButton btnJugar;
+	private JLabel btnOpciones;
+	private JLabel btnInstrucciones;
+	private JLabel btnJugar;
 	private Timer timer;
 	private boolean sonido = true;
 	private String idioma = "ES";
 	private JPanel panelTextos;
+	private boolean logoClickado = false;
 	
 	public Portada(Ventana ventana) {
 		setBounds(0, 0, 1084, 711);
@@ -37,35 +38,30 @@ public class Portada extends JPanel {
 		setLayout(null);
 		
 		this.ventana = ventana;
-/*
-		JLabel lblTitulo = new JLabel();
-		lblTitulo.setIcon(new ImageIcon("resources\\images\\titulo.png"));
-        lblTitulo.setForeground(Color.WHITE);
-        lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 80));
-        lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTitulo.setBounds(-10, 50, 450, 220);
-        add(lblTitulo);
-        */
-        btnJugar = new JButton("Jugar");
+
+        btnJugar = new JLabel();
         btnJugar.setFont(new Font("Segoe UI", Font.BOLD, 16));
         btnJugar.setBackground(Color.WHITE);
-        btnJugar.setBounds(100, 300, 200, 60);
+        btnJugar.setBounds(335, 440, 430, 80);
+        btnJugar.setIcon(new ImageIcon("resources\\images\\btnJugar.png"));
         add(btnJugar);
         
-        btnInstrucciones = new JButton("Instrucciones");
+        btnInstrucciones = new JLabel();
         btnInstrucciones.setFont(new Font("Segoe UI", Font.BOLD, 16));
         btnInstrucciones.setBackground(Color.WHITE);
-        btnInstrucciones.setBounds(100, 400, 200, 60);
+        btnInstrucciones.setBounds(335, 524, 430, 80);
+        btnInstrucciones.setIcon(new ImageIcon("resources\\images\\btnInstrucciones.png"));
         add(btnInstrucciones);
         
-        btnOpciones = new JButton("Opciones");
+        btnOpciones = new JLabel();
 		btnOpciones.setBackground(Color.WHITE);
 		btnOpciones.setFont(new Font("Segoe UI", Font.BOLD, 16));
-		btnOpciones.setBounds(100, 500, 200, 60);
+		btnOpciones.setBounds(335, 608, 430, 80);
+		btnOpciones.setIcon(new ImageIcon("resources\\images\\btnOpciones.png"));
 		add(btnOpciones);
         
         JLabel lblPortadaFondo = new JLabel("");
-		lblPortadaFondo.setIcon(new ImageIcon("resources\\images\\portada2b.jpg"));
+		lblPortadaFondo.setIcon(new ImageIcon("resources\\images\\title-screen.jpg"));
 		lblPortadaFondo.setBounds(0, 0, 1084, 711);
 		add(lblPortadaFondo);
 		
@@ -74,38 +70,66 @@ public class Portada extends JPanel {
         	@Override
         	public void mouseEntered(MouseEvent e) {
         		btnJugar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        		btnJugar.setIcon(new ImageIcon("resources\\images\\btnJugar2.png"));
+        	}
+        	@Override
+        	public void mouseExited(MouseEvent e) {
+        		btnJugar.setIcon(new ImageIcon("resources\\images\\btnJugar.png"));
         	}
         });
 		btnInstrucciones.addMouseListener(new MouseAdapter() {
-        	@Override
+			@Override
         	public void mouseEntered(MouseEvent e) {
-        		btnInstrucciones.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				btnInstrucciones.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				btnInstrucciones.setIcon(new ImageIcon("resources\\images\\btnInstrucciones2.png"));
+        	}
+        	@Override
+        	public void mouseExited(MouseEvent e) {
+        		btnInstrucciones.setIcon(new ImageIcon("resources\\images\\btnInstrucciones.png"));
         	}
         });
 		btnOpciones.addMouseListener(new MouseAdapter() {
-        	@Override
+			@Override
         	public void mouseEntered(MouseEvent e) {
-        		btnOpciones.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				btnOpciones.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				btnOpciones.setIcon(new ImageIcon("resources\\images\\btnOpciones2.png"));
+        	}
+        	@Override
+        	public void mouseExited(MouseEvent e) {
+        		btnOpciones.setIcon(new ImageIcon("resources\\images\\btnOpciones.png"));
         	}
         });
 		
-		//NAVEGACIÓN BOTONES
-		btnJugar.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		setVisible(false);
-        		ventana.getTimer().start();
-        		ventana.showEscena("Habitacion");
-        		ventana.getPanelTextos().setVisible(true);
-        		Audio.reproducirEfectoSonido(Audio.BOTON);
+		lblPortadaFondo.addMouseListener(new MouseAdapter() {	// Abrir panel instrucciones de juego
+        	public void mouseClicked(MouseEvent e) {
+        		if(!logoClickado) {
+        			lblPortadaFondo.setIcon(new ImageIcon("resources\\images\\title-screen-keys.jpg"));
+        			logoClickado = true;
+        		} else {
+        			lblPortadaFondo.setIcon(new ImageIcon("resources\\images\\title-screen.jpg"));
+        			logoClickado = false;
+        		}
         	}
         });
-		btnInstrucciones.addActionListener(new ActionListener() {	// Abrir panel instrucciones de juego
-        	public void actionPerformed(ActionEvent e) {
+		//NAVEGACIÓN BOTONES
+		btnJugar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+        		ventana.getTimer().start();
+        		ventana.showEscena("Intro");
+        		ventana.getPanelTextos().setVisible(true);
+        		Audio.reproducirEfectoSonido(Audio.BOTON);
+        		System.out.println(ventana.getMensajes().getLocale());
+			}
+        });
+		btnInstrucciones.addMouseListener(new MouseAdapter() {	// Abrir panel instrucciones de juego
+        	public void mouseClicked(MouseEvent e) {
         		ventana.getPanelInstrucciones().setVisible(true);
         	}
         });
-		btnOpciones.addActionListener(new ActionListener() {	// Abrir panel opciones
-        	public void actionPerformed(ActionEvent e) {
+		btnOpciones.addMouseListener(new MouseAdapter() {	// Abrir panel opciones
+        	public void mouseClicked(MouseEvent e) {
         		ventana.getPanelOpciones().setVisible(true);  
         	}
         });

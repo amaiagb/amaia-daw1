@@ -43,6 +43,7 @@ public class Cama extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				mochilaEncontrada = true;
 				Audio.reproducirEfectoSonido(Audio.COIN);
+				Habitacion.btnCama.setVisible(false);
 				Ventana.mostrarTextoPantalla("¡Ahí está la mochila! Voy a llevársela a ama");
 			}
 		});

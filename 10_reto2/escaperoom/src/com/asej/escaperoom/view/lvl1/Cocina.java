@@ -236,6 +236,7 @@ public class Cocina extends JPanel {
 			mostrarBotones("Estaba durmiendo como una marmota", "Egun on ama!", "Odio esa alarma");
 			madrePeticionHecha = true;
 			mensajePantalla = "madre";
+			Habitacion.btnCama.setVisible(true);
 
 		} else if (madrePeticionHecha && !Cama.mochilaEncontrada) {
 			Ventana.mostrarTextoPantalla("¿Todavía no has encontrado la mochila? Esa habitación tuya es una leonera...");
