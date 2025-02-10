@@ -22,8 +22,11 @@ public class Intro extends JPanel {
 		
 		setBounds(0, 0, 1100, 750);
 		setLayout(null);
-		Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("intro_ama"));
+		//ventana.getPanelTextos().setVisible(true);
+		Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("intro"));
 		//Ventana.mostrarTextoPantalla("*riiiiing riiiiiing*\n¡Hora de despertarse, hijo! Que sino vas a llegar tarde a clase" );
+		
+		
 		
 		
 	}

@@ -29,7 +29,7 @@ public class PanelOpciones extends JPanel {
 	
 	public PanelOpciones(Ventana ventana) {
 
-		this.mensajes = ventana.getMensajes();		
+		//this.mensajes = ventana.getMensajes();		
 		
 		setBounds(0, 0, 1084, 711);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -69,9 +69,6 @@ public class PanelOpciones extends JPanel {
         	public void actionPerformed(ActionEvent e) {
         		if(btnES.isSelected()) {
         			idioma = "ES";
-        			Ventana.mensajes = ResourceBundle.getBundle("com.asej.escaperoom.language.Mensajes", getDefaultLocale());
-        			System.out.println(getDefaultLocale());
-        			//locale = getDefaultLocale();
         			btnES.setContentAreaFilled(false);
         			btnES.setOpaque(true);
         			btnES.setBackground(Color.BLACK);
@@ -84,9 +81,6 @@ public class PanelOpciones extends JPanel {
         	public void actionPerformed(ActionEvent e) {
         		if(btnEN.isSelected()) {
         			idioma = "EN";
-        			Ventana.mensajes = ResourceBundle.getBundle("com.asej.escaperoom.language.Mensajes", Locale.ENGLISH);
-        			System.out.println(Locale.ENGLISH);
-        			//locale = Locale.ENGLISH;
         			btnEN.setContentAreaFilled(false);
         			btnEN.setOpaque(true);
         			btnEN.setBackground(Color.BLACK);
@@ -156,6 +150,15 @@ public class PanelOpciones extends JPanel {
 		
 		btnCerrarOpciones.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		
+        		if(idioma.equalsIgnoreCase("ES")) {
+        			Ventana v = new Ventana(getDefaultLocale());
+        			v.setVisible(true);
+        		} else if(idioma.equalsIgnoreCase("EN")) {
+        			Ventana v = new Ventana(Locale.ENGLISH);
+        			v.setVisible(true);
+        		}
+        		ventana.dispose();
         		setVisible(false);
         	}
         });

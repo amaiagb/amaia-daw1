@@ -31,6 +31,7 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
 import com.asej.escaperoom.controlador.Audio;
+import com.asej.escaperoom.juegos.PiedraPapelTijera;
 import com.asej.escaperoom.juegos.SopaLetras;
 import com.asej.escaperoom.model.Objeto;
 import com.asej.escaperoom.view.lvl1.Calle;
@@ -61,23 +62,21 @@ public class Ventana extends JFrame {
     private JTextField txtTimer;
 	private Timer timer;
 	private int segundos = 3600;
-    public static ResourceBundle mensajes;
     private JButton btnSoltarObjeto;
     private ArrayList<Objeto> objetosInventario;
-    
-    //private static Clip clipPrincipal;
-    //private Clip clipBoton;
 	private JLabel btnInventario;
-    //private static Clip clipClick;
     private static Locale locale;
+    
+    public static ResourceBundle mensajes;
 
-	public Ventana() {
+	public Ventana(Locale locale) {
 		
 		Ventana ventana = this;
 		//this.locale = locale;
 		
-		mensajes = ResourceBundle.getBundle("com.asej.escaperoom.language.Mensajes", Locale.getDefault());
-		System.out.println(mensajes.getLocale());
+		//mensajes = ResourceBundle.getBundle("com.asej.escaperoom.language.Mensajes", Locale.getDefault());
+		mensajes = ResourceBundle.getBundle("com.asej.escaperoom.language.Mensajes", locale);
+		System.out.println("Ventana, "+mensajes.getLocale());
 		objetosInventario = new ArrayList<>();
 		
 		Audio.reproducirMusica(Audio.CANCION_PRINCIPAL);
@@ -93,8 +92,7 @@ public class Ventana extends JFrame {
 		layeredPane.setBounds(0, 0, 1084, 711);
 		contentPane.add(layeredPane);
 		setLocationRelativeTo(null);
-		//	LayeredPane layers: 
-		//	Default -> Palette -> Modal -> Popup -> Drag
+		//	LayeredPane layers: Default -> Palette -> Modal -> Popup -> Drag
 		
 		Portada portada = new Portada(this);
 		layeredPane.add(portada, JLayeredPane.MODAL_LAYER);
@@ -252,6 +250,9 @@ public class Ventana extends JFrame {
 	
 		Cama cama = new Cama(this);
 		panelPrincipal.add(cama, "Cama");
+		
+		PiedraPapelTijera ppt = new PiedraPapelTijera(this);
+		panelPrincipal.add(ppt, "Juego ppt");
 
 		btnInventario.addMouseListener(new MouseAdapter() {
 			@Override

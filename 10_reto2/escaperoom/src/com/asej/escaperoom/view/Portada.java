@@ -120,7 +120,6 @@ public class Portada extends JPanel {
         		ventana.showEscena("Intro");
         		ventana.getPanelTextos().setVisible(true);
         		Audio.reproducirEfectoSonido(Audio.BOTON);
-        		System.out.println(ventana.getMensajes().getLocale());
 			}
         });
 		btnInstrucciones.addMouseListener(new MouseAdapter() {	// Abrir panel instrucciones de juego

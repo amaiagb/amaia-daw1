@@ -34,7 +34,7 @@ public class Calle extends JPanel{
 		add(lblBus);
 
 		JLabel lblFondo = new JLabel("");
-		lblFondo.setIcon(new ImageIcon("C:\\Users\\Amaia\\eclipse-workspace\\amaia-daw1\\10_reto2\\escaperoom\\resources\\images\\calle_autobus.jpg"));
+		lblFondo.setIcon(new ImageIcon("resources\\images\\calle_autobus.jpg"));
 		lblFondo.setBounds(0, 0, 1084, 723);
 		add(lblFondo);
 
