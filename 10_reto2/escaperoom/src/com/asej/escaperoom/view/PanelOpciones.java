@@ -35,7 +35,7 @@ public class PanelOpciones extends JPanel {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
 		
-		JLabel lblTitulo = new JLabel("Opciones");
+		JLabel lblTitulo = new JLabel(Ventana.mensajes.getString("opciones"));
 		lblTitulo.setForeground(Color.WHITE);
         //lblTitulo.setBackground(Color.LIGHT_GRAY);
         lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 36));
@@ -43,7 +43,7 @@ public class PanelOpciones extends JPanel {
         lblTitulo.setBounds(392, 66, 300, 100);
         add(lblTitulo);
         
-        JLabel lblIdioma = new JLabel("Idioma");
+        JLabel lblIdioma = new JLabel(Ventana.mensajes.getString("idioma"));
         lblIdioma.setHorizontalAlignment(SwingConstants.CENTER);
         lblIdioma.setForeground(Color.WHITE);
         lblIdioma.setFont(new Font("Segoe UI", Font.BOLD, 20));
@@ -89,7 +89,7 @@ public class PanelOpciones extends JPanel {
         	}
         });
         
-        JLabel lblSonido = new JLabel("Sonido");
+        JLabel lblSonido = new JLabel(Ventana.mensajes.getString("sonido"));
         lblSonido.setHorizontalAlignment(SwingConstants.CENTER);
         lblSonido.setForeground(Color.WHITE);
         lblSonido.setFont(new Font("Segoe UI", Font.BOLD, 20));

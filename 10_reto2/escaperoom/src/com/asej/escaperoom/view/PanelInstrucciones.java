@@ -22,7 +22,7 @@ public class PanelInstrucciones extends JPanel{
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
 		
-		JLabel lblTitulo = new JLabel("Instrucciones");
+		JLabel lblTitulo = new JLabel(Ventana.mensajes.getString("instrucciones"));
 		lblTitulo.setForeground(Color.WHITE);
         //lblTitulo.setBackground(Color.LIGHT_GRAY);
         lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 36));

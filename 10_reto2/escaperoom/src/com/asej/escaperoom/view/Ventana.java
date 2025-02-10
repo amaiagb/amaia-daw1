@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -43,9 +42,23 @@ import com.asej.escaperoom.view.lvl1.Intro;
 import com.asej.escaperoom.view.lvl1.Pasillo;
 import com.asej.escaperoom.view.lvl1.Salon;
 import com.asej.escaperoom.view.lvl1.Terraza;
-import com.asej.escaperoom.view.lvl5.Escena5;
-import com.asej.escaperoom.view.lvl5.Escena5_escritorio;
-import com.asej.escaperoom.view.lvl5.Escena5_pc;
+import com.asej.escaperoom.view.lvl2.Cajon;
+import com.asej.escaperoom.view.lvl2.Clase;
+import com.asej.escaperoom.view.lvl2.Codigo;
+import com.asej.escaperoom.view.lvl2.ColegioExterior;
+import com.asej.escaperoom.view.lvl2.ColegioPasillo;
+import com.asej.escaperoom.view.lvl2.ColegioPasillo2;
+import com.asej.escaperoom.view.lvl2.Conversacion;
+import com.asej.escaperoom.view.lvl2.Movil;
+import com.asej.escaperoom.view.lvl2.Movil2;
+import com.asej.escaperoom.view.lvl2.TaquillaAbierta;
+import com.asej.escaperoom.view.lvl2.Taquillas;
+import com.asej.escaperoom.view.lvl2.ZoomJarron;
+import com.asej.escaperoom.view.lvl2.ZoomTaquillas;
+import com.asej.escaperoom.view.lvl4.AulaOrdenadores;
+import com.asej.escaperoom.view.lvl4.Escritorio;
+import com.asej.escaperoom.view.lvl4.Ordenador;
+import com.asej.escaperoom.view.lvl4.Pizarra;
 
 public class Ventana extends JFrame {
 
@@ -72,14 +85,11 @@ public class Ventana extends JFrame {
 	public Ventana(Locale locale) {
 		
 		Ventana ventana = this;
-		//this.locale = locale;
 		
-		//mensajes = ResourceBundle.getBundle("com.asej.escaperoom.language.Mensajes", Locale.getDefault());
 		mensajes = ResourceBundle.getBundle("com.asej.escaperoom.language.Mensajes", locale);
-		System.out.println("Ventana, "+mensajes.getLocale());
 		objetosInventario = new ArrayList<>();
 		
-		Audio.reproducirMusica(Audio.CANCION_PRINCIPAL);
+		//Audio.reproducirMusica(Audio.CANCION_PRINCIPAL);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1100, 750);
@@ -114,7 +124,6 @@ public class Ventana extends JFrame {
 		btnSoltarObjeto.setVisible(false);
 		
 		panelInventario = new PanelInventario(this);
-		//panelInventario.setBounds(222, 100, 640, 480);
 		layeredPane.add(panelInventario, JLayeredPane.MODAL_LAYER);
 		panelInventario.setVisible(false);
 
@@ -197,8 +206,7 @@ public class Ventana extends JFrame {
 		btnOpciones.setOpaque(true);
 		panelNav.add(btnOpciones);
 		
-		
-		timer = new Timer(1000, new ActionListener() { // Se ejecuta cada segundo
+		timer = new Timer(1000, new ActionListener() { 
             @Override
             public void actionPerformed(ActionEvent e) {
             	if(segundos > 0) {
@@ -212,55 +220,45 @@ public class Ventana extends JFrame {
             }
         });
 
-		Escena5 escena5 = new Escena5(this);
-		panelPrincipal.add(escena5, "Escena 5");
+		// Registrar escenas:
+		panelPrincipal.add(new Intro(this), "Intro");
+		panelPrincipal.add(new Habitacion(this), "Habitacion");
+		panelPrincipal.add(new Pasillo(this), "Pasillo");
+		panelPrincipal.add(new Terraza(this), "Terraza");
+		panelPrincipal.add(new Salon(this), "Salon");
+		panelPrincipal.add(new Cocina(this), "Cocina");
+		panelPrincipal.add(new Garaje(this), "Garaje");
+		panelPrincipal.add(new SopaLetras(this), "Sopa de letras");
+		panelPrincipal.add(new Calle(this), "Calle");
+		panelPrincipal.add(new Cama(this), "Cama");
+		panelPrincipal.add(new PiedraPapelTijera(this), "Juego ppt");
 		
-		Escena5_pc escena5_pc = new Escena5_pc(this);
-		panelPrincipal.add(escena5_pc, "Escena 5 Ordenador");
+		panelPrincipal.add(new AulaOrdenadores(this), "Aula Ordenadores");
+		panelPrincipal.add(new Ordenador(this), "Ordenador");
+		panelPrincipal.add(new Escritorio(this), "Escritorio");
+		panelPrincipal.add(new Pizarra(this), "Pizarra");
 		
-		Escena5_escritorio escena5_escritorio = new Escena5_escritorio(this);
-		panelPrincipal.add(escena5_escritorio, "Pantalla ordenador");
+		panelPrincipal.add(new Movil(this), "Movil");
+		panelPrincipal.add(new Movil2(this), "Movil 2");
+		panelPrincipal.add(new Conversacion(this), "Conversacion");
+		panelPrincipal.add(new ColegioExterior(this), "Colegio Exterior");
+		panelPrincipal.add(new ColegioPasillo(this), "Colegio Pasillo");
+		panelPrincipal.add(new Clase(this), "Clase");
+		panelPrincipal.add(new ZoomJarron(this), "Zoom Jarron");
+		panelPrincipal.add(new Cajon(this), "Cajon");
+		panelPrincipal.add(new ColegioPasillo2(this), "Colegio Pasillo2");
+		panelPrincipal.add(new Taquillas(this), "Taquillas");
+		panelPrincipal.add(new ZoomTaquillas(this), "Zoom Taquillas");
+		panelPrincipal.add(new Codigo(this), "Codigo");
+		panelPrincipal.add(new TaquillaAbierta(this), "Taquilla Abierta");
 		
-		Intro intro = new Intro(this);
-		panelPrincipal.add(intro, "Intro");
 		
-		Habitacion habitacion = new Habitacion(this);
-		panelPrincipal.add(habitacion, "Habitacion");
-		
-		Pasillo pasillo = new Pasillo(this);
-		panelPrincipal.add(pasillo, "Pasillo");
-		
-		Terraza terraza = new Terraza(this);
-		panelPrincipal.add(terraza, "Terraza");
-		
-		Salon salon = new Salon(this);
-		panelPrincipal.add(salon, "Salon");
-		
-		Cocina cocina = new Cocina(this);
-		panelPrincipal.add(cocina, "Cocina");
-		
-		Garaje garaje = new Garaje(this);
-		panelPrincipal.add(garaje, "Garaje");
-		
-		SopaLetras sopa = new SopaLetras(this);
-		panelPrincipal.add(sopa, "Sopa de letras");
-		
-		Calle calle = new Calle(this);
-		panelPrincipal.add(calle, "Calle");
-	
-		Cama cama = new Cama(this);
-		panelPrincipal.add(cama, "Cama");
-		
-		PiedraPapelTijera ppt = new PiedraPapelTijera(this);
-		panelPrincipal.add(ppt, "Juego ppt");
-
 		btnInventario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				mostrarInventario(ventana);
 			}
 		});
-		
 
 		btnSoltarObjeto.addMouseListener(new MouseAdapter() {
 			@Override
@@ -289,6 +287,7 @@ public class Ventana extends JFrame {
 		});
 
 	}
+	
 	public void mostrarInventario(Ventana ventana) {
 		if(panelInventario.isVisible()) {
 			panelInventario.setVisible(false);
@@ -306,6 +305,21 @@ public class Ventana extends JFrame {
 		objetosInventario.remove(objetoSeleccionadoId);
 	}
 
+	public static void mostrarTextoPantalla(String mensaje) {
+		panelTextos.setSize(1084,60);
+		panelTextos.setVisible(true);
+		txtDialogo.setText(mensaje);
+	}
+	public static void quitarTextoPantalla() {
+		panelTextos.setVisible(false);
+		txtDialogo.setText("");
+	}
+	
+	public void showEscena(String escena) {
+		if(!btnSoltarObjeto.isVisible()) {
+			cardLayout.show(panelPrincipal, escena);
+		}
+	}
 
 	public PanelOpciones getPanelOpciones() {
 		return panelOpciones;
@@ -351,22 +365,6 @@ public class Ventana extends JFrame {
 	}
 	public JButton getBtnSoltarObjeto() {
 		return btnSoltarObjeto;
-	}
-	
-	public static void mostrarTextoPantalla(String mensaje) {
-		panelTextos.setSize(1084,60);
-		panelTextos.setVisible(true);
-		txtDialogo.setText(mensaje);
-	}
-	public static void quitarTextoPantalla() {
-		panelTextos.setVisible(false);
-		txtDialogo.setText("");
-	}
-	
-	public void showEscena(String escena) {
-		if(!btnSoltarObjeto.isVisible()) {
-			cardLayout.show(panelPrincipal, escena);
-		}
 	}
 	
 	public ArrayList<Objeto> getObjetosInventario () {

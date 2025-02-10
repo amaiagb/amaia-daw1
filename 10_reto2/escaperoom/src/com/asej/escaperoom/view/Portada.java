@@ -43,21 +43,21 @@ public class Portada extends JPanel {
         btnJugar.setFont(new Font("Segoe UI", Font.BOLD, 16));
         btnJugar.setBackground(Color.WHITE);
         btnJugar.setBounds(335, 440, 430, 80);
-        btnJugar.setIcon(new ImageIcon("resources\\images\\btnJugar.png"));
+        btnJugar.setIcon(new ImageIcon(Ventana.mensajes.getString("btnJugar")));
         add(btnJugar);
         
         btnInstrucciones = new JLabel();
         btnInstrucciones.setFont(new Font("Segoe UI", Font.BOLD, 16));
         btnInstrucciones.setBackground(Color.WHITE);
         btnInstrucciones.setBounds(335, 524, 430, 80);
-        btnInstrucciones.setIcon(new ImageIcon("resources\\images\\btnInstrucciones.png"));
+        btnInstrucciones.setIcon(new ImageIcon(Ventana.mensajes.getString("btnInstrucciones")));
         add(btnInstrucciones);
         
         btnOpciones = new JLabel();
 		btnOpciones.setBackground(Color.WHITE);
 		btnOpciones.setFont(new Font("Segoe UI", Font.BOLD, 16));
 		btnOpciones.setBounds(335, 608, 430, 80);
-		btnOpciones.setIcon(new ImageIcon("resources\\images\\btnOpciones.png"));
+		btnOpciones.setIcon(new ImageIcon(Ventana.mensajes.getString("btnOpciones")));
 		add(btnOpciones);
         
         JLabel lblPortadaFondo = new JLabel("");
@@ -70,33 +70,33 @@ public class Portada extends JPanel {
         	@Override
         	public void mouseEntered(MouseEvent e) {
         		btnJugar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        		btnJugar.setIcon(new ImageIcon("resources\\images\\btnJugar2.png"));
+        		btnJugar.setIcon(new ImageIcon(Ventana.mensajes.getString("btnJugarHover")));
         	}
         	@Override
         	public void mouseExited(MouseEvent e) {
-        		btnJugar.setIcon(new ImageIcon("resources\\images\\btnJugar.png"));
+        		btnJugar.setIcon(new ImageIcon(Ventana.mensajes.getString("btnJugar")));
         	}
         });
 		btnInstrucciones.addMouseListener(new MouseAdapter() {
 			@Override
         	public void mouseEntered(MouseEvent e) {
 				btnInstrucciones.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				btnInstrucciones.setIcon(new ImageIcon("resources\\images\\btnInstrucciones2.png"));
+				btnInstrucciones.setIcon(new ImageIcon(Ventana.mensajes.getString("btnInstruccionesHover")));
         	}
         	@Override
         	public void mouseExited(MouseEvent e) {
-        		btnInstrucciones.setIcon(new ImageIcon("resources\\images\\btnInstrucciones.png"));
+        		btnInstrucciones.setIcon(new ImageIcon(Ventana.mensajes.getString("btnInstrucciones")));
         	}
         });
 		btnOpciones.addMouseListener(new MouseAdapter() {
 			@Override
         	public void mouseEntered(MouseEvent e) {
 				btnOpciones.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				btnOpciones.setIcon(new ImageIcon("resources\\images\\btnOpciones2.png"));
+				btnOpciones.setIcon(new ImageIcon(Ventana.mensajes.getString("btnOpcionesHover")));
         	}
         	@Override
         	public void mouseExited(MouseEvent e) {
-        		btnOpciones.setIcon(new ImageIcon("resources\\images\\btnOpciones.png"));
+        		btnOpciones.setIcon(new ImageIcon(Ventana.mensajes.getString("btnOpciones")));
         	}
         });
 		
@@ -117,8 +117,10 @@ public class Portada extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
         		ventana.getTimer().start();
-        		ventana.showEscena("Intro");
-        		ventana.getPanelTextos().setVisible(true);
+        		ventana.showEscena("Aula Ordenadores");
+        		Ventana.mostrarTextoPantalla("Igual en la sala de informática encuentro algo que me ayude");
+        		//ventana.getPanelTextos().setVisible(true);
+        		//Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("intro"));
         		Audio.reproducirEfectoSonido(Audio.BOTON);
 			}
         });
