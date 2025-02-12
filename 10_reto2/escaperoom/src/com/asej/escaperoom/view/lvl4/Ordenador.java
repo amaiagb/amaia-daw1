@@ -68,7 +68,11 @@ public class Ordenador extends JPanel {
 		
 		
 		JButton btnIzq = new JButton("<");
-		btnIzq.setBounds(10, 364, 65, 61);
+		btnIzq.setIcon(new ImageIcon("resources\\images\\flechaIzquierda.png"));
+		btnIzq.setBounds(10, 350, 70, 65);
+		btnIzq.setContentAreaFilled(false); 
+		btnIzq.setBorderPainted(false); 
+		btnIzq.setFocusable(false);
 		add(btnIzq);
 		
 		JLabel lblIncorrecta = new JLabel("");
@@ -144,6 +148,16 @@ public class Ordenador extends JPanel {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lblPizarra.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+		});
+		btnIzq.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnIzq.setIcon(new ImageIcon("resources\\images\\flechaIzquierdaPintada.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnIzq.setIcon(new ImageIcon("resources\\images\\flechaIzquierda.png"));
 			}
 		});
 	}

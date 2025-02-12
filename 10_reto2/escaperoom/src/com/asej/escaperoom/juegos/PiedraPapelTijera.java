@@ -20,17 +20,8 @@ import com.asej.escaperoom.view.Ventana;
 
 public class PiedraPapelTijera extends JPanel {
 	
-	//private JTextField txtPlayer1;
-	//private JTextField txtPlayer2;
 	private JLabel lblP1Img;
 	private JLabel lblP2Img;
-	//private JLabel lblP1Puntos;
-	//private JTextField txtP1Puntos;
-	//private JLabel lblP2Puntos;
-	//private JTextField txtP2Puntos;
-	//private JLabel lblSeleccion;
-	//private JLabel lblP1Gana;
-	//private JLabel lblP2Gana;
 	private int p1Seleccion;
 	private String p1;
 	private String p2;
@@ -309,10 +300,11 @@ public class PiedraPapelTijera extends JPanel {
 				} else {
 					lblResultado.setFont(new Font("Tahoma", Font.PLAIN, 16));
 					lblResultado.setText("¡Enhorabuena!\nHas ganado la partida");
-					ventana.showEscena("Calle"); // Cambiar por alguna del nivel 2
+					ventana.showEscena("Conversacion 2"); // Cambiar por alguna del nivel 2
 					btnPiedra.setVisible(false);
 					btnPapel.setVisible(false);
 					btnTijera.setVisible(false);
+					Ventana.mostrarTextoPantalla("Vale, te lo has ganado. Ayer vi a Aitor en el aula de informática y estaba muy raro, como... triste. Algo raro pasa, tú que eres su amigo deberías averiguarlo");
 				}
 			}
 			case "p2" -> { 

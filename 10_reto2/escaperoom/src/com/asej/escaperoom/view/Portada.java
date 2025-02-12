@@ -117,8 +117,9 @@ public class Portada extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
         		ventana.getTimer().start();
-        		ventana.showEscena("Aula Ordenadores");
-        		Ventana.mostrarTextoPantalla("Igual en la sala de informática encuentro algo que me ayude");
+        		ventana.showEscena("Conversacion 2");
+        		Ventana.quitarTextoPantalla();
+        		//Ventana.mostrarTextoPantalla("Igual en la sala de informática encuentro algo que me ayude");
         		//ventana.getPanelTextos().setVisible(true);
         		//Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("intro"));
         		Audio.reproducirEfectoSonido(Audio.BOTON);

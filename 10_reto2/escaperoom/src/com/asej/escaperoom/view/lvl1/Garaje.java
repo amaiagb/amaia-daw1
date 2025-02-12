@@ -57,7 +57,7 @@ public class Garaje extends JPanel {
         add(btnLimpieza);
 
         JButton btnHerramientas = new JButton("");
-        btnHerramientas.setBounds(327, 436, 36, 23);
+        btnHerramientas.setBounds(285, 436, 78, 85);
         btnHerramientas.setOpaque(true);
         btnHerramientas.setContentAreaFilled(false);
         btnHerramientas.setBorderPainted(false);
@@ -72,7 +72,7 @@ public class Garaje extends JPanel {
         add(btnIrSalon);
 
         JLabel lblFondo = new JLabel("");
-        lblFondo.setIcon(new ImageIcon("resources\\images\\garaje.jpg"));
+        lblFondo.setIcon(new ImageIcon("C:\\Users\\Amaia\\eclipse-workspace\\amaia-daw1\\10_reto2\\escaperoom\\resources\\images\\garaje.jpg"));
         lblFondo.setBounds(0, 0, 1084, 711);
         add(lblFondo);
 

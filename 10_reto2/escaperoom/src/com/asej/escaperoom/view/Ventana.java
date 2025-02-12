@@ -33,6 +33,7 @@ import com.asej.escaperoom.controlador.Audio;
 import com.asej.escaperoom.juegos.PiedraPapelTijera;
 import com.asej.escaperoom.juegos.SopaLetras;
 import com.asej.escaperoom.model.Objeto;
+import com.asej.escaperoom.view.lvl1.Autobus;
 import com.asej.escaperoom.view.lvl1.Calle;
 import com.asej.escaperoom.view.lvl1.Cama;
 import com.asej.escaperoom.view.lvl1.Cocina;
@@ -49,6 +50,7 @@ import com.asej.escaperoom.view.lvl2.ColegioExterior;
 import com.asej.escaperoom.view.lvl2.ColegioPasillo;
 import com.asej.escaperoom.view.lvl2.ColegioPasillo2;
 import com.asej.escaperoom.view.lvl2.Conversacion;
+import com.asej.escaperoom.view.lvl2.Conversacion2;
 import com.asej.escaperoom.view.lvl2.Movil;
 import com.asej.escaperoom.view.lvl2.Movil2;
 import com.asej.escaperoom.view.lvl2.TaquillaAbierta;
@@ -70,6 +72,7 @@ public class Ventana extends JFrame {
 	private static JPanel panelTextos;
     private JPanel panelNav;
     private JPanel panelPrincipal;
+    private JPanel panelTransicion;
     private CardLayout cardLayout;
     private static JTextPane txtDialogo;
     private JTextField txtTimer;
@@ -115,10 +118,14 @@ public class Ventana extends JFrame {
 		layeredPane.add(panelInstrucciones, JLayeredPane.POPUP_LAYER);
 		panelInstrucciones.setVisible(false);
 		
+		panelTransicion = new PanelInstrucciones();
+		layeredPane.add(panelTransicion, JLayeredPane.POPUP_LAYER);
+		panelTransicion.setVisible(false);
+		
 		btnSoltarObjeto = new JButton("Soltar Objeto");
-		btnSoltarObjeto.setBounds(456, 525, 185, 46);
+		btnSoltarObjeto.setBounds(456, 595, 185, 46);
 		btnSoltarObjeto.setBackground(Color.ORANGE);
-		btnSoltarObjeto.setForeground(Color.WHITE);
+		btnSoltarObjeto.setForeground(Color.DARK_GRAY);
 		btnSoltarObjeto.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		layeredPane.add(btnSoltarObjeto);
 		btnSoltarObjeto.setVisible(false);
@@ -184,7 +191,8 @@ public class Ventana extends JFrame {
 		btnInventario.setSize(100, 40);
 		btnInventario.setText(mensajes.getString("btnInventario"));
 		btnInventario.setOpaque(true);
-		btnInventario.setVisible(false);
+		//btnInventario.setVisible(false);
+		btnInventario.setVisible(true); //Visible para testeo
 		panelNav.add(btnInventario);
 		
 		JLabel btnPista = new JLabel();
@@ -231,12 +239,7 @@ public class Ventana extends JFrame {
 		panelPrincipal.add(new SopaLetras(this), "Sopa de letras");
 		panelPrincipal.add(new Calle(this), "Calle");
 		panelPrincipal.add(new Cama(this), "Cama");
-		panelPrincipal.add(new PiedraPapelTijera(this), "Juego ppt");
-		
-		panelPrincipal.add(new AulaOrdenadores(this), "Aula Ordenadores");
-		panelPrincipal.add(new Ordenador(this), "Ordenador");
-		panelPrincipal.add(new Escritorio(this), "Escritorio");
-		panelPrincipal.add(new Pizarra(this), "Pizarra");
+		panelPrincipal.add(new Autobus(this), "Bus");
 		
 		panelPrincipal.add(new Movil(this), "Movil");
 		panelPrincipal.add(new Movil2(this), "Movil 2");
@@ -249,8 +252,18 @@ public class Ventana extends JFrame {
 		panelPrincipal.add(new ColegioPasillo2(this), "Colegio Pasillo2");
 		panelPrincipal.add(new Taquillas(this), "Taquillas");
 		panelPrincipal.add(new ZoomTaquillas(this), "Zoom Taquillas");
-		panelPrincipal.add(new Codigo(this), "Codigo");
+		//panelPrincipal.add(new Codigo(this), "Codigo");
 		panelPrincipal.add(new TaquillaAbierta(this), "Taquilla Abierta");
+		
+		panelPrincipal.add(new PiedraPapelTijera(this), "Juego ppt");
+		panelPrincipal.add(new Conversacion2(this), "Conversacion 2");
+		
+		panelPrincipal.add(new AulaOrdenadores(this), "Aula Ordenadores");
+		panelPrincipal.add(new Ordenador(this), "Ordenador");
+		panelPrincipal.add(new Escritorio(this), "Escritorio");
+		panelPrincipal.add(new Pizarra(this), "Pizarra");
+		
+		
 		
 		
 		btnInventario.addMouseListener(new MouseAdapter() {

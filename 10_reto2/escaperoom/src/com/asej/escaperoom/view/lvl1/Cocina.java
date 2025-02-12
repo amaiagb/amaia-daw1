@@ -29,17 +29,6 @@ public class Cocina extends JPanel {
 	private JLabel lblFondoBotones;
 	//private JTextPane textPane;
 	private int contador = 0;
-	//private int contadorPadre = 0;
-	//private int contadorMadre = 0;
-	//private int contadorHija = 0;
-	//private int contadorPreguntaPadre = 0;
-	//private int contadorPreguntaMadre = 0;
-	//private int contadorPreguntaHija = 0;
-	//private int segundos = 3600;
-	//private JTextPane txtDialogo;
-	//private Clip clipPrincipal;
-	//private Clip clipBoton;
-	//private Clip clipClick;
 	private Ventana ventana;
 	private JPanel mensajes;
 	private JButton btnPadre;

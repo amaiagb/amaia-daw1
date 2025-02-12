@@ -25,31 +25,32 @@ public class Cajon extends JPanel {
 		btnFlecha.setOpaque(true);
 		btnFlecha.setBorderPainted(false);
 		btnFlecha.setContentAreaFilled(false);
-		btnFlecha.setIcon(new ImageIcon("D:\\SERGIO\\escape room\\flechas\\flechaIzquierda.png"));
-		btnFlecha.setBounds(34, 327, 100, 55);
+		btnFlecha.setIcon(new ImageIcon("resources\\images\\flechaIzquierda.png"));
+		btnFlecha.setBounds(10, 350, 70, 65);
 		add(btnFlecha);
 		btnFlecha.setVisible(true);
-
+		
 		JLabel lblZoomCajon = new JLabel("");
-		lblZoomCajon.setIcon(new ImageIcon("D:\\SERGIO\\escape room\\Cajon.jpg"));
+		lblZoomCajon.setIcon(new ImageIcon("resources\\images\\lvl2\\Cajon.jpg"));
 		lblZoomCajon.setBounds(0, 0, 1100, 711);
 		add(lblZoomCajon);
 		
 		btnFlecha.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ventana.showEscena("Clase");
+				Ventana.quitarTextoPantalla();
 			}
 		});
 		
 		btnFlecha.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				btnFlecha.setIcon(new ImageIcon("D:\\SERGIO\\escape room\\flechas\\flechaIzquierdaPintada.png"));
+				btnFlecha.setIcon(new ImageIcon("resources\\images\\flechaIzquierdaPintada.png"));
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				btnFlecha.setIcon(new ImageIcon("D:\\SERGIO\\escape room\\flechas\\flechaIzquierda.png"));
+				btnFlecha.setIcon(new ImageIcon("resources\\images\\lvl2\\flechaIzquierda.png"));
 			}
 		});
 

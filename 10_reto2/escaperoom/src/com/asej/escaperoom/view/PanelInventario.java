@@ -172,7 +172,10 @@ public class PanelInventario extends JPanel {
 		txtObjDescripcion.setText("Selecciona un objeto del inventario para ver su descripción");
 		
 		JButton btnUsarObjeto = new JButton("Usar");
-		btnUsarObjeto.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnUsarObjeto.setForeground(Color.WHITE);
+		btnUsarObjeto.setBackground(Color.DARK_GRAY);
+		btnUsarObjeto.setOpaque(true);
+		btnUsarObjeto.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnUsarObjeto.setBounds(345, 240, 100, 70);
 		add(btnUsarObjeto);
 
@@ -387,6 +390,7 @@ public class PanelInventario extends JPanel {
 		}
 	}
 	public void resetearInventario() {
+		System.out.println("reset, "+objetoSeleccionadoId);
 		labels.get(objetoSeleccionadoId).setBorder(BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 		labels.get(objetoSeleccionadoId).setIcon(new ImageIcon(IMG_FOLDER+objetos.get(objetoSeleccionadoId).getUrlImg()));
 		labels.get(objetoSeleccionadoId).setBackground(null);

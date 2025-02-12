@@ -1,5 +1,7 @@
 package com.asej.escaperoom.view.lvl1;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.asej.escaperoom.view.Ventana;
@@ -26,7 +28,10 @@ public class Intro extends JPanel {
 		Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("intro"));
 		Ventana.mostrarTextoPantalla("*riiiiing riiiiiing*\n¡Hora de despertarse, hijo! Que sino vas a llegar tarde a clase" );
 		
-		
+		JLabel lblFondo = new JLabel("");
+		lblFondo.setIcon(new ImageIcon("resources\\images\\amanecer.jpg"));
+		lblFondo.setBounds(0, 0, 1084, 723);
+		add(lblFondo);
 		
 		
 	}

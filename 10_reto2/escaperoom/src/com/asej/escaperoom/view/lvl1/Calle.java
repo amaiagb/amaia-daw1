@@ -41,8 +41,10 @@ public class Calle extends JPanel{
 		lblBus.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblFinNivel.setVisible(true);
+				ventana.showEscena("Bus");
+				Autobus.timer.start();
 				Audio.reproducirEfectoSonido(Audio.COIN);
+				
 			}
 		});
 	}

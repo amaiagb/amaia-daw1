@@ -27,13 +27,13 @@ public class ColegioPasillo extends JPanel {
 		btnPuertaClase.setContentAreaFilled(false);
 		btnPuertaClase.setBorderPainted(false);
 		add(btnPuertaClase);
-
+/*
 		JLabel lblFlecha = new JLabel("");
-		lblFlecha.setIcon(new ImageIcon("C:\\Users\\Alumno\\Downloads\\flechonblanco.png"));
+		lblFlecha.setIcon(new ImageIcon("resources\\images\\lvl2\\flechaDerecha.png"));
 		lblFlecha.setBounds(778, 371, 131, 84);
 		add(lblFlecha);
 		lblFlecha.setVisible(false);
-
+*/
 		JButton btnMensaje = new JButton("");
 		btnMensaje.setBounds(119, 251, 48, 277);
 		btnMensaje.setOpaque(true);
@@ -41,8 +41,8 @@ public class ColegioPasillo extends JPanel {
 		btnMensaje.setBorderPainted(false);
 		add(btnMensaje);
 
-		JLabel lblPasillo = new JLabel("New label");
-		lblPasillo.setIcon(new ImageIcon("D:\\SERGIO\\escape room\\pasilloOriginal.jpg"));
+		JLabel lblPasillo = new JLabel("");
+		lblPasillo.setIcon(new ImageIcon("resources\\images\\lvl2\\pasilloOriginal.jpg"));
 		lblPasillo.setBounds(0, 0, 1084, 711);
 		add(lblPasillo);
 		
@@ -70,22 +70,22 @@ public class ColegioPasillo extends JPanel {
 		btnMensaje.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Ventana.mostrarTextoPantalla("Deberíamos entrar primero a clase ");
-				lblFlecha.setVisible(true);
+				//lblFlecha.setVisible(true);
 			}
 		});
-
+/*
 		lblFlecha.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblFlecha.setIcon(new ImageIcon("C:\\Users\\Alumno\\Downloads\\flechonamarilla.png"));
+				lblFlecha.setIcon(new ImageIcon("resources\\images\\flechaDerechaPintada.png"));
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblFlecha.setIcon(new ImageIcon("C:\\Users\\Alumno\\Downloads\\flechonblanco.png"));
+				lblFlecha.setIcon(new ImageIcon("resources\\images\\flechaDerecha.png"));
 			}
 		});
-		
+		*/
 		
 	}
 }

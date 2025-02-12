@@ -44,8 +44,12 @@ public class AulaOrdenadores extends JPanel {
 		*/
 		Ventana.mostrarTextoPantalla("Igual en la sala de informática encuentro algo que me ayude");
 		
-		JButton btnIzq = new JButton("<");
-		btnIzq.setBounds(10, 250, 65, 61);
+		JButton btnIzq = new JButton("");
+		btnIzq.setIcon(new ImageIcon("resources\\images\\flechaIzquierda.png"));
+		btnIzq.setBounds(10, 350, 70, 65);
+		btnIzq.setContentAreaFilled(false); 
+		btnIzq.setBorderPainted(false); 
+		btnIzq.setFocusable(false);
 		add(btnIzq);
 		
 		JLabel lblOrdenador = new JLabel("");
@@ -82,6 +86,16 @@ public class AulaOrdenadores extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				ventana.showEscena("Pizarra");
 				Ventana.quitarTextoPantalla();
+			}
+		});
+		btnIzq.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnIzq.setIcon(new ImageIcon("resources\\images\\flechaIzquierdaPintada.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnIzq.setIcon(new ImageIcon("resources\\images\\flechaIzquierda.png"));
 			}
 		});
 		

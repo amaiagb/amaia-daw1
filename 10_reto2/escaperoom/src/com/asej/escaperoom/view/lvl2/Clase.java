@@ -2,6 +2,8 @@ package com.asej.escaperoom.view.lvl2;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,10 +19,14 @@ public class Clase extends JPanel {
 		setBounds(0, 0, 1100, 750);
 		setLayout(null);
 
-		JButton btnIrPasillo = new JButton(">");
-		btnIrPasillo.setBounds(10, 331, 63, 71);
+		JButton btnIrPasillo = new JButton("");
+		btnIrPasillo.setOpaque(false);
+		btnIrPasillo.setBorderPainted(false);
+		btnIrPasillo.setContentAreaFilled(false);
+		btnIrPasillo.setIcon(new ImageIcon("resources\\images\\flechaIzquierda.png"));
+		btnIrPasillo.setBounds(10, 350, 70, 65);
 		add(btnIrPasillo);
-
+		
 		JButton btnJarron = new JButton("");
 		btnJarron.setOpaque(true);
 		btnJarron.setContentAreaFilled(false);
@@ -28,16 +34,16 @@ public class Clase extends JPanel {
 		btnJarron.setBounds(174, 341, 31, 49);
 		add(btnJarron);
 
-		JLabel lblDibujoJuan = new JLabel("");
-		lblDibujoJuan.setIcon(new ImageIcon("D:\\SERGIO\\escape room\\cuadroTOP.jpg"));
-		lblDibujoJuan.setBounds(271, 145, 500, 400);
-		lblDibujoJuan.setVisible(false);
-		add(lblDibujoJuan);
-		
 		JButton btnGuardarCuadro = new JButton("A\u00F1adir al Inventario");
 		btnGuardarCuadro.setBounds(601, 505, 156, 29);
 		btnGuardarCuadro.setVisible(false);
 		add(btnGuardarCuadro);
+		
+		JLabel lblDibujoJuan = new JLabel("");
+		lblDibujoJuan.setIcon(new ImageIcon("resources\\images\\lvl2\\cuadroTOP.jpg"));
+		lblDibujoJuan.setBounds(271, 145, 500, 400);
+		lblDibujoJuan.setVisible(false);
+		add(lblDibujoJuan);
 		
 		JButton btnCajon = new JButton("");
 		btnCajon.setOpaque(true);
@@ -54,7 +60,7 @@ public class Clase extends JPanel {
 		add(btnCuadroJuan);
 		
 		JLabel lblClase = new JLabel("");
-		lblClase.setIcon(new ImageIcon("D:\\SERGIO\\escape room\\clase).jpg"));
+		lblClase.setIcon(new ImageIcon("resources\\images\\lvl2\\clase.jpg"));
 		lblClase.setBounds(0, 0, 1084, 711);
 		add(lblClase);
 
@@ -88,6 +94,17 @@ public class Clase extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				lblDibujoJuan.setVisible(false);
 				btnGuardarCuadro.setVisible(false);
+			}
+		});
+		
+		btnIrPasillo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnIrPasillo.setIcon(new ImageIcon("resources\\images\\flechaIzquierdaPintada.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnIrPasillo.setIcon(new ImageIcon("resources\\images\\flechaIzquierda.png"));
 			}
 		});
 	}

@@ -11,40 +11,44 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.asej.escaperoom.model.Objeto;
 import com.asej.escaperoom.view.Ventana;
 
 public class TaquillaAbierta extends JPanel {
 
+	static boolean cromoObtenido = false;
+	
 	public TaquillaAbierta(Ventana ventana) {
 		setBounds(0, 0, 1100, 750);
 		setLayout(null);
 
 		JButton btnFlecha = new JButton("");
 		btnFlecha.setOpaque(true);
-		btnFlecha.setBorderPainted(true);
+		btnFlecha.setBorderPainted(false);
 		btnFlecha.setContentAreaFilled(false);
-		btnFlecha.setIcon(new ImageIcon("D:\\SERGIO\\escape room\\flechas\\flechaIzquierda.png"));
-		btnFlecha.setBounds(36, 320, 107, 71);
+		btnFlecha.setIcon(new ImageIcon("resources\\images\\flechaIzquierda.png"));
+		btnFlecha.setBounds(10, 350, 70, 65);
 		add(btnFlecha);
 
 		JLabel lblChincheta = new JLabel("");
-		lblChincheta.setIcon(new ImageIcon("D:\\SERGIO\\escape room\\chincheta.png"));
+		lblChincheta.setIcon(new ImageIcon("resources\\images\\lvl2\\chincheta.png"));
 		lblChincheta.setBounds(331, 272, 30, 24);
 		add(lblChincheta);
 
 		JLabel lblCromo = new JLabel("");
-		lblCromo.setIcon(new ImageIcon("D:\\SERGIO\\escape room\\iniestataq.png"));
+		lblCromo.setIcon(new ImageIcon("resources\\images\\lvl2\\iniestataq.png"));
 		lblCromo.setBounds(282, 287, 79, 40);
 		add(lblCromo);
 
 		JLabel lblFondo = new JLabel("");
-		lblFondo.setIcon(new ImageIcon("D:\\SERGIO\\escape room\\taquillaAbierta.jpg"));
+		lblFondo.setIcon(new ImageIcon("resources\\images\\lvl2\\taquillaAbierta.jpg"));
 		lblFondo.setBounds(0, 0, 1084, 711);
 		add(lblFondo);
 		
 		btnFlecha.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ventana.showEscena("Taquillas");
+				Ventana.quitarTextoPantalla();
 			}
 		});
 		
@@ -52,6 +56,9 @@ public class TaquillaAbierta extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				lblCromo.setVisible(false);
+				ventana.getObjetosInventario().add(new Objeto("cromo","cromo.png", "El cromo de Manuel"));
+				Ventana.mostrarTextoPantalla("¡Ya tengo el cromo! Voy a llevárselo a Manuel");
+				cromoObtenido = true;
 			}
 		});
 	}

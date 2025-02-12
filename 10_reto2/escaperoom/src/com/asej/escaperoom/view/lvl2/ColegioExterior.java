@@ -21,10 +21,6 @@ public class ColegioExterior extends JPanel {
 		setBounds(0, 0, 1100, 750);
 		setLayout(null);
 
-		JLabel lblCirculoAmarillo = new JLabel("");
-		lblCirculoAmarillo.setIcon(new ImageIcon("D:\\SERGIO\\escape room\\circuloamarilla.png"));
-		lblCirculoAmarillo.setBounds(557, 475, 46, 23);
-		add(lblCirculoAmarillo);
 
 		JButton btnPuertaColegio = new JButton("");
 		btnPuertaColegio.setBounds(511, 443, 75, 82);
@@ -35,7 +31,7 @@ public class ColegioExterior extends JPanel {
 
 		JLabel lblImagenColegio = new JLabel("");
 		lblImagenColegio.setIcon(new ImageIcon(
-				"D:\\SERGIO\\escape room\\Leonardo_Phoenix_10_estilo_animado_3d_de_un_instituto_moderno_0.jpg"));
+				"resources\\images\\lvl2\\colegio-exterior.jpg"));
 		lblImagenColegio.setBounds(0, 0, 1084, 711);
 		add(lblImagenColegio);
 
