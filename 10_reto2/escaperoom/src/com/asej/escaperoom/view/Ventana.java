@@ -57,15 +57,16 @@ import com.asej.escaperoom.view.lvl2.TaquillaAbierta;
 import com.asej.escaperoom.view.lvl2.Taquillas;
 import com.asej.escaperoom.view.lvl2.ZoomJarron;
 import com.asej.escaperoom.view.lvl2.ZoomTaquillas;
-import com.asej.escaperoom.view.lvl4.AulaOrdenadores;
-import com.asej.escaperoom.view.lvl4.Escritorio;
-import com.asej.escaperoom.view.lvl4.Ordenador;
-import com.asej.escaperoom.view.lvl4.Pizarra;
+import com.asej.escaperoom.view.lvl3.AulaOrdenadores;
+import com.asej.escaperoom.view.lvl3.Escritorio;
+import com.asej.escaperoom.view.lvl3.Ordenador;
+import com.asej.escaperoom.view.lvl3.Pizarra;
 
 public class Ventana extends JFrame {
 
 	private JPanel contentPane;
 	private PanelOpciones panelOpciones;
+	private PanelOpcionesJuego panelOpcionesJuego;
 	private PanelInstrucciones panelInstrucciones;
 	private PanelInventario panelInventario;
 	private PanelPistas panelPistas;
@@ -82,6 +83,7 @@ public class Ventana extends JFrame {
     private ArrayList<Objeto> objetosInventario;
 	private JLabel btnInventario;
     private static Locale locale;
+    public static int nivelActual = 1;
     
     public static ResourceBundle mensajes;
 
@@ -92,7 +94,7 @@ public class Ventana extends JFrame {
 		mensajes = ResourceBundle.getBundle("com.asej.escaperoom.language.Mensajes", locale);
 		objetosInventario = new ArrayList<>();
 		
-		//Audio.reproducirMusica(Audio.CANCION_PRINCIPAL);
+		Audio.reproducirMusica(Audio.CANCION_PRINCIPAL);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1100, 750);
@@ -113,6 +115,10 @@ public class Ventana extends JFrame {
 		panelOpciones = new PanelOpciones(this);
 		layeredPane.add(panelOpciones, JLayeredPane.POPUP_LAYER);
 		panelOpciones.setVisible(false);
+		
+		panelOpcionesJuego = new PanelOpcionesJuego(this);
+		layeredPane.add(panelOpcionesJuego, JLayeredPane.POPUP_LAYER);
+		panelOpcionesJuego.setVisible(false);
 		
 		panelInstrucciones = new PanelInstrucciones();
 		layeredPane.add(panelInstrucciones, JLayeredPane.POPUP_LAYER);
@@ -191,7 +197,7 @@ public class Ventana extends JFrame {
 		btnInventario.setSize(100, 40);
 		btnInventario.setText(mensajes.getString("btnInventario"));
 		btnInventario.setOpaque(true);
-		//btnInventario.setVisible(false);
+		btnInventario.setVisible(false);
 		btnInventario.setVisible(true); //Visible para testeo
 		panelNav.add(btnInventario);
 		
@@ -206,6 +212,14 @@ public class Ventana extends JFrame {
 		panelNav.add(btnPista);
 		
 		JLabel btnOpciones = new JLabel();
+		btnOpciones.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(!panelOpcionesJuego.isVisible()) {
+					panelOpcionesJuego.setVisible(true);
+				}
+			}
+		});
 		btnOpciones.setHorizontalAlignment(SwingConstants.CENTER);
 		btnOpciones.setIcon(new ImageIcon("resources\\images\\ajuste.png"));
 		btnOpciones.setForeground(Color.WHITE);
@@ -263,8 +277,14 @@ public class Ventana extends JFrame {
 		panelPrincipal.add(new Escritorio(this), "Escritorio");
 		panelPrincipal.add(new Pizarra(this), "Pizarra");
 		
-		
-		
+		btnPista.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				panelPistas.setVisible(true);
+				PanelPistas.pistas = PanelPistas.cargarPistas(nivelActual);
+				System.out.println(PanelPistas.pistas);
+			}
+		});
 		
 		btnInventario.addMouseListener(new MouseAdapter() {
 			@Override

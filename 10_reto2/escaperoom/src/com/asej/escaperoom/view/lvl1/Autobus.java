@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import com.asej.escaperoom.view.PanelPistas;
 import com.asej.escaperoom.view.Ventana;
 
 public class Autobus extends JPanel {
@@ -33,6 +34,8 @@ public class Autobus extends JPanel {
                 if (segundos == 3) {
                 	
                 	ventana.showEscena("Movil");
+                	Ventana.nivelActual = 2;
+                	PanelPistas.resetearPistas(2);
                 	Ventana.quitarTextoPantalla();
                     timer.stop();
                 }

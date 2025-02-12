@@ -15,6 +15,7 @@ import javax.swing.JTextArea;
 
 import com.asej.escaperoom.controlador.Audio;
 import com.asej.escaperoom.view.PanelInventario;
+import com.asej.escaperoom.view.PanelPistas;
 import com.asej.escaperoom.view.Ventana;
 
 public class Conversacion2 extends JPanel {
@@ -71,6 +72,8 @@ public class Conversacion2 extends JPanel {
 		btnFlechaDerecha.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ventana.showEscena("Aula Ordenadores");
+				Ventana.nivelActual=3;
+            	PanelPistas.resetearPistas(Ventana.nivelActual);
 				Ventana.mostrarTextoPantalla("Si aquí es donde vieron a Aitor la última vez, igual puedo encontrar alguna pista");
 				}
 		});
