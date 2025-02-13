@@ -156,6 +156,7 @@ public class PanelOpcionesJuego extends JPanel {
 		
 		btnCerrarOpciones.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		setVisible(false);
         		/*
         		if(idioma.equalsIgnoreCase("ES")) {
         			Ventana v = new Ventana(getDefaultLocale());

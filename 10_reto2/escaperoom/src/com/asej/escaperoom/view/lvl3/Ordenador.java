@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
+import com.asej.escaperoom.controlador.Audio;
 import com.asej.escaperoom.view.Ventana;
 
 import java.awt.event.MouseAdapter;
@@ -29,6 +30,7 @@ public class Ordenador extends JPanel {
 	private JTextPane txtMensaje;
 	private JTextField txtPcPassword;
 	private final String PASSWORD = "centro41eus";
+	static boolean capturasConseguidas = false;
 	
 	//private final String RUTA = "C:\\Users\\Amaia\\eclipse-workspace\\amaia-daw1\\10_reto2\\escaperoom\\";
 	//private final String RUTA = "D:\\amaia\\programacion\\amaia-daw1\\10_reto2\\escaperoom\\";
@@ -100,14 +102,13 @@ public class Ordenador extends JPanel {
 		btnPcEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(PASSWORD.equals(txtPcPassword.getText())) {
-					System.out.println("Sesión iniciada");
 					ventana.getCardLayout().show(ventana.getPanelPrincipal(),"Escritorio");
 					lblFondo.setIcon(new ImageIcon("resources\\images\\esc5_pc.jpg"));
 					lblIncorrecta.setVisible(false);
 					btnPcEntrar.setVisible(false);
 					txtPcPassword.setVisible(false);
 					Ventana.quitarTextoPantalla();
-					//txtMensaje.setText("Vaya, parece que está apagado");
+					Audio.reproducirEfectoSonido(Audio.BOTON);
 				} else {
 					lblIncorrecta.setVisible(true);
 					
@@ -121,10 +122,15 @@ public class Ordenador extends JPanel {
 				if(pcEncendido) {
 					lblFondo.setIcon(new ImageIcon("resources\\images\\esc5_pc.jpg"));
 					pcEncendido = false;
-				} else {
-					ventana.getCardLayout().show(ventana.getPanelPrincipal(), "Aula Ordenadores");
-					
+					btnPcEntrar.setVisible(false);
+					txtPcPassword.setVisible(false);
 				}
+				if(capturasConseguidas) {
+					AulaOrdenadores.btnSalir.setVisible(true);
+					AulaOrdenadores.lblOrdenador.setVisible(false);
+				}
+				ventana.showEscena("Aula Ordenadores");
+				Ventana.quitarTextoPantalla();
 			}
 		});
 		
@@ -139,7 +145,6 @@ public class Ordenador extends JPanel {
 				txtPcPassword.setVisible(true);
 				btnPcEntrar.setVisible(true);
 				Ventana.mostrarTextoPantalla("¡Genial! Aunque parece que necesita contraseña para iniciar sesión...");
-				//txtMensaje.setText("¡Genial! Aunque parece que necesita contraseña para iniciar sesión...");
 				pcEncendido = true;
 			}
 		});

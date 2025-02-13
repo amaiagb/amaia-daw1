@@ -119,7 +119,7 @@ public class PanelOpciones extends JPanel {
         			tglbtnSonido.setOpaque(true);
         			tglbtnSonido.setBackground(Color.BLACK);
         			tglbtnSilenciado.setBackground(Color.DARK_GRAY);
-        			Audio.reproducirMusica("op");
+        			Audio.reproducirMusica(Audio.CANCION_PRINCIPAL);
         		}
         	}
         });
@@ -152,10 +152,10 @@ public class PanelOpciones extends JPanel {
         	public void actionPerformed(ActionEvent e) {
         		
         		if(idioma.equalsIgnoreCase("ES")) {
-        			Ventana v = new Ventana(getDefaultLocale());
+        			Ventana v = new Ventana(getDefaultLocale(), sonido);
         			v.setVisible(true);
         		} else if(idioma.equalsIgnoreCase("EN")) {
-        			Ventana v = new Ventana(Locale.ENGLISH);
+        			Ventana v = new Ventana(Locale.ENGLISH, sonido);
         			v.setVisible(true);
         		}
         		ventana.dispose();

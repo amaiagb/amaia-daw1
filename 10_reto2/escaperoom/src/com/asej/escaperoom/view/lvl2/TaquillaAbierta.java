@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.asej.escaperoom.controlador.Audio;
 import com.asej.escaperoom.model.Objeto;
 import com.asej.escaperoom.view.Ventana;
 
@@ -51,15 +52,28 @@ public class TaquillaAbierta extends JPanel {
 				Ventana.quitarTextoPantalla();
 			}
 		});
+
+		btnFlecha.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnFlecha.setIcon(new ImageIcon("resources\\images\\flechaIzquierdaPintada.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnFlecha.setIcon(new ImageIcon("resources\\images\\flechaIzquierda.png"));
+			}
+		});
 		
 		lblCromo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				lblCromo.setVisible(false);
+				Audio.reproducirEfectoSonido(Audio.CROMO);
 				ventana.getObjetosInventario().add(new Objeto("cromo","cromo.png", "El cromo de Manuel"));
 				Ventana.mostrarTextoPantalla("¡Ya tengo el cromo! Voy a llevárselo a Manuel");
 				cromoObtenido = true;
 			}
+			
 		});
 	}
 }

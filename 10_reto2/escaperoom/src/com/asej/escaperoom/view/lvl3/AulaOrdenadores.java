@@ -10,7 +10,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
+import com.asej.escaperoom.view.FinDemo;
 import com.asej.escaperoom.view.Ventana;
+import com.asej.escaperoom.view.lvl2.Conversacion;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -20,10 +22,8 @@ public class AulaOrdenadores extends JPanel {
 
 	private Ventana ventana;
 	private JPanel panelTextos;
-	
-	//private final String RUTA = "C:\\Users\\Amaia\\eclipse-workspace\\amaia-daw1\\10_reto2\\escaperoom\\";
-	//private final String RUTA = "D:\\amaia\\programacion\\amaia-daw1\\10_reto2\\escaperoom\\";
-	private final String RUTA = "";
+	static JButton btnSalir;
+	static JLabel lblOrdenador;
 	
 	public AulaOrdenadores(Ventana ventana) {
 		
@@ -32,27 +32,18 @@ public class AulaOrdenadores extends JPanel {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		
 		this.ventana = ventana;
-		/*
-		JTextPane txtMensaje = new JTextPane();
-		txtMensaje.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		txtMensaje.setBounds(0, 611, 1084, 100);
-		txtMensaje.setBackground(Color.DARK_GRAY);
-		txtMensaje.setForeground(Color.WHITE);
-		txtMensaje.setBorder(new EmptyBorder(20, 20, 20, 20));
-		add(txtMensaje);
-		txtMensaje.setText("Igual en la sala de informática encuentro algo que me ayude");
-		*/
-		//Ventana.mostrarTextoPantalla("Igual en la sala de informática encuentro algo que me ayude");
+
+		btnSalir = new JButton();
+		btnSalir.setIcon(new ImageIcon("resources\\images\\flechaAbajo.png"));
+		btnSalir.setBounds(510, 550, 70, 65);
+		btnSalir.setContentAreaFilled(false); 
+		btnSalir.setBorderPainted(false); 
+		btnSalir.setFocusable(false);
+		btnSalir.setVisible(false);
+		add(btnSalir);
+		btnSalir.setVisible(false);
 		
-		JButton btnIzq = new JButton("");
-		btnIzq.setIcon(new ImageIcon("resources\\images\\flechaIzquierda.png"));
-		btnIzq.setBounds(10, 350, 70, 65);
-		btnIzq.setContentAreaFilled(false); 
-		btnIzq.setBorderPainted(false); 
-		btnIzq.setFocusable(false);
-		add(btnIzq);
-		
-		JLabel lblOrdenador = new JLabel("");
+		lblOrdenador = new JLabel("");
 		lblOrdenador.setBounds(166, 414, 143, 96);
 		add(lblOrdenador);
 		
@@ -61,7 +52,7 @@ public class AulaOrdenadores extends JPanel {
 		add(lblPizarra);
 		
 		JLabel lblFondo = new JLabel("");
-		lblFondo.setIcon(new ImageIcon(RUTA+"resources\\images\\esc5.jpg"));
+		lblFondo.setIcon(new ImageIcon("resources\\images\\esc5.jpg"));
 		lblFondo.setBounds(-150, 0, 1284, 711);
 		add(lblFondo);
 		
@@ -72,7 +63,8 @@ public class AulaOrdenadores extends JPanel {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.getCardLayout().show(ventana.getPanelPrincipal(), "Ordenador");
+				//ventana.getCardLayout().show(ventana.getPanelPrincipal(), "Ordenador");
+				ventana.showEscena("Ordenador");
 				Ventana.mostrarTextoPantalla("Vaya, parece que está apagado");
 			}
 		});
@@ -88,16 +80,33 @@ public class AulaOrdenadores extends JPanel {
 				Ventana.quitarTextoPantalla();
 			}
 		});
-		btnIzq.addMouseListener(new MouseAdapter() {
+		btnSalir.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				/*
+				ventana.showEscena("Fin Demo");
+				ventana.getTimer().stop();
+				Ventana.segundos = Ventana.txtTimer.getText();
+				*/
+				ventana.getTimer().stop();
+				String tiempoRestante = Ventana.txtTimer.getText();
+				ventana.getPanelPrincipal().add(new FinDemo(ventana, tiempoRestante), "Fin Demo");
+				ventana.showEscena("Fin Demo");
+				Ventana.quitarTextoPantalla();
+			}
+		});
+		
+		btnSalir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				btnIzq.setIcon(new ImageIcon("resources\\images\\flechaIzquierdaPintada.png"));
+				btnSalir.setIcon(new ImageIcon("resources\\images\\flechaAbajoPintada.png"));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				btnIzq.setIcon(new ImageIcon("resources\\images\\flechaIzquierda.png"));
+				btnSalir.setIcon(new ImageIcon("resources\\images\\flechaAbajo.png"));
 			}
 		});
 		
 	}
+
 }

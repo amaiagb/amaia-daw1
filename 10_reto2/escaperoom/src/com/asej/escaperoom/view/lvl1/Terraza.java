@@ -60,7 +60,7 @@ public class Terraza extends JPanel {
 
 		btnIrPasillo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Audio.reproducirEfectoSonido("boton");
+				Audio.reproducirEfectoSonido(Audio.BOTON);
 				Ventana.quitarTextoPantalla();
 				ventana.showEscena("Pasillo");
 			}
@@ -89,9 +89,11 @@ public class Terraza extends JPanel {
 	public void ladrar(){
 		contador++;
 		if (contador % 3 == 0) {
+			Audio.reproducirEfectoSonido(Audio.GATO);
 			Ventana.mostrarTextoPantalla("¡Miau!");
 			contador = 0;
 		} else {
+			Audio.reproducirEfectoSonido(Audio.PERRO);
 			Ventana.mostrarTextoPantalla("¡Guau!");
 		}
 	}

@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.asej.escaperoom.controlador.Audio;
 import com.asej.escaperoom.model.Objeto;
 import com.asej.escaperoom.view.Ventana;
 
@@ -45,6 +46,7 @@ public class ZoomJarron extends JPanel {
 
 		btnllave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Audio.reproducirEfectoSonido(Audio.COIN);
 				lblFondo.setIcon(new ImageIcon("resources\\images\\lvl2\\jarron-sin-llave.png"));
 				ventana.getObjetosInventario().add(new Objeto("llave","llave.png", "La llave que encontré en el jarrón"));
 				btnFlecha.setVisible(true);

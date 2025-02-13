@@ -10,9 +10,9 @@ import java.awt.event.MouseEvent;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
@@ -31,14 +31,15 @@ public class PiedraPapelTijera extends JPanel {
 	JLabel puntosB1, puntosB2, puntosB3, puntosB4, puntosB5;
 	private int puntosP1 = 0;
 	private int puntosP2 = 0;
+	private JLabel lblSelecciona;
 	private JLabel lblTimer;
 	private JLabel lblResultado;
 	private Ventana ventana;
 	private Timer timer;
 	private int contadorTimer;
-	private JLabel btnPiedra;
-	private JLabel btnPapel;
-	private JLabel btnTijera;
+	private JButton btnPiedra;
+	private JButton btnPapel;
+	private JButton btnTijera;
 
 	public PiedraPapelTijera(Ventana ventana) {
 		
@@ -47,12 +48,12 @@ public class PiedraPapelTijera extends JPanel {
 		setBounds(0, 0, 1100, 750);
 		setLayout(null);
 		
-		lblTimer = new JLabel("Selecciona una opci\u00F3n");
-		lblTimer.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblTimer.setBackground(new Color(122, 201, 67));
-		lblTimer.setOpaque(true);
+		lblTimer = new JLabel("");
+		lblTimer.setFont(new Font("Tahoma", Font.PLAIN, 32));
+		//lblTimer.setBackground(new Color(122, 201, 67));
+		lblTimer.setOpaque(false);
 		lblTimer.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTimer.setBounds(451, 219, 210, 135);
+		lblTimer.setBounds(451, 314, 210, 71);
 		add(lblTimer);
 		
 		lblResultado = new JLabel();
@@ -60,10 +61,18 @@ public class PiedraPapelTijera extends JPanel {
 		lblResultado.setBackground(new Color(122, 201, 67));
 		lblResultado.setOpaque(true);
 		lblResultado.setHorizontalAlignment(SwingConstants.CENTER);
-		lblResultado.setBounds(451, 137, 210, 71);
+		lblResultado.setBounds(451, 314, 210, 71);
 		add(lblResultado);
 		lblResultado.setVisible(false);
 		
+		lblSelecciona = new JLabel("Selecciona una opci\u00F3n");
+		lblSelecciona.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblSelecciona.setBackground(new Color(122, 201, 67));
+		lblSelecciona.setOpaque(true);
+		lblSelecciona.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSelecciona.setBounds(-5, 328, 1105, 41);
+		add(lblSelecciona);
+				
 		JLabel lblP1 = new JLabel("Bruno");
 		lblP1.setForeground(Color.WHITE);
 		lblP1.setFont(new Font("Tahoma", Font.BOLD, 22));
@@ -149,19 +158,31 @@ public class PiedraPapelTijera extends JPanel {
 		lblP2Fondo.setOpaque(true);
 		add(lblP2Fondo);
 		
-		btnPapel = new JLabel("");
+		btnPapel = new JButton("");
 		btnPapel.setIcon(new ImageIcon("resources\\images\\btn2.png"));
 		btnPapel.setBounds(490, 539, 135, 135);
+		btnPapel.setOpaque(false);
+		btnPapel.setFocusable(false);
+		btnPapel.setContentAreaFilled(false);
+		btnPapel.setBorderPainted(false);
 		add(btnPapel);
 		
-		btnPiedra = new JLabel("");
+		btnPiedra = new JButton("");
 		btnPiedra.setIcon(new ImageIcon("resources\\images\\btn1.png"));
 		btnPiedra.setBounds(306, 539, 135, 135);
+		btnPiedra.setOpaque(false);
+		btnPiedra.setFocusable(false);
+		btnPiedra.setContentAreaFilled(false);
+		btnPiedra.setBorderPainted(false);
 		add(btnPiedra);
 		
-		btnTijera = new JLabel("");
+		btnTijera = new JButton("");
 		btnTijera.setIcon(new ImageIcon("resources\\images\\btn3.png"));
 		btnTijera.setBounds(672, 539, 135, 135);
+		btnTijera.setOpaque(false);
+		btnTijera.setFocusable(false);
+		btnTijera.setContentAreaFilled(false);
+		btnTijera.setBorderPainted(false);
 		add(btnTijera);
 		
 		lblP1Img = new JLabel();
@@ -219,30 +240,35 @@ public class PiedraPapelTijera extends JPanel {
         	}
         });
 		
-		btnPiedra.addMouseListener(new MouseAdapter() {
-        	@Override
-			public void mouseClicked(MouseEvent e) {
-        		lblResultado.setVisible(false);
+		btnPiedra.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				lblResultado.setVisible(false);
         		p1Seleccion = 1;
         		cuentaAtras("piedra");
+        		lblSelecciona.setVisible(false);
 			}
+		
+
         });
 		
-		btnPapel.addMouseListener(new MouseAdapter() {
-        	@Override
-			public void mouseClicked(MouseEvent e) {
-        		lblResultado.setVisible(false);
+		btnPapel.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				lblResultado.setVisible(false);
         		p1Seleccion = 2;
         		cuentaAtras("papel");
+        		lblSelecciona.setVisible(false);
 			}
         });
 		
-		btnTijera.addMouseListener(new MouseAdapter() {
+		btnTijera.addActionListener(new ActionListener() {
         	@Override
-			public void mouseClicked(MouseEvent e) {
+			public void actionPerformed(ActionEvent e) {
         		lblResultado.setVisible(false);
         		p1Seleccion = 3;
         		cuentaAtras("tijera");
+        		lblSelecciona.setVisible(false);
 			}
         });
 	}
@@ -298,9 +324,7 @@ public class PiedraPapelTijera extends JPanel {
 				if(puntosP1 <5) {
 					lblResultado.setText("Ganas");
 				} else {
-					lblResultado.setFont(new Font("Tahoma", Font.PLAIN, 16));
-					lblResultado.setText("¡Enhorabuena!\nHas ganado la partida");
-					ventana.showEscena("Conversacion 2"); // Cambiar por alguna del nivel 2
+					ventana.showEscena("Conversacion 2");
 					btnPiedra.setVisible(false);
 					btnPapel.setVisible(false);
 					btnTijera.setVisible(false);
@@ -314,7 +338,9 @@ public class PiedraPapelTijera extends JPanel {
 					lblResultado.setText("Pierdes");
 				} else {
 					lblResultado.setFont(new Font("Tahoma", Font.PLAIN, 16));
-					lblResultado.setText("¡Oh no!\nInténtalo de nuevo");
+					lblResultado.setVisible(false);
+					lblSelecciona.setVisible(true);
+					lblSelecciona.setText("¡Oh no!\nInténtalo de nuevo");
 					reiniciarPartida();
 				}
 			}
@@ -360,11 +386,18 @@ public class PiedraPapelTijera extends JPanel {
 	            	 timer.stop();
 	            	 lblP1Img.setIcon(new ImageIcon("resources\\images\\"+opcion+".png"));
 	            	 hacerBatalla(p1Seleccion);
+	            	 btnPiedra.setEnabled(true);
+	         		btnPapel.setEnabled(true);
+	         		btnTijera.setEnabled(true);
 	            }
 	            contadorTimer--;
 	        }
 	    });
 		timer.start();
+		btnPiedra.setEnabled(false);
+		btnPapel.setEnabled(false);
+		btnTijera.setEnabled(false);
+		
 	}
 	
 	private void pintarPuntosP1(int puntos) {

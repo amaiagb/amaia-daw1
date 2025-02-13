@@ -44,7 +44,7 @@ public class Conversacion extends JPanel {
 		btnJugar.setBackground(Color.ORANGE);
 		btnJugar.setForeground(Color.BLACK);
 		btnJugar.setFont(new Font("Tahoma",0,16));
-		btnJugar.setBounds(650, 590, 200, 65);
+		btnJugar.setBounds(890, 350, 200, 65);
 		add(btnJugar);
 		btnJugar.setVisible(false);
 		

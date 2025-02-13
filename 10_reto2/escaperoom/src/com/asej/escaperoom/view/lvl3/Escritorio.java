@@ -2,6 +2,7 @@ package com.asej.escaperoom.view.lvl3;
 
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -11,23 +12,26 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 
+import com.asej.escaperoom.controlador.Audio;
+import com.asej.escaperoom.model.Objeto;
 import com.asej.escaperoom.view.Ventana;
+import java.awt.event.ActionListener;
+import java.awt.Color;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class Escritorio extends JPanel {
 
-	//private final String RUTA = "C:\\Users\\Amaia\\eclipse-workspace\\amaia-daw1\\10_reto2\\escaperoom\\";
-	//private final String RUTA = "D:\\amaia\\programacion\\amaia-daw1\\10_reto2\\escaperoom\\";
-	private final String RUTA = "";
-	
 	private JLabel lblDocRestaurado;
 	private ImageIcon imageIcon;
 	private JLabel lblDocAbierto;
 	private JTextField txtCorreo;
 	private JTextField txtPass;
-	private final String CORREO_USER = "asd";
-	private final String CORREO_PASS = "123";
+	private Timer timer;
+	JButton btnCapturar;
 	
 	public Escritorio(Ventana ventana) {
 
@@ -36,7 +40,7 @@ public class Escritorio extends JPanel {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		
 		ventana.getPanelTextos().setVisible(false);
-		
+				
 		txtCorreo = new JTextField();
 		txtCorreo.setBounds(390, 280, 289, 47);
 		txtCorreo.setOpaque(false);
@@ -51,37 +55,30 @@ public class Escritorio extends JPanel {
 		txtPass.setOpaque(false);
 		txtPass.setBorder(null);
 		add(txtPass);
+		
 		txtPass.setVisible(false);
+		btnCapturar = new JButton();
+		btnCapturar.setIcon(new ImageIcon("resources\\images\\btnCapturas.png"));
+		btnCapturar.setBounds(850, 293, 210, 70);
+		add(btnCapturar);
+		btnCapturar.setVisible(false);
 		
-		JButton btnLogin = new JButton("");
-		btnLogin.setBounds(450, 440, 184, 47);
-		btnLogin.setOpaque(false);
-		btnLogin.setBorderPainted(false);
-		btnLogin.setContentAreaFilled(false);
-		add(btnLogin);
-		btnLogin.setVisible(false);
+		JLabel lblErrorDoc = new JLabel("Error. Archivo corrupto. No se puede abrir");
+		lblErrorDoc.setBackground(new Color(255, 250, 205));
+		lblErrorDoc.setBounds(150, 380,253,40);
+		lblErrorDoc.setOpaque(true);
+		add(lblErrorDoc);
+		lblErrorDoc.setVisible(false);
 		
-		JLabel lblLoginError = new JLabel();
-		lblLoginError.setFont(new Font("OCR A Extended", Font.PLAIN, 18));
-		lblLoginError.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLoginError.setBounds(330,500, 400, 47);
-		add(lblLoginError);
-		lblLoginError.setVisible(false);
-
-		JLabel lblCerrarLogin = new JLabel();
-		lblCerrarLogin.setFont(new Font("OCR A Extended", Font.PLAIN, 18));
-		lblCerrarLogin.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCerrarLogin.setBounds(880,100, 40, 40);
-		add(lblCerrarLogin);
-		lblCerrarLogin.setVisible(false);
+		Bandeja bandeja = new Bandeja(ventana);
+		bandeja.setBounds(85, 77, 758, 521);
+		add(bandeja);
+		bandeja.setVisible(false);
 		
-		JLabel lblCorreoLogin = new JLabel();
-		lblCorreoLogin.setIcon(new ImageIcon(RUTA+"resources\\images\\email_login.png"));
-		lblCorreoLogin.setBounds(166,100,760,524);
-		add(lblCorreoLogin);
-		lblCorreoLogin.setVisible(false);
 		
-		Correo correo = new Correo(ventana);
+		
+		
+		Correo correo = new Correo(ventana, bandeja, btnCapturar);
 		correo.setBounds(85, 77, 758, 521);
 		add(correo);
 		correo.setVisible(false);
@@ -91,13 +88,15 @@ public class Escritorio extends JPanel {
 		add(galeria);
 		galeria.setVisible(false);
 		
+		
+		
 		JLabel lblCerrarCarpeta = new JLabel("");
 		lblCerrarCarpeta.setBounds(880, 100, 40, 36);
 		add(lblCerrarCarpeta);
 		lblCerrarCarpeta.setVisible(false);
 		
 		JLabel lblCarpeta = new JLabel();
-		lblCarpeta.setIcon(new ImageIcon(RUTA+"resources\\images\\carpeta.png"));
+		lblCarpeta.setIcon(new ImageIcon("resources\\images\\carpeta.png"));
 		lblCarpeta.setBounds(160, 100, 760, 524);
 		add(lblCarpeta);
 		lblCarpeta.setVisible(false);
@@ -110,17 +109,16 @@ public class Escritorio extends JPanel {
 		lblDocAbierto = new JLabel();
 		lblDocAbierto.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblDocAbierto.setBounds(250, 100, 550, 526);
-		lblDocAbierto.setIcon(new ImageIcon(RUTA+"resources\\images\\docRestaurado.png"));
+		lblDocAbierto.setIcon(new ImageIcon("resources\\images\\docRestaurado.png"));
 		add(lblDocAbierto);
 		lblDocAbierto.setVisible(false);
 
 		lblDocRestaurado = new JLabel("");
 		lblDocRestaurado.setVerticalAlignment(SwingConstants.TOP);
-		lblDocRestaurado.setIcon(new ImageIcon(RUTA+"resources\\images\\docSecreto.png"));
+		lblDocRestaurado.setIcon(new ImageIcon("resources\\images\\docSecreto.png"));
 		lblDocRestaurado.setBounds(929, 306, 145, 131);
 		add(lblDocRestaurado);
 		lblDocRestaurado.setVisible(false);
-		
 		
 		Papelera papelera = new Papelera(ventana, lblDocRestaurado);
 		papelera.setSize(760, 524);
@@ -160,16 +158,47 @@ public class Escritorio extends JPanel {
 
 		JLabel lblMenu = new JLabel("");
 		lblMenu.setVerticalAlignment(SwingConstants.BOTTOM);
-		lblMenu.setIcon(new ImageIcon(RUTA+"resources\\images\\btnSalir.png"));
+		lblMenu.setIcon(new ImageIcon("resources\\images\\btnSalir.png"));
 		lblMenu.setBounds(0, 604, 253, 65);
 		add(lblMenu);
 		lblMenu.setVisible(false);
 		
 		JLabel lblFondo = new JLabel("");
 		lblFondo.setVerticalAlignment(SwingConstants.BOTTOM);
-		lblFondo.setIcon(new ImageIcon(RUTA+"resources\\images\\desktop.png"));
+		lblFondo.setIcon(new ImageIcon("resources\\images\\desktop.png"));
 		lblFondo.setBounds(0, -39, 1100, 750);
 		add(lblFondo);
+
+		btnCapturar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Ventana.mostrarTextoPantalla("Las capturas se han añadido al inventario. Apaga el ordenador y ve a buscar a Aitor");
+				btnCapturar.setVisible(false);
+				Audio.reproducirEfectoSonido(Audio.COIN);
+				ventana.getObjetosInventario().add(new Objeto("capturas","capturas.png", "Las capturas de los emails de acoso que recibió Aitor"));
+				Ordenador.capturasConseguidas = true;
+				timer = new Timer(3000, new ActionListener() {
+			        public void actionPerformed(ActionEvent evt) {
+			           timer.stop();
+			           Ventana.quitarTextoPantalla();			           
+			        }
+			    });
+				timer.start();
+			}
+		});
+		
+		lblBtnDocumento.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lblErrorDoc.setVisible(true);
+			}
+		});
+
+		lblBtnDocumento.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				lblErrorDoc.setVisible(false);
+			}
+		});
 		
 		lblBtnInicio.addMouseListener(new MouseAdapter() {
 			@Override
@@ -267,58 +296,18 @@ public class Escritorio extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				correo.setVisible(true);
+				/*
 				lblCorreoLogin.setVisible(true);
 				txtCorreo.setVisible(true);
 				txtPass.setVisible(true);
 				btnLogin.setVisible(true);
 				lblCerrarLogin.setVisible(true);
-			}
-		});
-		
-		lblCerrarLogin.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblCerrarLogin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				lblCorreoLogin.setVisible(false);
-				txtCorreo.setVisible(false);
-				txtPass.setVisible(false);
-				btnLogin.setVisible(false);
-				lblCerrarLogin.setVisible(false);
-				lblLoginError.setVisible(false);
+				*/
 			}
 		});
 		
 		
-		btnLogin.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				btnLogin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				if(CORREO_USER.equals(txtCorreo.getText()) && CORREO_PASS.equals(txtPass.getText())) {
-					
-					correo.setVisible(true);
-					
-					lblCorreoLogin.setVisible(false);
-					txtCorreo.setVisible(false);
-					txtPass.setVisible(false);
-					btnLogin.setVisible(false);
-					lblLoginError.setVisible(false);
-				}else {
-					lblLoginError.setText("Correo o contraseña incorrectos");
-					lblLoginError.setVisible(true);
-					
-				}
-				
-			}
-		});
 
 		lblCerrarCarpeta.addMouseListener(new MouseAdapter() {
 			@Override

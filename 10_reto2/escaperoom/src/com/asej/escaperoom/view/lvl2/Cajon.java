@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
+import com.asej.escaperoom.model.Objeto;
 import com.asej.escaperoom.view.Ventana;
 
 public class Cajon extends JPanel {
@@ -30,8 +31,12 @@ public class Cajon extends JPanel {
 		add(btnFlecha);
 		btnFlecha.setVisible(true);
 		
+		JLabel lblNota = new JLabel("");
+		lblNota.setBounds(147, 234, 309, 208);
+		add(lblNota);
+		
 		JLabel lblZoomCajon = new JLabel("");
-		lblZoomCajon.setIcon(new ImageIcon("resources\\images\\lvl2\\Cajon.jpg"));
+		lblZoomCajon.setIcon(new ImageIcon("C:\\Users\\Amaia\\eclipse-workspace\\amaia-daw1\\10_reto2\\escaperoom\\resources\\images\\lvl2\\Cajon.png"));
 		lblZoomCajon.setBounds(0, 0, 1100, 711);
 		add(lblZoomCajon);
 		
@@ -39,6 +44,14 @@ public class Cajon extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				ventana.showEscena("Clase");
 				Ventana.quitarTextoPantalla();
+			}
+		});
+
+		lblNota.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lblZoomCajon.setIcon(new ImageIcon("C:\\Users\\Amaia\\eclipse-workspace\\amaia-daw1\\10_reto2\\escaperoom\\resources\\images\\lvl2\\Cajon.jpg"));
+				ventana.getObjetosInventario().add(new Objeto("nota","note.png", "Una nota con el correo aitor2012@centro.eus escrito"));
 			}
 		});
 		

@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.asej.escaperoom.controlador.Audio;
 import com.asej.escaperoom.view.Ventana;
 
 public class Clase extends JPanel {
@@ -34,8 +35,8 @@ public class Clase extends JPanel {
 		btnJarron.setBounds(174, 341, 31, 49);
 		add(btnJarron);
 
-		JButton btnGuardarCuadro = new JButton("A\u00F1adir al Inventario");
-		btnGuardarCuadro.setBounds(601, 505, 156, 29);
+		JButton btnGuardarCuadro = new JButton(Ventana.mensajes.getString("clase1"));
+		btnGuardarCuadro.setBounds(440, 556, 156, 29);
 		btnGuardarCuadro.setVisible(false);
 		add(btnGuardarCuadro);
 		
@@ -56,7 +57,7 @@ public class Clase extends JPanel {
 		btnCuadroJuan.setOpaque(true);
 		btnCuadroJuan.setContentAreaFilled(false);
 		btnCuadroJuan.setBorderPainted(false);
-		btnCuadroJuan.setBounds(692, 355, 16, 23);
+		btnCuadroJuan.setBounds(657, 313, 60, 77);
 		add(btnCuadroJuan);
 		
 		JLabel lblClase = new JLabel("");
@@ -73,7 +74,8 @@ public class Clase extends JPanel {
 		btnCajon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ventana.showEscena("Cajon");
-				Ventana.mostrarTextoPantalla("Parece que está vacío");
+				Audio.reproducirEfectoSonido(Audio.ARMARIO);
+				Ventana.mostrarTextoPantalla("¡Anda! Una nota, puede que nos sirva luego");
 			}
 		});
 		
@@ -88,6 +90,8 @@ public class Clase extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				lblDibujoJuan.setVisible(true);
 				btnGuardarCuadro.setVisible(true);
+				Audio.reproducirEfectoSonido(Audio.COIN);
+				Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("clase3"));
 			}
 		});
 		btnGuardarCuadro.addActionListener(new ActionListener() {
