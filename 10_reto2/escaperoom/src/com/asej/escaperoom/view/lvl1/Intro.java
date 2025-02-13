@@ -26,7 +26,7 @@ public class Intro extends JPanel {
 		setLayout(null);
 		ventana.getPanelTextos().setVisible(true);
 		Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("intro"));
-		Ventana.mostrarTextoPantalla("*riiiiing riiiiiing*\n¡Hora de despertarse, hijo! Que sino vas a llegar tarde a clase" );
+		//Ventana.mostrarTextoPantalla("*riiiiing riiiiiing*\n¡Hora de despertarse, hijo! Que sino vas a llegar tarde a clase" );
 		
 		JLabel lblFondo = new JLabel("");
 		lblFondo.setIcon(new ImageIcon("resources\\images\\amanecer.jpg"));

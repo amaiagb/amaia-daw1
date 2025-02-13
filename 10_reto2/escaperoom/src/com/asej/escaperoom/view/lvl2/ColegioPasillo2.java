@@ -58,7 +58,6 @@ public class ColegioPasillo2 extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				ventana.showEscena("Clase");
 				Ventana.quitarTextoPantalla();
-				//Ventana.mostrarTextoPantalla("Ya hemos encontrado todo lo que hay en clase");
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -88,7 +87,7 @@ public class ColegioPasillo2 extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				ventana.showEscena("Conversacion");
-				Ventana.mostrarTextoPantalla("¡He encontrado tu cromo!");
+				Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("colegioPasillo2"));
 				Conversacion.btnFlechaDerecha.setVisible(false);
 			}
 		});

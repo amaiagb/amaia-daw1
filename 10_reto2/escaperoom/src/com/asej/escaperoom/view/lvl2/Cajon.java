@@ -36,7 +36,7 @@ public class Cajon extends JPanel {
 		add(lblNota);
 		
 		JLabel lblZoomCajon = new JLabel("");
-		lblZoomCajon.setIcon(new ImageIcon("C:\\Users\\Amaia\\eclipse-workspace\\amaia-daw1\\10_reto2\\escaperoom\\resources\\images\\lvl2\\Cajon.png"));
+		lblZoomCajon.setIcon(new ImageIcon("resources\\images\\lvl2\\Cajon.png"));
 		lblZoomCajon.setBounds(0, 0, 1100, 711);
 		add(lblZoomCajon);
 		
@@ -50,20 +50,20 @@ public class Cajon extends JPanel {
 		lblNota.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblZoomCajon.setIcon(new ImageIcon("C:\\Users\\Amaia\\eclipse-workspace\\amaia-daw1\\10_reto2\\escaperoom\\resources\\images\\lvl2\\Cajon.jpg"));
-				ventana.getObjetosInventario().add(new Objeto("nota","note.png", "Una nota con el correo aitor2012@centro.eus escrito"));
+				lblZoomCajon.setIcon(new ImageIcon("resources\\images\\lvl2\\Cajon.jpg"));
+				ventana.getObjetosInventario().add(new Objeto("nota","note.png", Ventana.mensajes.getString("cajon")));
 			}
 		});
 		
 		btnFlecha.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				btnFlecha.setIcon(new ImageIcon("resources\\images\\flechaIzquierdaPintada.png"));
+				btnFlecha.setIcon(new ImageIcon("resources\\images\\lvl2\\flechaIzquierdaPintada.png"));
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				btnFlecha.setIcon(new ImageIcon("resources\\images\\lvl2\\flechaIzquierda.png"));
+				btnFlecha.setIcon(new ImageIcon("resources\\images\\flechaIzquierda.png"));
 			}
 		});
 

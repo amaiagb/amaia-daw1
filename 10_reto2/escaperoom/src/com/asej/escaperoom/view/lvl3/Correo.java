@@ -18,9 +18,6 @@ import javax.swing.JTextField;
 
 public class Correo extends JPanel {
 
-	//private final String RUTA = "C:\\Users\\Amaia\\eclipse-workspace\\amaia-daw1\\10_reto2\\escaperoom\\";
-	//private final String RUTA = "D:\\amaia\\programacion\\amaia-daw1\\10_reto2\\escaperoom\\";
-	private final String RUTA = "";
 	private final String CORREO_USER = "aitor2012@centro.eus";
 	private final String CORREO_PASS = "2025Docs";
 	
@@ -62,7 +59,7 @@ public class Correo extends JPanel {
 		JLabel lblFondo = new JLabel("");
 		lblFondo.setBounds(0, 0, 758, 522);
 		lblFondo.setVerticalAlignment(SwingConstants.TOP);
-		lblFondo.setIcon(new ImageIcon("C:\\Users\\Amaia\\eclipse-workspace\\amaia-daw1\\10_reto2\\escaperoom\\resources\\images\\email_login.png"));
+		lblFondo.setIcon(new ImageIcon("resources\\images\\email_login.png"));
 		add(lblFondo);
 		
 		txtCorreo = new JTextField();
@@ -121,12 +118,12 @@ public class Correo extends JPanel {
 					txtCorreo.setVisible(false);
 					txtPass.setVisible(false);
 					btnLogin.setVisible(false);
-					Ventana.mostrarTextoPantalla("¡Oh no! Le están escribiendo cosas horribles a Aitor... Voy a hacer capturas de esto para enseñárselo al tutor, este acoso no puede quedar así.");
+					Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("correo"));
 					btnCapturar.setVisible(true);
 					Audio.reproducirEfectoSonido(Audio.BOTON);
 					lblLoginError.setVisible(false);
 				}else {
-					lblLoginError.setText("Correo o contraseña incorrectos");
+					lblLoginError.setText(Ventana.mensajes.getString("escritorio"));
 					lblLoginError.setVisible(true);
 					
 				}

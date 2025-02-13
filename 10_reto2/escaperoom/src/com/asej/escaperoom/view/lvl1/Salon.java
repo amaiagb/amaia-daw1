@@ -23,13 +23,6 @@ import com.asej.escaperoom.view.Ventana;
 
 public class Salon extends JPanel {
 
-	private JTextField tiempo_textField;
-	private JTextPane textPane;
-	private int contador = 0;
-	private int segundos=3600;
-    private JTextPane dialogo_textPane; // Declarar como atributo para poder modificarlo desde los botones
-    private Clip clipBoton;
-	private Clip clipClick;
 	
 	public Salon(Ventana ventana) {
 
@@ -126,20 +119,20 @@ public class Salon extends JPanel {
 
 		btnTerraza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ventana.mostrarTextoPantalla("La otra terraza de la casa, tiene mejores vistas");
-			}
+				Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("salon1"));
+				}
 		});
 
 		btnCuadro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ventana.mostrarTextoPantalla("El cuadro favorito de mama, un dia casi lo rompo de un balonazo. Sentia la muerte sobre mis hombros");
-			}
+				Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("salon2"));
+				}
 		});
 
 		btnSillon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ventana.mostrarTextoPantalla("Tiene la marca del culo de mi padre, ya le vale");
-			}
+				Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("salon3"));
+				}
 		});
 		
 		btnIrCocina.addMouseListener(new MouseAdapter() {

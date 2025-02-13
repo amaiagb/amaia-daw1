@@ -26,7 +26,7 @@ public class FinDemo extends JPanel {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
 		
-		JLabel lblFinDemo = new JLabel("Fin de la Demo");
+		JLabel lblFinDemo = new JLabel(Ventana.mensajes.getString("finDemo"));
 		lblFinDemo.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		lblFinDemo.setForeground(Color.WHITE);
 		lblFinDemo.setBackground(Color.DARK_GRAY);

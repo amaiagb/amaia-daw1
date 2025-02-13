@@ -63,7 +63,7 @@ public class Escritorio extends JPanel {
 		add(btnCapturar);
 		btnCapturar.setVisible(false);
 		
-		JLabel lblErrorDoc = new JLabel("Error. Archivo corrupto. No se puede abrir");
+		JLabel lblErrorDoc = new JLabel(Ventana.mensajes.getString("docError"));
 		lblErrorDoc.setBackground(new Color(255, 250, 205));
 		lblErrorDoc.setBounds(150, 380,253,40);
 		lblErrorDoc.setOpaque(true);
@@ -74,10 +74,7 @@ public class Escritorio extends JPanel {
 		bandeja.setBounds(85, 77, 758, 521);
 		add(bandeja);
 		bandeja.setVisible(false);
-		
-		
-		
-		
+
 		Correo correo = new Correo(ventana, bandeja, btnCapturar);
 		correo.setBounds(85, 77, 758, 521);
 		add(correo);
@@ -87,8 +84,6 @@ public class Escritorio extends JPanel {
 		galeria.setBounds(85, 77, 920, 540);
 		add(galeria);
 		galeria.setVisible(false);
-		
-		
 		
 		JLabel lblCerrarCarpeta = new JLabel("");
 		lblCerrarCarpeta.setBounds(880, 100, 40, 36);
@@ -171,10 +166,10 @@ public class Escritorio extends JPanel {
 
 		btnCapturar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ventana.mostrarTextoPantalla("Las capturas se han añadido al inventario. Apaga el ordenador y ve a buscar a Aitor");
+				Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("capturasTxt"));
 				btnCapturar.setVisible(false);
 				Audio.reproducirEfectoSonido(Audio.COIN);
-				ventana.getObjetosInventario().add(new Objeto("capturas","capturas.png", "Las capturas de los emails de acoso que recibió Aitor"));
+				ventana.getObjetosInventario().add(new Objeto("capturas","capturas.png", Ventana.mensajes.getString("capturasDesc")));
 				Ordenador.capturasConseguidas = true;
 				timer = new Timer(3000, new ActionListener() {
 			        public void actionPerformed(ActionEvent evt) {
@@ -188,8 +183,12 @@ public class Escritorio extends JPanel {
 		
 		lblBtnDocumento.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseEntered(MouseEvent e) {
 				lblErrorDoc.setVisible(true);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblErrorDoc.setVisible(false);
 			}
 		});
 

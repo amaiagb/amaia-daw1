@@ -24,13 +24,15 @@ import com.asej.escaperoom.controlador.Audio;
 import com.asej.escaperoom.view.Ventana;
 
 public class Terraza extends JPanel {
-
+/*
 	private JTextField tiempo_textField;
 	private JTextPane textPane;
-	private int contador = 0;
+	
 	private int segundos=3600;
 	private Clip clipBoton;
 	private Clip clipClick;
+	*/
+	private int contador = 0;
 	
 	public Terraza(Ventana ventana) {
 		
@@ -90,11 +92,11 @@ public class Terraza extends JPanel {
 		contador++;
 		if (contador % 3 == 0) {
 			Audio.reproducirEfectoSonido(Audio.GATO);
-			Ventana.mostrarTextoPantalla("¡Miau!");
+			Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("maullido"));
 			contador = 0;
 		} else {
 			Audio.reproducirEfectoSonido(Audio.PERRO);
-			Ventana.mostrarTextoPantalla("¡Guau!");
-		}
+			Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("ladrido"));
+			}
 	}
 }

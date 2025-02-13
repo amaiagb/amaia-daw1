@@ -322,30 +322,30 @@ public class PiedraPapelTijera extends JPanel {
 				puntosP1++;
 				pintarPuntosP1(puntosP1);
 				if(puntosP1 <5) {
-					lblResultado.setText("Ganas");
+					lblResultado.setText(Ventana.mensajes.getString("ganas"));
 				} else {
 					ventana.showEscena("Conversacion 2");
 					btnPiedra.setVisible(false);
 					btnPapel.setVisible(false);
 					btnTijera.setVisible(false);
-					Ventana.mostrarTextoPantalla("Vale, te lo has ganado. Ayer vi a Aitor en el aula de informática y estaba muy raro, como... triste. Algo raro pasa, tú que eres su amigo deberías averiguarlo");
+					Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("conversacion2"));
 				}
 			}
 			case "p2" -> { 
 				puntosP2++;
 				pintarPuntosP2(puntosP2);
 				if(puntosP2 <5) {
-					lblResultado.setText("Pierdes");
+					lblResultado.setText(Ventana.mensajes.getString("pierdes"));
 				} else {
 					lblResultado.setFont(new Font("Tahoma", Font.PLAIN, 16));
 					lblResultado.setVisible(false);
 					lblSelecciona.setVisible(true);
-					lblSelecciona.setText("¡Oh no!\nInténtalo de nuevo");
+					lblSelecciona.setText(Ventana.mensajes.getString("mensajePierdes"));
 					reiniciarPartida();
 				}
 			}
 			case "empate" -> { 
-				lblResultado.setText("Empate");
+				lblResultado.setText(Ventana.mensajes.getString("empate"));
 			}
 		}
 	}
@@ -364,7 +364,7 @@ public class PiedraPapelTijera extends JPanel {
 		puntosP1 = 0;
 		puntosP2 = 0;
 		lblTimer.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblTimer.setText("Selecciona una opción");
+		lblTimer.setText(Ventana.mensajes.getString("JLabel2"));
 		
 	}
 
@@ -373,7 +373,7 @@ public class PiedraPapelTijera extends JPanel {
 		lblTimer.setVisible(true);
 		lblTimer.setFont(new Font("Tahoma", Font.PLAIN, 38));
 		lblTimer.setText("3");
-		timer = new Timer(300, new ActionListener() {
+		timer = new Timer(200, new ActionListener() {
 	        public void actionPerformed(ActionEvent evt) {
 	            if (contadorTimer == 3) {
 	                lblTimer.setText("2");

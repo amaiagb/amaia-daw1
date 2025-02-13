@@ -23,7 +23,6 @@ public class Codigo extends JPanel {
 	public Codigo(Ventana ventana) {
 		setBounds(0, 0, 600, 500);
 		setLayout(null);
-		//setUndecorated(true);
 
 		JButton btnNublado = new JButton("");
 		btnNublado.setIcon(new ImageIcon("resources\\images\\lvl2\\nublado2.png"));
@@ -110,12 +109,11 @@ public class Codigo extends JPanel {
 		lblCirculo4.setBounds(380, 442, 18, 14);
 		add(lblCirculo4);
 
-		JButton btnVolver = new JButton("Volver");
+		JButton btnVolver = new JButton(Ventana.mensajes.getString("btnVolver"));
 		btnVolver.setBounds(28, 442, 89, 29);
 		add(btnVolver);
 
 		JLabel lblFondo = new JLabel("");
-		//lblFondo.setIcon(new ImageIcon("resources\\images\\lvl2\\fondoCodigo.png"));
 		lblFondo.setBackground(Color.DARK_GRAY);
 		lblFondo.setOpaque(true);
 		lblFondo.setBounds(240, 100, 600, 500);

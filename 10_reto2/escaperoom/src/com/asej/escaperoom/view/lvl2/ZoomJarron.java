@@ -48,7 +48,7 @@ public class ZoomJarron extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				Audio.reproducirEfectoSonido(Audio.COIN);
 				lblFondo.setIcon(new ImageIcon("resources\\images\\lvl2\\jarron-sin-llave.png"));
-				ventana.getObjetosInventario().add(new Objeto("llave","llave.png", "La llave que encontré en el jarrón"));
+				ventana.getObjetosInventario().add(new Objeto("llave","llave.png", Ventana.mensajes.getString("zoomJarron")));
 				btnFlecha.setVisible(true);
 			}
 		});

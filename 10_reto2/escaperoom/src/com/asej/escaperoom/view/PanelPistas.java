@@ -182,19 +182,19 @@ public class PanelPistas extends JPanel {
 		String[] pistas = new String[3];
 		switch(nivelActual) {
 		case 1 -> {
-			pistas[0] = "Si no encuentras la mochila mira bien en tu habitación, cerca de la cama"; 
-			pistas[1] = "Para poder salir de casa necesitas completar las tareas de tu familia. \nBusca bien en el garaje y en el salón.";
-			pistas[2] = "Las palabras que tienes que encontrar en la sopa de letras son: \n A _ _ _ _, B _ _ _ _ _ _ _, I _ _ _ _ _ _, D _ _ _, M _ _ _ _.";
+			pistas[0] = Ventana.mensajes.getString("pista1Lvl1"); 
+			pistas[1] = Ventana.mensajes.getString("pista2Lvl1");
+			pistas[2] = Ventana.mensajes.getString("pista3Lvl1");
 		}
 		case 2 -> {
-			pistas[0] = "Encuentra a Manuel y habla con él"; 
-			pistas[1] = "Parece que algo brilla en el jarrón de la clase";
-			pistas[2] = "Tal vez deberías mirar en las taquillas";
+			pistas[0] = Ventana.mensajes.getString("pista1Lvl2"); 
+			pistas[1] = Ventana.mensajes.getString("pista2Lvl2");
+			pistas[2] = Ventana.mensajes.getString("pista3Lvl2");
 		}
 		case 3 -> {
-			pistas[0] = "Puede que en la pizarra encuentres algo que te ayude"; 
-			pistas[1] = "Revisa la papelera de reciclaje y la galería de fotos. \n Parece que las fotos tienen todas algún número visible.";
-			pistas[2] = "En los documentos encontrarás las credenciales necesarias para acceder al email";
+			pistas[0] = Ventana.mensajes.getString("pista1Lvl3"); 
+			pistas[1] = Ventana.mensajes.getString("pista2Lvl3");
+			pistas[2] = Ventana.mensajes.getString("pista3Lvl3");
 		}
 		}
 		return pistas;

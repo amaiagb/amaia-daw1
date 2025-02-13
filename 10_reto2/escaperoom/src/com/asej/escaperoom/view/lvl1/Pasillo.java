@@ -104,8 +104,8 @@ public class Pasillo extends JPanel {
 					lblPuertaSalir.setVisible(false);
 					lblIrCalle.setVisible(true);
 				} else {
-					Ventana.mostrarTextoPantalla("Tienes que terminar las tareas antes de salir de casa");
-					
+					Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("pasillo1"));
+						
 				}
 			}
 		});
@@ -117,8 +117,8 @@ public class Pasillo extends JPanel {
 				Audio.detenerMusica();
         		Audio.reproducirMusica(Audio.CANCION_NIVEL2);
 				ventana.showEscena("Calle");
-				Ventana.mostrarTextoPantalla("¡Justo llega el bus! ¡Genial!");
-			}
+				Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("pasillo2"));
+				}
 		});
 		
 		btnIrSalon.addMouseListener(new MouseAdapter() {

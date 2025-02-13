@@ -101,6 +101,7 @@ public class Ventana extends JFrame {
 		Audio.reproducirMusica(Audio.CANCION_PRINCIPAL);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
 		setBounds(0, 0, 1080, 711);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -278,6 +279,7 @@ public class Ventana extends JFrame {
 		btnOpciones.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Audio.detenerMusica();
 				dispose();
 			}
 		});

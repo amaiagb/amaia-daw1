@@ -14,6 +14,8 @@ import com.asej.escaperoom.controlador.Audio;
 import com.asej.escaperoom.view.Ventana;
 
 public class Clase extends JPanel {
+	
+	private int contadorObjetos = 0;
 
 	public Clase(Ventana ventana) {
 
@@ -68,6 +70,7 @@ public class Clase extends JPanel {
 		btnJarron.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ventana.showEscena("Zoom Jarron");
+				contadorObjetos++;
 			}
 		});
 
@@ -75,14 +78,20 @@ public class Clase extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				ventana.showEscena("Cajon");
 				Audio.reproducirEfectoSonido(Audio.ARMARIO);
-				Ventana.mostrarTextoPantalla("¡Anda! Una nota, puede que nos sirva luego");
+				Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("cajon"));
+				contadorObjetos++;
 			}
 		});
 		
 		btnIrPasillo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ventana.showEscena("Colegio Pasillo2");
-				Ventana.quitarTextoPantalla();
+				if(contadorObjetos >= 3) {
+					ventana.showEscena("Colegio Pasillo2");
+					Ventana.quitarTextoPantalla();
+				}else {
+					Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("buscarClase"));
+				}
+				
 			}
 		});
 
@@ -92,6 +101,7 @@ public class Clase extends JPanel {
 				btnGuardarCuadro.setVisible(true);
 				Audio.reproducirEfectoSonido(Audio.COIN);
 				Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("clase3"));
+				contadorObjetos++;
 			}
 		});
 		btnGuardarCuadro.addActionListener(new ActionListener() {

@@ -69,8 +69,8 @@ public class TaquillaAbierta extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				lblCromo.setVisible(false);
 				Audio.reproducirEfectoSonido(Audio.CROMO);
-				ventana.getObjetosInventario().add(new Objeto("cromo","cromo.png", "El cromo de Manuel"));
-				Ventana.mostrarTextoPantalla("¡Ya tengo el cromo! Voy a llevárselo a Manuel");
+				ventana.getObjetosInventario().add(new Objeto("cromo","cromo.png", Ventana.mensajes.getString("taquillaAbierta1")));
+				Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("taquillaAbierta2"));
 				cromoObtenido = true;
 			}
 			

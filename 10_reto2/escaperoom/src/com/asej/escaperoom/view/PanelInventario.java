@@ -169,9 +169,9 @@ public class PanelInventario extends JPanel {
 		txtObjDescripcion.setBackground(new Color(255, 255, 255));
 		txtObjDescripcion.setBounds(35, 240, 290, 70);
 		add(txtObjDescripcion);
-		txtObjDescripcion.setText("Selecciona un objeto del inventario para ver su descripción");
+		txtObjDescripcion.setText(Ventana.mensajes.getString("panelInventario"));
 		
-		JButton btnUsarObjeto = new JButton("Usar");
+		JButton btnUsarObjeto = new JButton(Ventana.mensajes.getString("btnUsar"));
 		btnUsarObjeto.setForeground(Color.WHITE);
 		btnUsarObjeto.setBackground(Color.DARK_GRAY);
 		btnUsarObjeto.setOpaque(true);

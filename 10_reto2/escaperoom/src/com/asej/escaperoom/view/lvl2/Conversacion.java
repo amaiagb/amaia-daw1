@@ -40,7 +40,7 @@ public class Conversacion extends JPanel {
 		btnFlechaDerecha.setFocusable(false);
 		add(btnFlechaDerecha);
 		
-		JButton btnJugar = new JButton("Jugar");
+		JButton btnJugar = new JButton(Ventana.mensajes.getString("btnJugar1"));
 		btnJugar.setBackground(Color.ORANGE);
 		btnJugar.setForeground(Color.BLACK);
 		btnJugar.setFont(new Font("Tahoma",0,16));
@@ -62,7 +62,7 @@ public class Conversacion extends JPanel {
 					ventana.entregarObjeto(PanelInventario.objetoSeleccionadoId);
 					Audio.reproducirEfectoSonido(Audio.COIN);
 					lblFondo.setIcon(new ImageIcon("resources\\images\\lvl2\\manuel-bg2.png"));
-					Ventana.mostrarTextoPantalla("¡Jo, muchas gracias! Por cierto, me he enterado de una cosa... \nsi me ganas a piedra, papel o tijera te lo cuento");
+					Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("conversacion1"));
 					btnJugar.setVisible(true);
 					ventana.getBtnSoltarObjeto().setVisible(false);
 				}

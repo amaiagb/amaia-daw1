@@ -72,7 +72,7 @@ public class Garaje extends JPanel {
         add(btnIrSalon);
 
         JLabel lblFondo = new JLabel("");
-        lblFondo.setIcon(new ImageIcon("C:\\Users\\Amaia\\eclipse-workspace\\amaia-daw1\\10_reto2\\escaperoom\\resources\\images\\garaje.jpg"));
+        lblFondo.setIcon(new ImageIcon("resources\\images\\garaje.jpg"));
         lblFondo.setBounds(0, 0, 1084, 711);
         add(lblFondo);
 
@@ -87,30 +87,30 @@ public class Garaje extends JPanel {
         btnCoche.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	Audio.reproducirEfectoSonido(Audio.COCHE);
-            	Ventana.mostrarTextoPantalla("El coche de papá está averiado. Será mejor que hoy coja el bus.");
-            }
+            	Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("garage1"));
+                }
         });
 
         btnNevera.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	Audio.reproducirEfectoSonido(Audio.ARMARIO);
-            	Ventana.mostrarTextoPantalla("¿Por qué solo hay alcohol?");
-            }
+            	Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("garage2"));
+                }
         });
 
         btnLimpieza.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	Audio.reproducirEfectoSonido(Audio.ARMARIO);
-            	Ventana.mostrarTextoPantalla("Solo son productos de limpieza del coche, no me sirve.");
-            }
+            	Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("garage3"));
+                 }
         });
         
         btnHerramientas.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	Audio.reproducirEfectoSonido(Audio.COIN);
-            	Ventana.mostrarTextoPantalla("¡Las herramientas de aita! Se han añadido al inventario");
+            	Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("garage4"));
                 btnHerramientas.setEnabled(false);
-                ventana.getObjetosInventario().add(new Objeto("destornillador","destornillador.png", "El destornillador de aita"));
+                ventana.getObjetosInventario().add(new Objeto("destornillador","destornillador.png", Ventana.mensajes.getString("garage5")));
             }
         });
         

@@ -88,22 +88,22 @@ public class Habitacion extends JPanel {
 
 		btnCajon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ventana.mostrarTextoPantalla("No hurges en la ropa que la ensucias");
-			}
+				Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("habitacion1"));
+				}
 		});
 
 		btnReloj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Audio.reproducirEfectoSonido(Audio.RELOJ);
-				Ventana.mostrarTextoPantalla("¡Oh no! Son las 07:25. Debes darte prisa si no quieres llegar tarde.");
-			}
+				Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("habitacion2"));
+				}
 		});
 
 		btnOrdenador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Audio.reproducirEfectoSonido(Audio.ORDENADOR);
-				Ventana.mostrarTextoPantalla("Ahora no es momento de jugar al LOL");
-			}
+				Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("habitacion3"));
+				}
 		});
 
 		btnCama.addActionListener(new ActionListener() {

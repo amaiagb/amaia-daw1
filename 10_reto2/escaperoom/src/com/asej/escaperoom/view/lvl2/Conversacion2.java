@@ -54,7 +54,7 @@ public class Conversacion2 extends JPanel {
 		lblFondo.setBounds(0, 0, 1084, 711);
 		add(lblFondo);
 		
-		Ventana.mostrarTextoPantalla("Vale, te lo has ganado. Ayer vi a Aitor en el aula de informática y estaba muy raro, como... triste. \nAlgo raro pasa, tú que eres su amigo deberías averiguarlo"); 
+		Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("conversacion2")); 
 		lblManuel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -74,7 +74,7 @@ public class Conversacion2 extends JPanel {
 				ventana.showEscena("Aula Ordenadores");
 				Ventana.nivelActual=3;
             	PanelPistas.resetearPistas(Ventana.nivelActual);
-				Ventana.mostrarTextoPantalla("Si aquí es donde vieron a Aitor la última vez, igual puedo encontrar alguna pista");
+            	Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("conversacion2a"));
 				}
 		});
 		btnFlechaDerecha.addMouseListener(new MouseAdapter() {

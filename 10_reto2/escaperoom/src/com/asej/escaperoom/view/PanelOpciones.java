@@ -137,7 +137,7 @@ public class PanelOpciones extends JPanel {
         	}
         });
         
-        JButton btnCerrarOpciones = new JButton("Volver");
+        JButton btnCerrarOpciones = new JButton(Ventana.mensajes.getString("btnVolver"));
         btnCerrarOpciones.setBounds(25, 28, 167, 57);
         btnCerrarOpciones.setBackground(Color.WHITE);
         btnCerrarOpciones.setForeground(Color.DARK_GRAY);

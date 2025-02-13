@@ -27,13 +27,7 @@ public class ColegioPasillo extends JPanel {
 		btnPuertaClase.setContentAreaFilled(false);
 		btnPuertaClase.setBorderPainted(false);
 		add(btnPuertaClase);
-/*
-		JLabel lblFlecha = new JLabel("");
-		lblFlecha.setIcon(new ImageIcon("resources\\images\\lvl2\\flechaDerecha.png"));
-		lblFlecha.setBounds(778, 371, 131, 84);
-		add(lblFlecha);
-		lblFlecha.setVisible(false);
-*/
+
 		JButton btnMensaje = new JButton("");
 		btnMensaje.setBounds(119, 251, 48, 277);
 		btnMensaje.setOpaque(true);
@@ -69,7 +63,7 @@ public class ColegioPasillo extends JPanel {
 		});
 		btnMensaje.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ventana.mostrarTextoPantalla("Deberíamos entrar primero a clase ");
+				Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("colegioPasillo"));
 				//lblFlecha.setVisible(true);
 			}
 		});

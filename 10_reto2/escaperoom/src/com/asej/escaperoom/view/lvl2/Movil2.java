@@ -41,7 +41,7 @@ public class Movil2 extends JPanel {
 		lblMovil.setBounds(293, 95, 360, 548);
 		add(lblMovil);
 
-		JButton btnEscribirMensaje = new JButton("Escribir mensaje");
+		JButton btnEscribirMensaje = new JButton(Ventana.mensajes.getString("btnMovil"));
 		btnEscribirMensaje.setBackground(new Color(138, 225, 140));
 		btnEscribirMensaje.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnEscribirMensaje.setBounds(706, 350, 192, 51);
@@ -63,7 +63,7 @@ public class Movil2 extends JPanel {
 			}
 		});
 
-		timer = new Timer(2000, new ActionListener() {
+		timer = new Timer(3000, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
@@ -85,7 +85,7 @@ public class Movil2 extends JPanel {
 		btnFlecha.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ventana.showEscena("Conversacion");
-				Ventana.mostrarTextoPantalla("Bruno, había conseguido un cromo increíble y me ha desaparecido, \n si alguien me lo ha cogido tiene que estar en clase o en las taquillas... ¿me ayudas a buscarlo?");
+				Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("movil2"));
 				
 			}
 		});

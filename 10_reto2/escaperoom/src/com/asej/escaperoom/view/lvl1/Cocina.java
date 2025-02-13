@@ -55,8 +55,6 @@ public class Cocina extends JPanel {
 
 		this.ventana = ventana;
 
-		//Border roundedBorder = new LineBorder(Color.BLACK, 3, true);
-
 		JButton btnIrSalon = new JButton();
 		btnIrSalon.setIcon(new ImageIcon("resources\\images\\flechaIzquierda.png"));
 		btnIrSalon.setBounds(10, 350, 70, 65);
@@ -135,7 +133,7 @@ public class Cocina extends JPanel {
 					if(madreInteraccion) {
 						pasarPreguntaPadre();
 					} else {
-						Ventana.mostrarTextoPantalla("Haz caso a ama primero, hijo");
+						Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("cocina1"));
 					}
 					
 				}
@@ -156,7 +154,7 @@ public class Cocina extends JPanel {
 					if(madreInteraccion) {
 						pasarPreguntaHija();
 					} else {
-						Ventana.mostrarTextoPantalla("Cuando termines lo de ama te cuento una cosa");
+						Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("cocina2"));
 					}
 				}
 			}
@@ -199,17 +197,17 @@ public class Cocina extends JPanel {
 		if (!padrePeticionHecha) {
 			ventana.getPanelTextos().setLocation(0, 600);
 			Ventana.mostrarTextoPantalla(
-					"Se nos han pegado las sábanas hoy, eh... Menos mal que todavía llegas al autobús");
-			mostrarBotones("Ay, qué sueño tengo", "Egun on aita!", "Qué buena pinta tienen esas tostadas");
+					Ventana.mensajes.getString("cocina3"));
+			mostrarBotones(Ventana.mensajes.getString("cocina4"),Ventana.mensajes.getString("cocina5"),Ventana.mensajes.getString("cocina6"));
 			padrePeticionHecha = true;
 			mensajePantalla = "padre";
 
 		} else if (padrePeticionHecha && !objetoPadre.equals(PanelInventario.objetoSeleccionado)) {
-			Ventana.mostrarTextoPantalla("Sigo esperando que me traigas el destornillador");
-
+			Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("cocina7"));
+			
 		} else if (padrePeticionHecha && objetoPadre.equals(PanelInventario.objetoSeleccionado)) { // Entregar herramientas a padre
 			Ventana.mostrarTextoPantalla(
-					"Muchas gracias campeón, cuando vuelvas del colegio te llevo al cine como recompensa, que seguro ya habré arreglado el coche");
+					Ventana.mensajes.getString("cocina8"));
 			btnPadre.setVisible(false);
 			ventana.entregarObjeto(PanelInventario.objetoSeleccionadoId);
 			Audio.reproducirEfectoSonido(Audio.COIN);
@@ -221,8 +219,8 @@ public class Cocina extends JPanel {
 		if (!madrePeticionHecha) {
 			ventana.getPanelTextos().setLocation(0, 600);
 			Ventana.mostrarTextoPantalla(
-					"Buenos días hijo, no sé si has oído la alarma así que he ido a despertarte");
-			mostrarBotones("Estaba durmiendo como una marmota", "Egun on ama!", "Odio esa alarma");
+					Ventana.mensajes.getString("cocina9"));
+			mostrarBotones(Ventana.mensajes.getString("cocina10"),Ventana.mensajes.getString("cocina11"),Ventana.mensajes.getString("cocina12"));
 			madrePeticionHecha = true;
 			mensajePantalla = "madre";
 			Habitacion.btnCama.setVisible(true);
@@ -231,14 +229,14 @@ public class Cocina extends JPanel {
 			Ventana.mostrarTextoPantalla("¿Todavía no has encontrado la mochila? Esa habitación tuya es una leonera...");
 
 		} else if (madrePeticionHecha && Cama.mochilaEncontrada) { // Entregar objeto a madre
-			Ventana.mostrarTextoPantalla("¡Bien! Te meto el sandwich en el bolsillo grande, ¿vale? Hoy te he hecho tu favorito, para que estés contento");
-			ventana.getObjetosInventario().add(new Objeto("sandwich","sandwich.png", "El sandwich para comer en el recreo"));
+			Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("cocina14"));
+			ventana.getObjetosInventario().add(new Objeto("sandwich","sandwich.png", Ventana.mensajes.getString("cocina15")));
 			btnMadre.setVisible(false);
 			timer = new Timer(2000, new ActionListener() {
 	            public void actionPerformed(ActionEvent evt) {
 	            	ventana.mostrarInventario(ventana);
 	            	ventana.getBtnInventario().setVisible(true);
-	                Ventana.mostrarTextoPantalla("Ahora puedes acceder a tu mochila en cualquier momento, \nahí se guardarán todos los objetos útiles que encuentres para usarlos cuando necesites");
+	            	Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("cocina16"));
 	            	
 	                if (ventana.getPanelInventario().isVisible()) {
 	                    timer.stop();
@@ -254,16 +252,16 @@ public class Cocina extends JPanel {
 	public void pasarPreguntaHija() {
 		if (!hijaPeticionHecha) {
 			ventana.getPanelTextos().setLocation(0, 600);
-			Ventana.mostrarTextoPantalla("Egun on hermanito! ");
-			mostrarBotones("Hola hermanita", "No te comas todos los cereales, eh", "Qué madrugadora estás hoy");
+			Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("cocina17"));
+			mostrarBotones(Ventana.mensajes.getString("cocina18"),Ventana.mensajes.getString("cocina19"),Ventana.mensajes.getString("cocina20"));
 			hijaPeticionHecha = true;
 			mensajePantalla = "hija";
 
 		} else if (hijaPeticionHecha && !objetoHija.equals(PanelInventario.objetoSeleccionado)) {
-			Ventana.mostrarTextoPantalla("¿Has podido terminar mi sopa de letras?");
+			Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("cocina21"));
 
 		} else if (hijaPeticionHecha && objetoHija.equals(PanelInventario.objetoSeleccionado)) { // Entregar sopa de letras
-			Ventana.mostrarTextoPantalla("Muchas gracias, eres es el hermano más listo de todos");
+			Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("cocina22"));
 			btnHija.setVisible(false);
 			ventana.entregarObjeto(PanelInventario.objetoSeleccionadoId);
 			Audio.reproducirEfectoSonido(Audio.COIN);
@@ -286,22 +284,22 @@ public class Cocina extends JPanel {
 		if (mensajePantalla.equals("padre")) {
 			btnPadre.setEnabled(false);
 			Ventana.mostrarTextoPantalla(
-					"La tostadora siempre dando problemas... Hijo, ya que estas aquí hazme un favor, ve al garaje y traeme mi destronillador a ver si puedo arreglarla");
-			mostrarBotones("Vale, aita", "¡Bien, a por las herramientas!", "Vaya momento para ponerse...");
+					Ventana.mensajes.getString("cocina23"));
+			mostrarBotones(Ventana.mensajes.getString("cocina24"), Ventana.mensajes.getString("cocina25"),Ventana.mensajes.getString("cocina26"));
 			mensajePantalla = "";
 
 		} else if (mensajePantalla.equals("madre")) {
 			btnMadre.setEnabled(false);
 			Ventana.mostrarTextoPantalla(
-					"Vete a coger tu mochila y traémela anda, que ya tengo tu bocata del recreo preparado");
-			mostrarBotones("¡Claro, ahora mismo!", "Bueeeno, vale, voy", "Uf, pues a ver dónde está...");
+					Ventana.mensajes.getString("cocina27"));
+			mostrarBotones(Ventana.mensajes.getString("cocina28"),Ventana.mensajes.getString("cocina29"),Ventana.mensajes.getString("cocina30"));
 			mensajePantalla = "";
 
 		} else if (mensajePantalla.equals("hija")) {
 			btnHija.setEnabled(false);
 			Ventana.mostrarTextoPantalla(
-					" Oye, antes estaba en el salón haciendo los pasatiempos de mi revista y jo... no he encontrado ni una palabra de la sopa de letras... ¿Me ayudarías porfa?");
-			mostrarBotones("Venga, voy a por la revista", "A estas horas... bueno, va", "¡Sí! ¡Me encantan!");
+					Ventana.mensajes.getString("cocina31"));
+			mostrarBotones(Ventana.mensajes.getString("cocina32"),Ventana.mensajes.getString("cocina33"),Ventana.mensajes.getString("cocina34"));
 			mensajePantalla = "";
 
 		} else {

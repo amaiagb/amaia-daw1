@@ -29,7 +29,7 @@ public class Autobus extends JPanel {
 		timer = new Timer(1000, new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
             	segundos++;
-            	Ventana.mostrarTextoPantalla("Ya hemos llegado al colegio");
+            	Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("llegadabus"));
             	
                 if (segundos == 3) {
                 	

@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
+import com.asej.escaperoom.controlador.Audio;
 import com.asej.escaperoom.view.FinDemo;
 import com.asej.escaperoom.view.Ventana;
 import com.asej.escaperoom.view.lvl2.Conversacion;
@@ -63,9 +64,8 @@ public class AulaOrdenadores extends JPanel {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//ventana.getCardLayout().show(ventana.getPanelPrincipal(), "Ordenador");
 				ventana.showEscena("Ordenador");
-				Ventana.mostrarTextoPantalla("Vaya, parece que está apagado");
+				Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("aulaOrdenadores1"));
 			}
 		});
 		
@@ -93,6 +93,7 @@ public class AulaOrdenadores extends JPanel {
 				ventana.getPanelPrincipal().add(new FinDemo(ventana, tiempoRestante), "Fin Demo");
 				ventana.showEscena("Fin Demo");
 				Ventana.quitarTextoPantalla();
+				Audio.detenerMusica();
 			}
 		});
 		
