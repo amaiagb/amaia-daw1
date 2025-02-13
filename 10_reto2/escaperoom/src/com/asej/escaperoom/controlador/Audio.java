@@ -7,6 +7,8 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 
+import com.asej.escaperoom.view.Ventana;
+
 public class Audio {
 	private static String musicaActual;
     private static Clip clipMusica;
@@ -17,13 +19,29 @@ public class Audio {
     public static final String RELOJ = "reloj.wav";
     public static final String COCHE = "coche.wav";
     public static final String ARMARIO = "armario.wav";
+    public static final String ORDENADOR = "ordenador.wav";
+    public static final String BOCATA = "bocata.wav";
+    public static final String GATO = "gato.wav";
+    public static final String PERRO = "perro.wav";
+    public static final String LLAVE = "llave.wav";
+    public static final String PAPEL = "papel.wav";
+    public static final String TIJERAS = "tijeras.wav";
+    public static final String ROCA = "roca.wav";
+    public static final String ROCK = "rock.wav";
+    public static final String PUERTA = "puerta.wav";
+    public static final String TAQUILLA = "taquilla.wav";
+    public static final String CROMO = "cromo.wav";
     public static final String CANCION_PRINCIPAL = "op.wav";
+    public static final String CANCION_NIVEL3 = "casa.wav";
+    public static final String CANCION_NIVEL2 = "casa2.wav";
+    public static final String CANCION_NIVEL1 = "casa3.wav";
+	
     public static boolean sonidoON = true;
 	public static boolean musicaON = true;
 	public static boolean efectosON = true;
 
 	public static void reproducirMusica(String nombreArchivo) {
-		if(musicaON) {
+		if(Ventana.sonido) {
 			if (clipMusica != null && clipMusica.isRunning()) {
 				clipMusica.stop(); // Detén la música anterior si está sonando
 	        }
@@ -60,7 +78,7 @@ public class Audio {
 	
 	
 	public static void reproducirEfectoSonido(String nombreArchivo) {
-		if(efectosON) {
+		
 			if (clipEfectoSonido != null && clipEfectoSonido.isRunning()) {
 	        	clipEfectoSonido.stop();
 	        }
@@ -82,7 +100,7 @@ public class Audio {
 	                e.printStackTrace();
 	            }
 	        }).start();
-		}
+		
         
     }
 

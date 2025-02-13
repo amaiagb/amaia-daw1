@@ -113,6 +113,9 @@ public class Pasillo extends JPanel {
 		lblIrCalle.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Audio.reproducirEfectoSonido(Audio.PUERTA);
+				Audio.detenerMusica();
+        		Audio.reproducirMusica(Audio.CANCION_NIVEL2);
 				ventana.showEscena("Calle");
 				Ventana.mostrarTextoPantalla("¡Justo llega el bus! ¡Genial!");
 			}

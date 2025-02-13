@@ -100,7 +100,7 @@ public class Portada extends JPanel {
         	}
         });
 		
-		lblPortadaFondo.addMouseListener(new MouseAdapter() {	// Abrir panel instrucciones de juego
+		lblPortadaFondo.addMouseListener(new MouseAdapter() {	
         	public void mouseClicked(MouseEvent e) {
         		if(!logoClickado) {
         			lblPortadaFondo.setIcon(new ImageIcon("resources\\images\\title-screen-keys.jpg"));
@@ -115,13 +115,15 @@ public class Portada extends JPanel {
 		btnJugar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Audio.detenerMusica();
+        		Audio.reproducirMusica(Audio.CANCION_NIVEL1);
 				setVisible(false);
         		ventana.getTimer().start();
-        		ventana.showEscena("Clase");
+        		ventana.showEscena("Intro");
         		Ventana.quitarTextoPantalla();
         		//Ventana.mostrarTextoPantalla("Igual en la sala de informática encuentro algo que me ayude");
-        		//ventana.getPanelTextos().setVisible(true);
-        		//Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("intro"));
+        		ventana.getPanelTextos().setVisible(true);
+        		Ventana.mostrarTextoPantalla(Ventana.mensajes.getString("intro"));
         		Audio.reproducirEfectoSonido(Audio.BOTON);
 			}
         });
@@ -136,10 +138,4 @@ public class Portada extends JPanel {
         	}
         });
 	}
-	/*
-	public JButton getBtnOpciones() {
-		return btnOpciones;
-		
-	}
-	*/
 }

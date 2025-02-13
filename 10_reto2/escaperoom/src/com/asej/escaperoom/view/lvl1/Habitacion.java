@@ -94,12 +94,14 @@ public class Habitacion extends JPanel {
 
 		btnReloj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Audio.reproducirEfectoSonido(Audio.RELOJ);
 				Ventana.mostrarTextoPantalla("¡Oh no! Son las 07:25. Debes darte prisa si no quieres llegar tarde.");
 			}
 		});
 
 		btnOrdenador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Audio.reproducirEfectoSonido(Audio.ORDENADOR);
 				Ventana.mostrarTextoPantalla("Ahora no es momento de jugar al LOL");
 			}
 		});

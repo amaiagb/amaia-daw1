@@ -2,6 +2,7 @@ package com.asej.escaperoom.view;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -76,20 +77,23 @@ public class Ventana extends JFrame {
     private JPanel panelTransicion;
     private CardLayout cardLayout;
     private static JTextPane txtDialogo;
-    private JTextField txtTimer;
+    public static JTextField txtTimer;
 	private Timer timer;
-	private int segundos = 3600;
+	public static int segundos = 3600;
     private JButton btnSoltarObjeto;
     private ArrayList<Objeto> objetosInventario;
 	private JLabel btnInventario;
     private static Locale locale;
     public static int nivelActual = 1;
-    
+    public static boolean juegoSuperado = false;
+    public static boolean sonido;
     public static ResourceBundle mensajes;
 
-	public Ventana(Locale locale) {
-		
+	public Ventana(Locale locale, boolean sonido) {
+		setTitle("BilboSKP | School Escape Room");
+		setUndecorated(true);
 		Ventana ventana = this;
+		this.sonido = sonido;
 		
 		mensajes = ResourceBundle.getBundle("com.asej.escaperoom.language.Mensajes", locale);
 		objetosInventario = new ArrayList<>();
@@ -97,7 +101,7 @@ public class Ventana extends JFrame {
 		Audio.reproducirMusica(Audio.CANCION_PRINCIPAL);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, 1100, 750);
+		setBounds(0, 0, 1080, 711);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -198,7 +202,7 @@ public class Ventana extends JFrame {
 		btnInventario.setText(mensajes.getString("btnInventario"));
 		btnInventario.setOpaque(true);
 		btnInventario.setVisible(false);
-		btnInventario.setVisible(true); //Visible para testeo
+		//btnInventario.setVisible(true); //Visible para testeo
 		panelNav.add(btnInventario);
 		
 		JLabel btnPista = new JLabel();
@@ -212,16 +216,8 @@ public class Ventana extends JFrame {
 		panelNav.add(btnPista);
 		
 		JLabel btnOpciones = new JLabel();
-		btnOpciones.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if(!panelOpcionesJuego.isVisible()) {
-					panelOpcionesJuego.setVisible(true);
-				}
-			}
-		});
 		btnOpciones.setHorizontalAlignment(SwingConstants.CENTER);
-		btnOpciones.setIcon(new ImageIcon("resources\\images\\ajuste.png"));
+		btnOpciones.setIcon(new ImageIcon("resources\\images\\off.png"));
 		btnOpciones.setForeground(Color.WHITE);
 		btnOpciones.setBackground(Color.GRAY);
 		btnOpciones.setBounds(1020, 10, 60, 40);
@@ -231,7 +227,7 @@ public class Ventana extends JFrame {
 		timer = new Timer(1000, new ActionListener() { 
             @Override
             public void actionPerformed(ActionEvent e) {
-            	if(segundos > 0) {
+            	if(segundos > 0 &&  !juegoSuperado) {
             		segundos--;
                     String time = String.format("%02d:%02d", segundos / 60, segundos % 60);
                     txtTimer.setText(time);
@@ -276,6 +272,21 @@ public class Ventana extends JFrame {
 		panelPrincipal.add(new Ordenador(this), "Ordenador");
 		panelPrincipal.add(new Escritorio(this), "Escritorio");
 		panelPrincipal.add(new Pizarra(this), "Pizarra");
+		//panelPrincipal.add(new FinDemo(this), "Fin Demo");
+		
+
+		btnOpciones.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				dispose();
+			}
+		});
+		btnOpciones.addMouseListener(new MouseAdapter() {
+			@Override
+        	public void mouseEntered(MouseEvent e) {
+				btnOpciones.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        	}
+        });
 		
 		btnPista.addMouseListener(new MouseAdapter() {
 			@Override
